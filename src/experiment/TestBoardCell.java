@@ -1,6 +1,7 @@
 package experiment;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 public class TestBoardCell {
 	
@@ -15,7 +16,7 @@ public class TestBoardCell {
 	}
 	
 	public Set<TestBoardCell> getAdjList() {
-		return null;
+		return new TreeSet<TestBoardCell>();
 	}
 	
 	public void setRoom(boolean isRoom) {

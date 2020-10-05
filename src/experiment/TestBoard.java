@@ -3,6 +3,7 @@ package experiment;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class TestBoard {
 
@@ -13,14 +14,14 @@ public class TestBoard {
 	}
 	
 	void calcTargets( TestBoardCell startCell, int pathlength) {
-		
+		// calculates legal targets for a move from startCell of length pathlength.
 	}
 	
 	Set<TestBoardCell> getTargets(){
-		return null;
+		return new TreeSet<TestBoardCell>();
 	}
 	
 	TestBoardCell getCell( int row, int col ) {
-		return null;
+		return new TestBoardCell(0,0);
 	}
 }
