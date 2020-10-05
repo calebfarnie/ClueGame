@@ -1,3 +1,10 @@
+/* 
+ * @author Caleb Farnie
+ * @author Joshua Josey
+ * C12A-2 Clue Paths 1
+ * 05 October 2020
+ */
+
 package experiment;
 
 import java.util.Map;
@@ -7,21 +14,23 @@ import java.util.TreeSet;
 
 public class TestBoard {
 
-	Map<TestBoardCell, Set<TestBoardCell>> adjList;
+	private Map<TestBoardCell, Set<TestBoardCell>> adjList;
+	private TestBoardCell [][] board;
 	
 	public TestBoard() {
+		board = new TestBoardCell[4][4];
 		adjList = new TreeMap<TestBoardCell, Set<TestBoardCell>>();
 	}
 	
-	void calcTargets( TestBoardCell startCell, int pathlength) {
+	public void calcTargets( TestBoardCell startCell, int pathlength) {
 		// calculates legal targets for a move from startCell of length pathlength.
 	}
 	
-	Set<TestBoardCell> getTargets(){
+	public Set<TestBoardCell> getTargets(){
 		return new TreeSet<TestBoardCell>();
 	}
 	
-	TestBoardCell getCell( int row, int col ) {
+	public TestBoardCell getCell( int row, int col ) {
 		return new TestBoardCell(0,0);
 	}
 }
