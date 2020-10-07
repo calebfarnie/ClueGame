@@ -9,20 +9,42 @@ package experiment;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class TestBoardCell implements Comparable{
+public class TestBoardCell implements Comparable<TestBoardCell>{
 	
 	private int row; 
 	private int col; 
 	private boolean isRoom;
 	private boolean isOccupied;
+	Set<TestBoardCell> adjList;
 
 	public TestBoardCell(int row, int col) {
 		this.row = row; 
 		this.col = col; 
+		adjList = new TreeSet();
+		//adjList = new TreeSet<TestBoardCell>();
 	}
 	
 	public Set<TestBoardCell> getAdjList() {
-		return new TreeSet<TestBoardCell>();
+		//Set<TestBoardCell> genAdjList = new TreeSet<TestBoardCell>();
+		
+		if(row > 0) {
+			adjList.add(TestBoard.getCell(row-1, col));
+		}
+		
+		if(col > 0) {
+			adjList.add(TestBoard.getCell(row, col-1));
+		}
+		
+		if(row < TestBoard.ROWS-1) {
+			adjList.add(TestBoard.getCell(row+1, col));
+		}
+		
+		if(col < TestBoard.COLS-1) {
+			adjList.add(TestBoard.getCell(row, col+1));
+		}
+		
+		
+		return adjList;
 	}
 	
 	public void setIsRoom(boolean isRoom) {
@@ -50,11 +72,9 @@ public class TestBoardCell implements Comparable{
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		if(this.row == ((TestBoardCell) o).getRow() && this.col == ((TestBoardCell) o).getCol())
+	public int compareTo(TestBoardCell o) {
+		if(this.row == o.getRow() && this.col == o.getCol())
 			return 0;
 		return -1;
 	}
-	
-	
 }

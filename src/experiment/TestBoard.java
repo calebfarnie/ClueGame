@@ -14,23 +14,30 @@ import java.util.TreeSet;
 
 public class TestBoard {
 
+	final static int COLS = 4;
+	final static int ROWS = 4;
+	
+	private static TestBoardCell [][] board;
+	
+	private Set<TestBoardCell> targets;
+	private Set<TestBoardCell> visited;
 	private Map<TestBoardCell, Set<TestBoardCell>> adjList;
-	private TestBoardCell [][] board;
 	
 	public TestBoard() {
-		board = new TestBoardCell[4][4];
-		adjList = new TreeMap<TestBoardCell, Set<TestBoardCell>>();
+		board = new TestBoardCell[ROWS][COLS];
 	}
 	
-	public void calcTargets( TestBoardCell startCell, int pathlength) {
+	public static void calcTargets( TestBoardCell startCell, int pathlength) {
 		// calculates legal targets for a move from startCell of length pathlength.
 	}
 	
-	public Set<TestBoardCell> getTargets(){
+	public static Set<TestBoardCell> getTargets(){
 		return new TreeSet<TestBoardCell>();
 	}
 	
-	public TestBoardCell getCell( int row, int col ) {
+	public static TestBoardCell getCell( int row, int col ) {
+		// PROBLEM HERE
+		//return board[row][col];
 		return new TestBoardCell(0,0);
 	}
 }
