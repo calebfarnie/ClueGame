@@ -60,12 +60,32 @@ public class TestBoard {
 		}
 	}
 	
-	public void calcTargets( TestBoardCell startCell, int pathlength) {
-		// calculates legal targets for a move from startCell of length pathlength.
+	public void calcTargets( TestBoardCell startCell, int pathLength) {
+		// calculates legal targets for a move from startCell of length pathLength.
+		/*
+		 * path length is dice roll
+		 * 
+		 */
+		targets = new HashSet<TestBoardCell>();
+		visited = new HashSet<TestBoardCell>();
+		visited.add(startCell);
+		findAllTargets(startCell, pathLength);
+	}
+	
+	private void findAllTargets(TestBoardCell startCell, int numSteps) {
+		for(TestBoardCell c : startCell.getAdjList()) {
+			if(!visited.contains(c) && !c.isRoom() && !c.getOccupied()) {
+				if(numSteps ==1)
+					targets.add(c);
+				else
+					findAllTargets(c, numSteps -1);
+				visited.remove(c);
+			}
+		}
 	}
 	
 	public Set<TestBoardCell> getTargets(){
-		return new HashSet<TestBoardCell>();
+		return targets;
 	}
 	
 	public TestBoardCell getCell( int row, int col ) {
