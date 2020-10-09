@@ -100,7 +100,7 @@ public class BoardTestsExp {
 	@Test
 	public void testStartingPoint3() {
 		TestBoardCell cell = board.getCell(3,3);
-		board.calcTargets(cell, 1);
+		board.calcTargets(cell, 3);
 		Set<TestBoardCell> testList = board.getTargets();
 		Assert.assertTrue(testList.contains(board.getCell(3,0)));
 		Assert.assertTrue(testList.contains(board.getCell(2,1)));
