@@ -7,6 +7,7 @@
 
 package experiment;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -17,27 +18,62 @@ public class TestBoard {
 	final static int COLS = 4;
 	final static int ROWS = 4;
 	
-	private static TestBoardCell [][] board;
+	private TestBoardCell [][] board;
 	
 	private Set<TestBoardCell> targets;
 	private Set<TestBoardCell> visited;
-	private Map<TestBoardCell, Set<TestBoardCell>> adjList;
+//	private Map<TestBoardCell, Set<TestBoardCell>> adjList;
 	
 	public TestBoard() {
+		// create board
 		board = new TestBoardCell[ROWS][COLS];
+		
+		// fill board with cells
+		for(int r = 0; r < ROWS; r++) {
+			for(int c = 0; c < COLS; c++) {
+				board[r][c] = new TestBoardCell(r,c);
+			}
+		}
+		
+		// get adjacency lists
+		for(int r = 0; r < ROWS; r++) {
+			for(int c = 0; c < COLS; c++) {
+				calcAdjList(r,c);
+			}
+		}
 	}
 	
-	public static void calcTargets( TestBoardCell startCell, int pathlength) {
+	public void calcAdjList(int row, int col){
+		TestBoardCell cell = getCell(row, col);
+
+		if(row > 0) {
+			cell.addAdj(getCell(row-1, col));
+			//adjList.add(getCell(row-1, col));
+		}
+
+		if(col > 0) {
+			cell.addAdj(getCell(row, col-1));
+		}
+
+		if(row < TestBoard.ROWS-1) {
+			cell.addAdj(getCell(row+1, col));
+		}
+
+		if(col < TestBoard.COLS-1) {
+			cell.addAdj(getCell(row, col+1));
+		}
+	}
+	
+	public void calcTargets( TestBoardCell startCell, int pathlength) {
 		// calculates legal targets for a move from startCell of length pathlength.
 	}
 	
-	public static Set<TestBoardCell> getTargets(){
-		return new TreeSet<TestBoardCell>();
+	public Set<TestBoardCell> getTargets(){
+		return new HashSet<TestBoardCell>();
 	}
 	
-	public static TestBoardCell getCell( int row, int col ) {
+	public TestBoardCell getCell( int row, int col ) {
 		// PROBLEM HERE
-		//return board[row][col];
-		return new TestBoardCell(0,0);
+		return board[row][col];
 	}
 }

@@ -6,44 +6,32 @@ package experiment;
  * 05 October 2020
  */
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class TestBoardCell implements Comparable<TestBoardCell>{
+public class TestBoardCell{
 	
 	private int row; 
 	private int col; 
 	private boolean isRoom;
 	private boolean isOccupied;
-	Set<TestBoardCell> adjList;
+	Set<TestBoardCell> adjList = new HashSet<TestBoardCell>();
 
 	public TestBoardCell(int row, int col) {
 		this.row = row; 
 		this.col = col; 
-		adjList = new TreeSet();
-		//adjList = new TreeSet<TestBoardCell>();
 	}
 	
-	public Set<TestBoardCell> getAdjList() {
-		//Set<TestBoardCell> genAdjList = new TreeSet<TestBoardCell>();
-		
-		if(row > 0) {
-			adjList.add(TestBoard.getCell(row-1, col));
-		}
-		
-		if(col > 0) {
-			adjList.add(TestBoard.getCell(row, col-1));
-		}
-		
-		if(row < TestBoard.ROWS-1) {
-			adjList.add(TestBoard.getCell(row+1, col));
-		}
-		
-		if(col < TestBoard.COLS-1) {
-			adjList.add(TestBoard.getCell(row, col+1));
-		}
-		
-		
+	public void addAdj(TestBoardCell cell){
+		adjList.add(cell);
+	}
+	
+//	public void setAdjList(Set<TestBoardCell> setIn) {
+//		adjList = setIn;
+//	}
+	
+	public Set<TestBoardCell> getAdjList(){
 		return adjList;
 	}
 	
@@ -71,10 +59,10 @@ public class TestBoardCell implements Comparable<TestBoardCell>{
 		return col;
 	}
 
-	@Override
-	public int compareTo(TestBoardCell o) {
-		if(this.row == o.getRow() && this.col == o.getCol())
-			return 0;
-		return -1;
-	}
+//	@Override
+//	public int compareTo(TestBoardCell o) {
+//		if(this.row == o.getRow() && this.col == o.getCol())
+//			return 0;
+//		return 1;
+//	}
 }
