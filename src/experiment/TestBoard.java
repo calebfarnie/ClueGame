@@ -8,10 +8,7 @@
 package experiment;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class TestBoard {
 
@@ -22,7 +19,6 @@ public class TestBoard {
 	
 	private Set<TestBoardCell> targets;
 	private Set<TestBoardCell> visited;
-//	private Map<TestBoardCell, Set<TestBoardCell>> adjList;
 	
 	public TestBoard() {
 		// create board
@@ -73,7 +69,6 @@ public class TestBoard {
 	}
 	
 	public TestBoardCell getCell( int row, int col ) {
-		// PROBLEM HERE
 		return board[row][col];
 	}
 }

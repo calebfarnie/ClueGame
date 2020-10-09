@@ -8,7 +8,6 @@ package experiment;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class TestBoardCell{
 	
@@ -26,10 +25,6 @@ public class TestBoardCell{
 	public void addAdj(TestBoardCell cell){
 		adjList.add(cell);
 	}
-	
-//	public void setAdjList(Set<TestBoardCell> setIn) {
-//		adjList = setIn;
-//	}
 	
 	public Set<TestBoardCell> getAdjList(){
 		return adjList;
@@ -58,11 +53,4 @@ public class TestBoardCell{
 	public int getCol() {
 		return col;
 	}
-
-//	@Override
-//	public int compareTo(TestBoardCell o) {
-//		if(this.row == o.getRow() && this.col == o.getCol())
-//			return 0;
-//		return 1;
-//	}
 }
