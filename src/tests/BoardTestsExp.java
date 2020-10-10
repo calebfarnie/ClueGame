@@ -1,8 +1,8 @@
-/* 
+/** 
  * @author Caleb Farnie
  * @author Joshua Josey
  * C13A-1 Clue Paths 2
- * 05 October 2020
+ * 10 October 2020
  */
 
 package tests;
