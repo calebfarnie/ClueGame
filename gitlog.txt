@@ -1,4 +1,21 @@
-Note: we also utilized pair programming.
+commit 228c7acb8834b9a5b781a6cfb16f8796344b1264
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sat Oct 10 15:16:45 2020 -0600
+
+    Updated headers on the files. No changes to code.
+
+commit 364ac7b2e84121884e6910769d02540619b81058
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sat Oct 10 15:13:28 2020 -0600
+
+    Completed C13A-2. Implemented FileInitTests. All tests fail.
+
+commit 0ccb5b4c1f24ec95b0e082798d93fa3fa17e9665
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Oct 9 19:25:31 2020 -0600
+
+    Began working on failed tests. Puck up from testNumberOfDoorways().
+    Completed via pair programming.
 
 commit 872299da0be713f278443ad8ff50d72814a3cdba
 Author: Caleb Farnie <cfarnie@mymail.mines.edu>
