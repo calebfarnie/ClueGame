@@ -1,0 +1,13 @@
+// Planets and planet cards
+Room, Coruscant, C
+Room, Geonosis, G
+Room, Hoth, H
+Room, Dagobah, D
+Room, Endor, E
+Room, Kashyyyk, K
+Room, Yavin 4, Y
+Room, Bespin, B
+Room, Tatooine, T
+// other spaces
+Space, Unused, X
+Space, FreeSpace, S

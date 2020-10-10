@@ -44,7 +44,6 @@ public class TestBoard {
 
 		if(row > 0) {
 			cell.addAdj(getCell(row-1, col));
-			//adjList.add(getCell(row-1, col));
 		}
 
 		if(col > 0) {
