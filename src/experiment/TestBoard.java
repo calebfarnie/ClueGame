@@ -1,7 +1,7 @@
 /* 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C12A-2 Clue Paths 1
+ * C13A-1 Clue Paths 2
  * 05 October 2020
  */
 
@@ -61,11 +61,6 @@ public class TestBoard {
 	}
 	
 	public void calcTargets( TestBoardCell startCell, int pathLength) {
-		// calculates legal targets for a move from startCell of length pathLength.
-		/*
-		 * path length is dice roll
-		 * 
-		 */
 		targets = new HashSet<TestBoardCell>();
 		visited = new HashSet<TestBoardCell>();
 		visited.add(startCell);
@@ -73,12 +68,15 @@ public class TestBoard {
 	}
 	
 	private void findAllTargets(TestBoardCell startCell, int numSteps) {
+		// recursively find target cells
 		for(TestBoardCell c : startCell.getAdjList()) {
-			if(!visited.contains(c) /*&& !c.isRoom()*/ && !c.getOccupied()) {
-				if(numSteps ==1)
+			if(!visited.contains(c) && !c.getOccupied()) {
+				visited.add(c);
+				if(numSteps ==1) {
 					targets.add(c);
-				else
+				}else {
 					findAllTargets(c, numSteps -1);
+				}
 				visited.remove(c);
 			}
 		}

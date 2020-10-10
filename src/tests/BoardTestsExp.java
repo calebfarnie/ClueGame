@@ -1,7 +1,7 @@
 /* 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C12A-2 Clue Paths 1
+ * C13A-1 Clue Paths 2
  * 05 October 2020
  */
 
@@ -120,7 +120,7 @@ public class BoardTestsExp {
 		TestBoardCell cell = board.getCell(0,3);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> testList = board.getTargets();
-		Assert.assertTrue(testList.contains(board.getCell(1,2)));
+		Assert.assertTrue(testList.contains(board.getCell(1,1)));
 		Assert.assertTrue(testList.contains(board.getCell(2,2)));
 		Assert.assertTrue(testList.contains(board.getCell(3,3)));
 		Assert.assertEquals(3, testList.size());

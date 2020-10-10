@@ -2,7 +2,7 @@ package experiment;
 /* 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C12A-2 Clue Paths 1
+ * C13A-1 Clue Paths 2
  * 05 October 2020
  */
 
