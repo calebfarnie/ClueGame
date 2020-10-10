@@ -1,11 +1,11 @@
+package tests;
+
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C13A-1 Clue Paths 2
+ * C13A-2 Clue Init 1
  * 10 October 2020
  */
-
-package tests;
 
 import java.util.Set;
 import org.junit.Assert;

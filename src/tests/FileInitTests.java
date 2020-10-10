@@ -1,5 +1,12 @@
 package tests;
 
+/** 
+ * @author Caleb Farnie
+ * @author Joshua Josey
+ * C13A-2 Clue Init 1
+ * 10 October 2020
+ */
+
 /*
  * This program tests that config files are loaded properly.
  */
