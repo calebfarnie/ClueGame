@@ -26,8 +26,9 @@ public class BoardCell {
 	private boolean isOccupied;
 	private Set<BoardCell> adjList = new HashSet<BoardCell>();
 
-	public BoardCell() {
-		// TODO Auto-generated constructor stub
+	public BoardCell(int row, int col) {
+		this.row = row;
+		this.col = col;
 	}
 	
 	public void addAdj(BoardCell adj) {

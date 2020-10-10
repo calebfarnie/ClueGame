@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
@@ -8,15 +11,19 @@ package clueGame;
  */
 
 import java.util.Map;
+import java.util.Scanner;
+
+import experiment.TestBoardCell;
 
 public class Board {
 	
 	// instance variables
-	private BoardCell[][] grid;
 	private int numRows;
 	private int numColumns;
 	private String layoutConfigFile;
+	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
+	private BoardCell [][] grid;
 	
 	/*
      * variable and methods used for singleton pattern
@@ -33,43 +40,93 @@ public class Board {
      /*
       * initialize the board (since we are using singleton pattern)
       */
-     public void initialize()
-     {
+     public void initialize() {
+    	 
+    	// load config files
+  		try {
+			loadConfigFiles();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+  		
+  		// create board  		
+    	grid = new BoardCell[numRows][numColumns];
+    	 
+    	// fill board with cells
+ 		for(int r = 0; r < numRows; r++) {
+ 			for(int c = 0; c < numColumns; c++) {
+ 				grid[r][c] = new BoardCell(r,c);
+ 			}
+ 		}
+ 		
+ 		// get adjacency lists
+ 		for(int r = 0; r < numRows; r++) {
+ 			for(int c = 0; c < numColumns; c++) {
+ 				calcAdjList(r,c);
+ 			}
+ 		}	
+    	 
      }
 	
 	// methods
+    
+     private void calcAdjList(int r, int c) {
+ 		// TODO Auto-generated method stub
+ 		
+ 	}
      
     public void setConfigFiles(String csv, String txt) {
-    	
+    	layoutConfigFile = csv;
+    	setupConfigFile = txt;
     }
 	
-	public void loadConfigFiles() {
-		
+	public void loadConfigFiles() throws FileNotFoundException {
+		loadSetupConfig();
+ 		loadLayoutConfig();
 	}
 	
-	public void loadSetupConfig() {
+	public void loadSetupConfig() throws FileNotFoundException {
+		// set up file reader and scanner
+		FileReader reader = new FileReader(setupConfigFile);
+		Scanner in = new Scanner(reader);
+
+		// add rooms
+		if(in.next().equals("// Rooms and room cards")) {
+			// read setup txt file
+			while(in.hasNext()) {
+				String[] tempRoom = in.next().split(", ");
+				String roomName = tempRoom[1];
+				char roomInitial = tempRoom[2].charAt(0);
+				
+				// TODO STOPPED HERE 10/10/2020
+			}
+		}
 		
+
 	}
 	
-	public void loadLayoutConfig() {
-		
+	public void loadLayoutConfig() throws FileNotFoundException{
+		FileReader reader = new FileReader(setupConfigFile);
+		Scanner in = new Scanner(reader);
 	}
-	public BoardCell getCell(int i, int j) {
-		// TODO Auto-generated method stub
-		return new BoardCell();
+	
+	public BoardCell getCell(int row, int col) {
+		return getCell(row, col);
 	}
+	
 	public int getNumRows() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public Room getRoom(char c) {
-		// TODO Auto-generated method stub
-		return new Room();
+		return numRows;
 	}
 	
-	public Room getRoom(BoardCell c) {
-		// TODO Auto-generated method stub
-		return new Room();
+	public Room getRoom(char initial) {
+		// TODO
+		return null;
+	}
+	
+	public Room getRoom(BoardCell cell) {
+		// TODO
+		return null;
 	}
 
 }

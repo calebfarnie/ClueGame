@@ -14,23 +14,22 @@ public class Room {
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 
-	public Room() {
-		// TODO Auto-generated constructor stub
+	public Room(String name, BoardCell center, BoardCell label) {
+		this.name = name;
+		this.centerCell = center;
+		this.labelCell = label;
 	}
 	
 	public String getName() {
-		// TODO Auto-generated method stub
-		return "";
+		return name;
 	}
 
 	public BoardCell getLabelCell() {
-		// TODO Auto-generated method stub
-		return null;
+		return labelCell;
 	}
 
 	public BoardCell getCenterCell() {
-		// TODO Auto-generated method stub
-		return null;
+		return centerCell;
 	}
 
 }
