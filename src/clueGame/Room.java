@@ -13,11 +13,20 @@ public class Room {
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
+	//private char initial;
 
-	public Room(String name, BoardCell center, BoardCell label) {
+	public Room(String name) {
 		this.name = name;
-		this.centerCell = center;
-		this.labelCell = label;
+		//this.centerCell = center;
+		//this.initial = initial;
+	}
+	
+	public void setCenterCell(BoardCell center) {
+		centerCell = center;
+	}
+	
+	public void setLabelCell(BoardCell label) {
+		labelCell = label;
 	}
 	
 	public String getName() {

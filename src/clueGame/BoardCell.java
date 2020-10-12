@@ -22,14 +22,38 @@ public class BoardCell {
 	private boolean roomLabel;
 	private boolean roomCenter;
 	private char secretPassage;
-	private boolean inRoom;
+	private boolean isRoom;
 	private boolean isOccupied;
+	private boolean isDoorway;
 	private Set<BoardCell> adjList = new HashSet<BoardCell>();
 
 	public BoardCell(int row, int col) {
 		this.row = row;
 		this.col = col;
 	}
+	
+	public BoardCell(int row, int col, char initial, boolean roomLabel, boolean roomCenter, DoorDirection doorDirection, boolean isDoorway) {
+		this.row = row;
+		this.col = col;
+		this.initial = initial;
+		this.roomLabel = roomLabel;
+		this.roomCenter = roomCenter;
+		this.doorDirection = doorDirection;
+		this.isDoorway = isDoorway;
+	}
+	
+	public char getInitial() {
+		return initial;
+	}
+	
+	public void setSecretPassage(char secretPassage) {
+		this.secretPassage = secretPassage;
+	}
+	
+	/*
+	public void setInitail(char initial) {
+		this.initial = initial;
+	}*/
 	
 	public void addAdj(BoardCell adj) {
 		// TODO
@@ -40,11 +64,11 @@ public class BoardCell {
 	}
 	
 	public void setIsRoom(boolean isRoom) {
-		this.inRoom = isRoom;
+		this.isRoom = isRoom;
 	}
 	
 	public boolean isRoom() {
-		return inRoom;
+		return isRoom;
 	}
 	
 	public void setOccupied(boolean isOccupied) {
@@ -64,28 +88,23 @@ public class BoardCell {
 	}
 
 	public DoorDirection getDoorDirection() {
-		// TODO Auto-generated method stub
-		return DoorDirection.NONE;
+		return doorDirection;
 	}
 
 	public boolean isDoorway() {
-		// TODO Auto-generated method stub
-		return false;
+		return isDoorway;
 	}
 
 	public boolean isLabel() {
-		// TODO Auto-generated method stub
-		return false;
+		return roomLabel;
 	}
 
 	public boolean isRoomCenter() {
-		// TODO Auto-generated method stub
-		return false;
+		return roomCenter;
 	}
 
 	public char getSecretPassage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return secretPassage;
 	}
 	
 	
