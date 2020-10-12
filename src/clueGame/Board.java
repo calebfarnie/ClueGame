@@ -1,5 +1,12 @@
 package clueGame;
 
+/** 
+ * @author Caleb Farnie
+ * @author Joshua Josey
+ * C14A-1 Clue Init 2
+ * 12 October 2020
+ */
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -57,11 +64,9 @@ public class Board {
 	 			}
 	 		}	
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} catch (BadConfigFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
   		
  		
@@ -100,7 +105,7 @@ public class Board {
 			
 			// throw exception if not a room or space
 			if(!tempRoom[0].equals("Room") && !tempRoom[0].equals("Space"))
-				throw new BadConfigFormatException();
+				throw new BadConfigFormatException("Setup file contains room type that is not Room or Space.");
 			
 			String roomName = tempRoom[1];
 			char roomInitial = tempRoom[2].charAt(0);
@@ -125,7 +130,7 @@ public class Board {
 		int rowCount = config.get(0).length;
 		for(String[] row : config) {
 			if (row.length != rowCount) {
-				throw new BadConfigFormatException();
+				throw new BadConfigFormatException("Expected row: " + rowCount + ". Actual row: " + row.length);
 			}
 		}
 		
@@ -149,7 +154,7 @@ public class Board {
 				
 				// test for initial in roomMap. Throw exception if room not in map.
 				if(!roomMap.containsKey(initial))
-					throw new BadConfigFormatException();
+					throw new BadConfigFormatException("Room type not declared in " + setupConfigFile);
 				
 				if(s.length() == 1) {
 					label = false;
