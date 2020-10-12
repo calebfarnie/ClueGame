@@ -31,7 +31,7 @@ public class Board {
 	private int numColumns;
 	private String layoutConfigFile;
 	private String setupConfigFile;
-	private Map<Character, Room> roomMap = new HashMap<Character, Room>();
+	private Map<Character, Room> roomMap;
 	private BoardCell [][] grid;
 
 	/*
@@ -49,7 +49,7 @@ public class Board {
 	/*
 	 * initialize the board (since we are using singleton pattern)
 	 */
-	public void initialize() {
+	public void initialize() {		
 		// load config files
 		try {
 			loadConfigFiles();
@@ -90,6 +90,9 @@ public class Board {
 	}
 
 	public void loadSetupConfig() throws FileNotFoundException, BadConfigFormatException {
+		// allocate memory for room map
+		roomMap = new HashMap<Character, Room>();
+				
 		// set up file reader and scanner
 		FileReader reader = new FileReader(setupConfigFile);
 		Scanner in = new Scanner(reader);
