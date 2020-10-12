@@ -1,3 +1,45 @@
+commit 76255ac8c7c1fdd59f7ba298a6238b4f353bf747
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Oct 12 14:23:02 2020 -0600
+
+    Fixed "run all tests". C14A-4 complete.
+
+commit 89ee8a2e05fed615af956e2e1acf5622473fa6b9
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sun Oct 11 22:10:22 2020 -0600
+
+    Finished C14A-1. Refactoring complete. Worked via pair programming.
+
+commit 4796101c461ed787e739b1e9d619f9c79d5e137e
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sun Oct 11 21:52:01 2020 -0600
+
+    Completed tests. All pass. Pre-refactoring.
+
+commit 379465cd2b8f49550318e1fbf7c9a50a80c75d5a
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sun Oct 11 21:24:59 2020 -0600
+
+    All tests pass.
+
+commit 7e613cda4adc9d5b68b7ee09123d6f2f0997e98f
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sun Oct 11 21:18:33 2020 -0600
+
+    All but one test passes.
+
+commit ea1e7948c4d92e6ca63996cfde5d5022dd327527
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sat Oct 10 16:14:33 2020 -0600
+
+    Began input file parsing. Worked via Pair Programming.
+
+commit a4869710ef3d141b07515e69339d502186ebc1bb
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sat Oct 10 15:17:58 2020 -0600
+
+    Updated gitlog.txt
+
 commit 228c7acb8834b9a5b781a6cfb16f8796344b1264
 Author: Caleb Farnie <cfarnie@mymail.mines.edu>
 Date:   Sat Oct 10 15:16:45 2020 -0600

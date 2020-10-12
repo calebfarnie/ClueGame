@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /** 
  * @author Caleb Farnie
@@ -21,6 +22,7 @@ import java.util.HashMap;
 
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import experiment.TestBoardCell;
 
@@ -32,6 +34,8 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
+	private Set<TestBoardCell> targets;
+	private Set<TestBoardCell> visited;
 	private BoardCell [][] grid;
 
 	/*
@@ -53,7 +57,7 @@ public class Board {
 		// load config files
 		try {
 			loadConfigFiles();
-			getAdjList();	
+			generateAdjLists();	
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (BadConfigFormatException e) {
@@ -65,7 +69,7 @@ public class Board {
 
 	// methods
 
-	private void getAdjList() {
+	private void generateAdjLists() {
 		// get adjacency lists
 		for(int r = 0; r < numRows; r++) {
 			for(int c = 0; c < numColumns; c++) {
@@ -250,5 +254,21 @@ public class Board {
 			return null;
 		}
 	}
+	
+	public Set<BoardCell> getAdjList(int row, int col) {
+		return grid[row][col].getAdjList();
+	}
+	
+	public void calcTargets(BoardCell cell, int pathLength) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public Set<BoardCell> getTargets() {
+		// TODO Auto-generated method stub
+		return new HashSet<BoardCell>();
+	}
+	
+	
 
 }
