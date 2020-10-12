@@ -50,11 +50,6 @@ public class BoardCell {
 		this.secretPassage = secretPassage;
 	}
 	
-	/*
-	public void setInitail(char initial) {
-		this.initial = initial;
-	}*/
-	
 	public void addAdj(BoardCell adj) {
 		// TODO
 	}

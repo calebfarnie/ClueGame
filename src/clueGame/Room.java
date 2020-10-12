@@ -17,8 +17,7 @@ public class Room {
 
 	public Room(String name) {
 		this.name = name;
-		//this.centerCell = center;
-		//this.initial = initial;
+
 	}
 	
 	public void setCenterCell(BoardCell center) {
