@@ -13,6 +13,7 @@ public class Room {
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
+	private boolean isWalkway;
 
 	public Room(String name) {
 		this.name = name;
@@ -37,6 +38,14 @@ public class Room {
 
 	public BoardCell getCenterCell() {
 		return centerCell;
+	}
+	
+	public void setWalkway() {
+		isWalkway = true;
+	}
+	
+	public boolean getWalkway() {
+		return isWalkway;
 	}
 
 }

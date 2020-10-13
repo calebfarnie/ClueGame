@@ -1,3 +1,18 @@
+Note: completed via pair programming.
+
+commit fa341dde3c4704dbb0204eb7032b107f8b542054
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Oct 12 18:45:33 2020 -0600
+
+    Completed C14A-2. New tests fail with no errors, all previous tests
+    pass.
+
+commit 48a470dfeb59d724faff132063b79229b3cce213
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Oct 12 14:54:42 2020 -0600
+
+    Implemented failing tests for "BoardAdjTargetTest306.java".
+
 commit 76255ac8c7c1fdd59f7ba298a6238b4f353bf747
 Author: Caleb Farnie <cfarnie@mymail.mines.edu>
 Date:   Mon Oct 12 14:23:02 2020 -0600

@@ -100,8 +100,6 @@ public class BoardCell {
 
 	public char getSecretPassage() {
 		return secretPassage;
-	}
-	
-	
+	}	
 
 }

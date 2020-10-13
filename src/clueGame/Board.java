@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import experiment.TestBoard;
 import experiment.TestBoardCell;
 
 public class Board {
@@ -78,11 +79,26 @@ public class Board {
 		}
 	}
 
-	private void calcAdjList(int r, int c) {
+	private void calcAdjList(int row, int col) {
 		// TODO Auto-generated method stub
-		
-		// Remember if doors should be part of room or not
+		BoardCell cell = getCell(row, col);
 
+		if(row > 0 && isWalkway(row-1, col)) {
+			cell.addAdj(getCell(row-1, col));
+		}
+
+		if(col > 0) {
+			cell.addAdj(getCell(row, col-1));
+		}
+
+		if(row < numRows-1) {
+			cell.addAdj(getCell(row+1, col));
+		}
+
+		if(col < numColumns-1) {
+			cell.addAdj(getCell(row, col+1));
+		}
+		
 	}
 
 	public void setConfigFiles(String csv, String txt) {
@@ -228,7 +244,10 @@ public class Board {
 				if(label) {
 					roomMap.get(cellData.charAt(0)).setLabelCell(cell);
 				}
-
+				
+				if(initial == 'S') {
+					roomMap.get(cellData.charAt(0)).setWalkway();
+				}
 			}
 		}
 	}
@@ -271,6 +290,13 @@ public class Board {
 		return new HashSet<BoardCell>();
 	}
 	
+	public boolean isWalkway(int r, int c) {
+		if(getCell(r, c).isRoom()) {
+			return roomMap.get(getCell(r, c).getInitial()).getWalkway();
+		} else {
+			return false;
+		}
+	}
 	
 
 }
