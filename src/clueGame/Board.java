@@ -3,7 +3,7 @@ package clueGame;
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C14A-1 Clue Init 2
+ * C14A-2 Clue Board 1
  * 12 October 2020
  */
 
@@ -80,6 +80,8 @@ public class Board {
 
 	private void calcAdjList(int r, int c) {
 		// TODO Auto-generated method stub
+		
+		// Remember if doors should be part of room or not
 
 	}
 

@@ -3,7 +3,7 @@ package tests;
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C14A-1 Clue Init 2
+ * C14A-2 Clue Board 1
  * 12 October 2020
  */
 
