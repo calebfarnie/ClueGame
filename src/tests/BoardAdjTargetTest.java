@@ -39,23 +39,24 @@ public class BoardAdjTargetTest {
 	@Test
 	public void testAdjacenciesPlanets()
 	{
-		// we want to test a couple of different rooms.
-		// First, the study that only has a single door but a secret room
-		Set<BoardCell> testList = board.getAdjList(2, 2);
-		assertEquals(2, testList.size());
-		assertTrue(testList.contains(board.getCell(4, 6)));
-		assertTrue(testList.contains(board.getCell(20, 19)));
+		// we want to test a couple of different planets.
+		// First, Degobah which has a secret room and two doors
+		Set<BoardCell> testList = board.getAdjList(3, 3);
+		assertEquals(3, testList.size());
+		assertTrue(testList.contains(board.getCell(25, 15)));
+		assertTrue(testList.contains(board.getCell(7, 3)));
+		assertTrue(testList.contains(board.getCell(3, 7)));
 		
-		// now test the ballroom (note not marked since multiple test here)
-		testList = board.getAdjList(20, 11);
-		assertEquals(4, testList.size());
-		assertTrue(testList.contains(board.getCell(16, 9)));
+		// now test cell within Coruscant (not room center, should have no adj)
+		testList = board.getAdjList(2, 15);
+		assertEquals(0, testList.size());
 		
-		// one more room, the kitchen
-		testList = board.getAdjList(20, 19);
-		assertEquals(2, testList.size());
-		assertTrue(testList.contains(board.getCell(17, 18)));
-		assertTrue(testList.contains(board.getCell(2, 2)));
+		// test Hoth
+		testList = board.getAdjList(26, 25);
+		assertEquals(3, testList.size());
+		assertTrue(testList.contains(board.getCell(25, 22)));
+		assertTrue(testList.contains(board.getCell(23, 24)));
+		assertTrue(testList.contains(board.getCell(23, 26)));
 	}
 
 	
