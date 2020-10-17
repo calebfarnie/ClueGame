@@ -13,6 +13,7 @@ public class Room {
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
+	private char secretPassage = '0';
 	private boolean isWalkway;
 
 	public Room(String name) {
@@ -21,11 +22,17 @@ public class Room {
 	}
 	
 	public void setCenterCell(BoardCell center) {
-		centerCell = center;
+		this.centerCell = center;
 	}
 	
+	/*
+	 * public void setCenterCell(int row, int col) {
+		this.centerCell = center;
+	}
+	 */
+	
 	public void setLabelCell(BoardCell label) {
-		labelCell = label;
+		this.labelCell = label;
 	}
 	
 	public String getName() {
@@ -41,11 +48,19 @@ public class Room {
 	}
 	
 	public void setWalkway() {
-		isWalkway = true;
+		this.isWalkway = true;
 	}
 	
 	public boolean getWalkway() {
 		return isWalkway;
+	}
+	
+	public void setSecretPassage(char secretPassage) {
+		this.secretPassage = secretPassage;
+	}
+	
+	public char getSecretPassage() {
+		return secretPassage;
 	}
 
 }

@@ -10,4 +10,4 @@ Room, Bespin, B
 Room, Tatooine, T
 // other spaces
 Space, Unused, X
-Space, FreeSpace, S
+Space, FreeSpace, W

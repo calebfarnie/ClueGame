@@ -30,6 +30,7 @@ public class BoardCell {
 	public BoardCell(int row, int col) {
 		this.row = row;
 		this.col = col;
+		isOccupied = false;
 	}
 	
 	public BoardCell(int row, int col, char initial, boolean roomLabel, boolean roomCenter, DoorDirection doorDirection, boolean isDoorway) {
@@ -40,6 +41,7 @@ public class BoardCell {
 		this.roomCenter = roomCenter;
 		this.doorDirection = doorDirection;
 		this.isDoorway = isDoorway;
+		isOccupied = false;
 	}
 	
 	public char getInitial() {
@@ -51,7 +53,7 @@ public class BoardCell {
 	}
 	
 	public void addAdj(BoardCell adj) {
-		// TODO
+		this.adjList.add(adj);
 	}
 	
 	public Set<BoardCell> getAdjList(){
@@ -71,6 +73,9 @@ public class BoardCell {
 	}
 	
 	public boolean getOccupied() {
+		if(roomCenter)
+			return false;
+		
 		return isOccupied;
 	}
 	
@@ -100,6 +105,13 @@ public class BoardCell {
 
 	public char getSecretPassage() {
 		return secretPassage;
-	}	
-
+	}
+	
+	public boolean isWalkway() {
+		if(initial == 'W' || isDoorway || roomCenter) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
