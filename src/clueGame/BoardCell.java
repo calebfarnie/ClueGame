@@ -3,13 +3,12 @@ package clueGame;
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C14A-2 Clue Board 1
- * 12 October 2020
+ * C15A Clue Board 2
+ * 16 October 2020
  */
 
 import java.util.HashSet;
 import java.util.Set;
-
 import experiment.TestBoardCell;
 
 public class BoardCell {

@@ -1,18 +1,17 @@
 package clueGame;
 
+/** 
+ * @author Caleb Farnie
+ * @author Joshua Josey
+ * C15A Clue Board 2
+ * 16 October 2020
+ */
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-
-/** 
- * @author Caleb Farnie
- * @author Joshua Josey
- * C13A-2 Clue Init 1
- * 10 October 2020
- */
-
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -139,36 +138,6 @@ public class Board {
 		}
 
 	}
-
-	/*
-	private void verifyAdjCell(BoardCell curCell, BoardCell ogCell) {
-		if(curCell.getDoorDirection().equals(DoorDirection.NONE)) {
-			if(curCell.getOccupied() == false)
-				ogCell.addAdj(curCell);
-		} else { // cell is a door
-			if(curCell.getDoorDirection().equals(DoorDirection.UP)) {
-				BoardCell roomCell = getCell(curCell.getRow(), curCell.getCol()-1);
-				Character c = roomCell.getInitial();
-				curCell = roomMap.get(c).getCenterCell();
-			} else if(curCell.getDoorDirection().equals(DoorDirection.DOWN)) {
-				BoardCell roomCell = getCell(curCell.getRow(), curCell.getCol()+1);
-				Character c = roomCell.getInitial();
-				curCell = roomMap.get(c).getCenterCell();
-			} else if(curCell.getDoorDirection().equals(DoorDirection.LEFT)) {
-				BoardCell roomCell = getCell(curCell.getRow()-1, curCell.getCol());
-				Character c = roomCell.getInitial();
-				curCell = roomMap.get(c).getCenterCell();
-			} else { // direction is RIGHT
-				BoardCell roomCell = getCell(curCell.getRow()+1, curCell.getCol());
-				Character c = roomCell.getInitial();
-				curCell = roomMap.get(c).getCenterCell();
-			}
-			// check if occupied
-			if(curCell.getOccupied() == false)
-				ogCell.addAdj(curCell);
-		}
-	}
-	 */
 
 	public void setConfigFiles(String csv, String txt) {
 		layoutConfigFile = "data/" + csv;
@@ -373,7 +342,6 @@ public class Board {
 	}
 
 	public Set<BoardCell> getTargets() {
-		// TODO Auto-generated method stub
 		return targets;
 	}
 

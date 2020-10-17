@@ -3,8 +3,8 @@ package clueGame;
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C14A-1 Clue Init 2
- * 12 October 2020
+ * C15A Clue Board 2
+ * 16 October 2020
  */
 
 public class Room {
@@ -24,12 +24,6 @@ public class Room {
 	public void setCenterCell(BoardCell center) {
 		this.centerCell = center;
 	}
-	
-	/*
-	 * public void setCenterCell(int row, int col) {
-		this.centerCell = center;
-	}
-	 */
 	
 	public void setLabelCell(BoardCell label) {
 		this.labelCell = label;
