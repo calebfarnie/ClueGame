@@ -61,7 +61,6 @@ public class Board {
 	}
 
 	// methods
-
 	private void generateAdjLists() {
 		// get adjacency lists
 		for(int r = 0; r < numRows; r++) {
@@ -72,62 +71,21 @@ public class Board {
 	}
 
 	private void calcAdjList(int row, int col) {
-		// TODO Auto-generated method stub
 		BoardCell cell = getCell(row, col);
 
 		// normal walkway
 		if(!cell.isWalkway())
 			return;
 
+		// if doorway, test which direction and add that room center to adj list.
+		// also add doorway to room center's adj list
 		if(cell.isDoorway()) {
-			// doorway adj
-			// add center of room door points to
-			// Handle other 3 directions like walkway
-			if(cell.getDoorDirection().equals(DoorDirection.UP)) {
-				BoardCell roomCell = getCell(row-1, col);
-				char c = roomCell.getInitial();
-				cell.addAdj(roomMap.get(c).getCenterCell());
-				roomMap.get(c).getCenterCell().addAdj(cell);
-			} else if(cell.getDoorDirection().equals(DoorDirection.DOWN)) {
-				BoardCell roomCell = getCell(row+1, col);
-				char c = roomCell.getInitial();
-				cell.addAdj(roomMap.get(c).getCenterCell());
-				roomMap.get(c).getCenterCell().addAdj(cell);
-			} else if(cell.getDoorDirection().equals(DoorDirection.LEFT)) {
-				BoardCell roomCell = getCell(row, col-1);
-				char c = roomCell.getInitial();
-				cell.addAdj(roomMap.get(c).getCenterCell());
-				roomMap.get(c).getCenterCell().addAdj(cell);
-			} else { // direction is RIGHT
-				BoardCell roomCell = getCell(row, col+1);
-				char c = roomCell.getInitial();
-				cell.addAdj(roomMap.get(c).getCenterCell());	
-				roomMap.get(c).getCenterCell().addAdj(cell);
-			}
-
-
+			processDoorDirection(row, col, cell);
 		}
-
+		
+		// if not room center, add it to the adj list
 		if(!cell.isRoomCenter()) {
-			// left
-			if(row > 0 && getCell(row-1, col).isWalkway()) {
-				cell.addAdj(getCell(row-1, col));
-			}
-	
-			// up
-			if(col > 0 && getCell(row, col-1).isWalkway()) {
-				cell.addAdj(getCell(row, col-1));
-			}
-	
-			// right
-			if(row < numRows-1 && getCell(row+1, col).isWalkway()) {
-				cell.addAdj(getCell(row+1, col));
-			}
-	
-			// down
-			if(col < numColumns-1 && getCell(row, col+1).isWalkway()) {
-				cell.addAdj(getCell(row, col+1));
-			}
+			addRoomCenterAdjList(row, col, cell);
 		} else {
 			// add secret passage if applicable
 			char current = cell.getInitial();
@@ -137,6 +95,53 @@ public class Board {
 			}
 		}
 
+	}
+
+	private void addRoomCenterAdjList(int row, int col, BoardCell cell) {
+		// left
+		if(row > 0 && getCell(row-1, col).isWalkway()) {
+			cell.addAdj(getCell(row-1, col));
+		}
+
+		// up
+		if(col > 0 && getCell(row, col-1).isWalkway()) {
+			cell.addAdj(getCell(row, col-1));
+		}
+
+		// right
+		if(row < numRows-1 && getCell(row+1, col).isWalkway()) {
+			cell.addAdj(getCell(row+1, col));
+		}
+
+		// down
+		if(col < numColumns-1 && getCell(row, col+1).isWalkway()) {
+			cell.addAdj(getCell(row, col+1));
+		}
+	}
+
+	private void processDoorDirection(int row, int col, BoardCell cell) {
+		// doorway adj
+		// add center of room door points to
+		// Handle other 3 directions like walkway
+		if(cell.getDoorDirection().equals(DoorDirection.UP)) {
+			BoardCell roomCell = getCell(row-1, col);
+			addDoorAdjList(cell, roomCell);
+		} else if(cell.getDoorDirection().equals(DoorDirection.DOWN)) {
+			BoardCell roomCell = getCell(row+1, col);
+			addDoorAdjList(cell, roomCell);
+		} else if(cell.getDoorDirection().equals(DoorDirection.LEFT)) {
+			BoardCell roomCell = getCell(row, col-1);
+			addDoorAdjList(cell, roomCell);
+		} else { // direction is RIGHT
+			BoardCell roomCell = getCell(row, col+1);
+			addDoorAdjList(cell, roomCell);
+		}
+	}
+
+	private void addDoorAdjList(BoardCell cell, BoardCell roomCell) {
+		char c = roomCell.getInitial();
+		cell.addAdj(roomMap.get(c).getCenterCell());
+		roomMap.get(c).getCenterCell().addAdj(cell);
 	}
 
 	public void setConfigFiles(String csv, String txt) {
