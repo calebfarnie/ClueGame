@@ -43,6 +43,8 @@ public class BoardCell {
 		isOccupied = false;
 	}
 	
+	// refactor constructors
+	
 	public char getInitial() {
 		return initial;
 	}
