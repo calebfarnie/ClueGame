@@ -3,8 +3,6 @@ package clueGame;
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C15A Clue Board 2
- * 16 October 2020
  */
 
 import java.io.FileNotFoundException;
@@ -15,9 +13,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-
-import experiment.TestBoard;
-import experiment.TestBoardCell;
 
 public class Board {
 
@@ -212,6 +207,10 @@ public class Board {
 		grid = new BoardCell[numRows][numColumns];
 
 		// fill board
+		fillBoard(rows);
+	}
+
+	private void fillBoard(ArrayList<String[]> rows) throws BadConfigFormatException {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numColumns; col++) {
 				createCell(rows, row, col);
