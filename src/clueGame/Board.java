@@ -31,21 +31,20 @@ public class Board {
 	private Set<BoardCell> visited;
 	private BoardCell [][] grid;
 
-	/*
-	 * variable and methods used for singleton pattern
-	 */
+	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
+	
 	// constructor is private to ensure only one can be created
 	private Board() {
 		super() ;
 	}
+	
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
 	}
-	/*
-	 * initialize the board (since we are using singleton pattern)
-	 */
+	
+	// initialize the board (since we are using singleton pattern)
 	public void initialize() {		
 		// load config files
 		try {
@@ -56,11 +55,9 @@ public class Board {
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
-
-
 	}
 
-	// methods
+	// private methods
 	private void generateAdjLists() {
 		// get adjacency lists
 		for(int r = 0; r < numRows; r++) {
@@ -120,9 +117,8 @@ public class Board {
 	}
 
 	private void processDoorDirection(int row, int col, BoardCell cell) {
-		// doorway adj
 		// add center of room door points to
-		// Handle other 3 directions like walkway
+		// handle other 3 directions like walkway
 		if(cell.getDoorDirection().equals(DoorDirection.UP)) {
 			BoardCell roomCell = getCell(row-1, col);
 			addDoorAdjList(cell, roomCell);
@@ -138,10 +134,15 @@ public class Board {
 		}
 	}
 
-	private void addDoorAdjList(BoardCell cell, BoardCell roomCell) {
-		char c = roomCell.getInitial();
-		cell.addAdj(roomMap.get(c).getCenterCell());
-		roomMap.get(c).getCenterCell().addAdj(cell);
+	private void addDoorAdjList(BoardCell currentCell, BoardCell roomCell) {
+		char roomCellInitial = roomCell.getInitial();
+		BoardCell roomCenterCell = roomMap.get(roomCellInitial).getCenterCell();
+		
+		// adds the room's center cell to currentCell's adj list
+		currentCell.addAdj(roomMap.get(roomCellInitial).getCenterCell());
+		
+		// adds currentCell to roomCell's adj list
+		roomCenterCell.addAdj(currentCell);
 	}
 
 	public void setConfigFiles(String csv, String txt) {
@@ -217,6 +218,7 @@ public class Board {
 		// fill board
 		for(int row = 0; row < numRows; row++) {
 			for(int col = 0; col < numColumns; col++) {
+				// extract cell from row and column
 				String[] currentRowData = rows.get(row);
 				String cellData = currentRowData[col];
 				char initial = cellData.charAt(0);
@@ -235,7 +237,7 @@ public class Board {
 				if(cellData.length() == 1) {
 					direction = DoorDirection.NONE;
 
-				  // if initial length >1, then process second value
+				  // if initial length >1, then process second char value
 				} else {
 					switch(cellData.charAt(1)) {
 					case '*':
@@ -277,7 +279,7 @@ public class Board {
 					cell.setSecretPassage(cellData.charAt(1));
 				}
 
-				// mark room's center cell/label
+				// mark room's center cell/label and set walkway
 				if(center) {
 					roomMap.get(cellData.charAt(0)).setCenterCell(cell);
 				}
