@@ -195,6 +195,8 @@ public class Board {
 			String[] splitRow = in.nextLine().split(",");
 			rows.add(splitRow);
 		}
+		
+		//close scanner
 		in.close();
 
 		// test for equal columns
@@ -219,11 +221,10 @@ public class Board {
 				String cellData = currentRowData[col];
 				char initial = cellData.charAt(0);
 
-				// set variables to false. Will be changed in switch-case below.
-				boolean label = false;
-				boolean center = false;
-				boolean doorway = false;
-				boolean isSecretPassage = false;
+				// instantiate boolean values to false
+				// will be changed in switch-case below.
+				boolean label, center, doorway, isSecretPassage;
+				label = center =  doorway = isSecretPassage = false;
 				DoorDirection direction = DoorDirection.NONE;
 
 				// test for initial in roomMap. Throw exception if room not in map.
