@@ -222,7 +222,7 @@ public class Board {
 		// extract cell from row and column
 		String[] currentRowData = rows.get(row);
 		String cellData = currentRowData[col];
-		char initial = cellData.charAt(0);
+		char initial = cellData.charAt(0), symbol = '0';
 
 		// instantiate boolean values to false
 		// will be changed in switch-case below.
@@ -230,7 +230,7 @@ public class Board {
 		label = center = doorway = isSecretPassage = false;
 		DoorDirection direction = DoorDirection.NONE;
 
-		// test for initial in roomMap. Throw exception if room not in map.
+		// test for initial in roomMap. Throw exception if initial not in map.
 		if (!roomMap.containsKey(initial))
 			throw new BadConfigFormatException("Room type not declared in " + setupConfigFile);
 
@@ -240,7 +240,8 @@ public class Board {
 
 			// if initial length >1, then process second char value
 		} else {
-			switch (cellData.charAt(1)) {
+			symbol = cellData.charAt(1);
+			switch (symbol) {
 			case '*':
 				center = true;
 				break;
@@ -274,23 +275,27 @@ public class Board {
 		grid[row][col] = cell;
 		cell.setIsRoom(true);
 
+		// set room attributes
+		
 		// set secret passage
 		if (isSecretPassage) {
-			roomMap.get(cellData.charAt(0)).setSecretPassage(cellData.charAt(1));
-			cell.setSecretPassage(cellData.charAt(1));
+			roomMap.get(initial).setSecretPassage(symbol);
+			cell.setSecretPassage(symbol);
 		}
 
-		// mark room's center cell/label and set walkway
+		// set room's center cell
 		if (center) {
-			roomMap.get(cellData.charAt(0)).setCenterCell(cell);
+			roomMap.get(initial).setCenterCell(cell);
 		}
 
+		// set room's label
 		if (label) {
-			roomMap.get(cellData.charAt(0)).setLabelCell(cell);
+			roomMap.get(initial).setLabelCell(cell);
 		}
 
+		// set room walkway
 		if (initial == 'W') {
-			roomMap.get(cellData.charAt(0)).setWalkway();
+			roomMap.get(initial).setWalkway();
 		}
 	}
 
