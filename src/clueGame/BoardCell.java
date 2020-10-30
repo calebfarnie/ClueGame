@@ -3,13 +3,10 @@ package clueGame;
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
- * C15A Clue Board 2
- * 16 October 2020
  */
 
 import java.util.HashSet;
 import java.util.Set;
-import experiment.TestBoardCell;
 
 public class BoardCell {
 	
@@ -17,19 +14,20 @@ public class BoardCell {
 	private int row;
 	private int col;
 	private char initial;
-	private DoorDirection doorDirection;
+	private char secretPassage;
 	private boolean roomLabel;
 	private boolean roomCenter;
-	private char secretPassage;
 	private boolean isRoom;
 	private boolean isOccupied;
 	private boolean isDoorway;
+	private DoorDirection doorDirection;
 	private Set<BoardCell> adjList = new HashSet<BoardCell>();
 
+	// constructors
 	public BoardCell(int row, int col) {
 		this.row = row;
 		this.col = col;
-		isOccupied = false;
+		this.isOccupied = false;
 	}
 	
 	public BoardCell(int row, int col, char initial, boolean roomLabel, boolean roomCenter, DoorDirection doorDirection, boolean isDoorway) {
@@ -40,13 +38,12 @@ public class BoardCell {
 		this.roomCenter = roomCenter;
 		this.doorDirection = doorDirection;
 		this.isDoorway = isDoorway;
-		isOccupied = false;
+		this.isOccupied = false;
 	}
 	
-	// refactor constructors
-	
+	// public methods
 	public char getInitial() {
-		return initial;
+		return this.initial;
 	}
 	
 	public void setSecretPassage(char secretPassage) {
@@ -58,7 +55,7 @@ public class BoardCell {
 	}
 	
 	public Set<BoardCell> getAdjList(){
-		return adjList;
+		return this.adjList;
 	}
 	
 	public void setIsRoom(boolean isRoom) {
@@ -66,7 +63,7 @@ public class BoardCell {
 	}
 	
 	public boolean isRoom() {
-		return isRoom;
+		return this.isRoom;
 	}
 	
 	public void setOccupied(boolean isOccupied) {
@@ -74,45 +71,42 @@ public class BoardCell {
 	}
 	
 	public boolean getOccupied() {
-		if(roomCenter)
+		if(this.roomCenter) {
 			return false;
-		
-		return isOccupied;
+		}else {
+			return this.isOccupied;
+		}
 	}
 	
 	public int getRow() {
-		return row;
+		return this.row;
 	}
 	
 	public int getCol() {
-		return col;
+		return this.col;
 	}
 
 	public DoorDirection getDoorDirection() {
-		return doorDirection;
+		return this.doorDirection;
 	}
 
 	public boolean isDoorway() {
-		return isDoorway;
+		return this.isDoorway;
 	}
 
 	public boolean isLabel() {
-		return roomLabel;
+		return this.roomLabel;
 	}
 
 	public boolean isRoomCenter() {
-		return roomCenter;
+		return this.roomCenter;
 	}
 
 	public char getSecretPassage() {
-		return secretPassage;
+		return this.secretPassage;
 	}
 	
 	public boolean isWalkway() {
-		if(initial == 'W' || isDoorway || roomCenter) {
-			return true;
-		} else {
-			return false;
-		}
+		return (this.initial == 'W' || this.isDoorway || this.roomCenter);
 	}
 }
