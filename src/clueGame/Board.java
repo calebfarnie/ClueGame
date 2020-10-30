@@ -233,20 +233,16 @@ public class Board {
 
 				// if initial length is 1, then it's a normal room.
 				if(cellData.length() == 1) {
-					label = false;
-					center = false;
 					direction = DoorDirection.NONE;
 
-					// if initial length >1, then process second value
+				  // if initial length >1, then process second value
 				} else {
 					switch(cellData.charAt(1)) {
 					case '*':
 						center = true;
-						direction = DoorDirection.NONE;
 						break;
 					case '#':
 						label = true;
-						direction = DoorDirection.NONE;
 						break;
 					case '^':
 						doorway = true;
