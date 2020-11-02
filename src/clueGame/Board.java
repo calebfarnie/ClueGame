@@ -24,6 +24,9 @@ public class Board {
 	private Map<Character, Room> roomMap;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
+	private Set<Card> deck;
+	private Set<Player> players;
+	private Solution theAnswer;
 	private BoardCell[][] grid;
 
 	// variable and methods used for singleton pattern

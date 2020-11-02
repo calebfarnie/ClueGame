@@ -5,6 +5,6 @@ package clueGame;
  * @author Joshua Josey
  */
 
-public enum DoorDirection {
-	LEFT, RIGHT, UP, DOWN, NONE
+public enum CardType {
+	PERSON, ROOM, WEAPON
 }
