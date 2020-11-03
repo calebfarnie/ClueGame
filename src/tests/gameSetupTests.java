@@ -105,7 +105,57 @@ class gameSetupTests {
 		}
 		assertEquals(count, 1);
 	}
-	
-	
 
+	
+	@Test
+	public void testDeck() {
+		// test amount of PERSON cards
+		int count = 0;
+		Set<Card> cardList = board.getDeck();
+		
+		for(Card c : cardList) {
+			if(c.getType() == CardType.PERSON) {
+				count++;
+			}
+		}
+		
+		assertEquals(count, 6);
+		
+		// test Obi-Wan Kenobi in deck and is PERSON
+		Card testCard = new Card("Obi-Wan Kenobi", CardType.PERSON);
+		count = 0;
+		
+		for(Card c : cardList) {
+			if(c.equals(testCard)) {
+				count++;
+			}
+		}
+		
+		assertEquals(count, 1);
+		
+		// test amount of ROOM cards
+		count = 0;
+
+		for(Card c : cardList) {
+			if(c.getType() == CardType.ROOM) {
+				count++;
+			}
+		}
+
+		assertEquals(count, 9);
+		
+		// test Kashyyyk in deck and is ROOM
+		testCard = new Card("Kashyyyk", CardType.ROOM);
+		count = 0;
+
+		for(Card c : cardList) {
+			if(c.equals(testCard)) {
+				count++;
+			}
+		}
+
+		assertEquals(count, 1);
+
+		
+	}
 }
