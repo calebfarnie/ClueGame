@@ -210,8 +210,10 @@ public class Board {
 				Room room = new Room(roomName);
 				roomMap.put(roomInitial, room);
 				
-				Card card = new Card(roomName, CardType.ROOM);
-				deck.add(card);
+				if(!tempRoom[0].equals("Space")) {
+					Card card = new Card(roomName, CardType.ROOM);
+					deck.add(card);
+				}
 			}
 		}
 
