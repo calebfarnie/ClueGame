@@ -1,22 +1,20 @@
 package tests;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import clueGame.Board;
-import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.Player;
-import clueGame.Room;
 import clueGame.Solution;
 
 /** 
@@ -165,12 +163,12 @@ class gameSetupTests {
 		Solution answer = board.getAnswer();
 		ArrayList<Card> deck = board.getDeck();
 		Map<String, Player> players = board.getPlayers();
-		assertTrue(answer.person != null);
+		assertFalse(answer.person == null);
 		assertFalse(answer.weapon == null);
 		assertFalse(answer.room == null);
 		
 		// test hand count is sufficient for each player
-		int requirement = (deck.size() - 3) / players.size() - 1;
+		int requirement = (deck.size() - 3) / players.values().size() - 1;
 		int count = 0;
 		
 		for(Player player : players.values()) {
