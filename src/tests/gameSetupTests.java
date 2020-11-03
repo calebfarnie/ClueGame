@@ -178,5 +178,24 @@ class gameSetupTests {
 		}
 		
 		assertEquals(count, players.size());
+		
+		// test for no duplicates of Luke card
+		count = 0;
+		Card testCard = new Card("Luke Skywalker", CardType.PERSON);
+		
+		for(Player player : players.values()) {
+			for(Card card : player.getHand()) {
+				if(card.equals(testCard)) {
+					count++;
+				}
+			}
+		}
+		
+		// test for in Answer
+		if(answer.person.equals(testCard)) {
+			count++;
+		}
+		
+		assertEquals(count, 1);
 	}
 }
