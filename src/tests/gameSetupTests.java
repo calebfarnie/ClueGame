@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.Card;
+import clueGame.CardType;
 import clueGame.Player;
 import clueGame.Room;
 
@@ -62,8 +64,38 @@ class gameSetupTests {
 		
 		// ensure color of Yoda is green
 		player = board.getPlayer("Yoda");
-		assertTrue( player != null );
+		assertTrue(player != null);
 		assertEquals(player.getColor(), Color.green);
+	}
+	
+	@Test
+	void testWeaponsCards() {
+		// test amount of weapons
+		int count = 0;
+		Set<Card> cardList = board.getDeck();
+		
+		for(Card c : cardList) {
+			if(c.getType() == CardType.WEAPON) {
+				count++;
+			}
+		}
+		
+		assertEquals(count, 6);
+		
+		// test that blaster pistol is in the set
+		Card testCard = new Card("Blaster Pistol", CardType.WEAPON);
+		assertTrue(cardList.contains(testCard));
+		
+		// test that the type of the lightsaber card is CardType.WEAPON
+		testCard = new Card("Light Saber", CardType.WEAPON);
+		
+		count = 0;
+		for(Card c : cardList) {
+			if(c.getType() == CardType.WEAPON && c.getName() == "Lightsaber") {
+				count++;
+			}
+		}
+		assertEquals(count, 1);
 	}
 
 }

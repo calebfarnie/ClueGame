@@ -26,7 +26,6 @@ public class Board {
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	private Set<Card> deck;
-	//private Set<Player> players;
 	private Solution theAnswer;
 	private BoardCell[][] grid;
 
@@ -159,7 +158,8 @@ public class Board {
 		// allocate memory for room map
 		roomMap = new HashMap<Character, Room>();
 		playerMap = new HashMap<String, Player>();
-
+		deck = new HashSet<Card>();
+		
 		// set up file reader and scanner
 		FileReader reader = new FileReader(setupConfigFile);
 		Scanner in = new Scanner(reader);
@@ -393,6 +393,10 @@ public class Board {
 	
 	public Player getPlayer(String name){
 		return playerMap.get(name);
+	}
+	
+	public Set<Card> getDeck(){
+		return deck;
 	}
 	
 }
