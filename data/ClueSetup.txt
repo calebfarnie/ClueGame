@@ -11,3 +11,10 @@ Room, Tatooine, T
 // other spaces
 Space, Unused, X
 Space, FreeSpace, W
+// Players - name, color, human/computer, startRow, startCol
+//Player, Luke Skywalker, white, human, 8, 1
+//Player, Obi-Wan Kenobi, blue, computer, 17, 3
+//Player, Yoda, green, computer, 26, 19
+//Player, Darth Vader, Red, computer, 13, 26
+//Player, Emperor Palpatine, black, computer, 1, 18
+//Player, Han Solo, brown, computer, 1,5

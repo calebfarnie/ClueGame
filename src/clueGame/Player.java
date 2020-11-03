@@ -12,13 +12,19 @@ public abstract class Player {
 	private String name;
 	private Color color;
 	protected int row;
-	protected int colunm;
+	protected int column;
 	private BoardCell startingLocation;
 	private boolean isHuman;
 	private Set<Card> hand;
-	
-	
-	
+		
 	public abstract void updateHand(Card card);
+	
+	public int getStartRow() {
+		return 0;
+	}
+	
+	public int getStartCol() {
+		return 0;
+	}
 
 }

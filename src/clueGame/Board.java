@@ -22,6 +22,7 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
+	private Map<String, Player> playerMap;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	private Set<Card> deck;
@@ -364,5 +365,13 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
-
+	
+	public Set<Player> getPlayers(){
+		return new HashSet<Player>();
+	}
+	
+	public Player getPlayer(String name){
+		return null;
+	}
+	
 }
