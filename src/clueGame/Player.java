@@ -6,6 +6,7 @@ package clueGame;
  */
 
 import java.awt.Color;
+import java.util.HashSet;
 import java.util.Set;
 
 public abstract class Player {
@@ -55,6 +56,10 @@ public abstract class Player {
 	
 	public Color getColor() {
 		return this.color;
+	}
+	
+	public Set<Card> getHand(){
+		return new HashSet<Card>();
 	}
 
 }

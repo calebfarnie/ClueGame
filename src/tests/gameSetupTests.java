@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import clueGame.Card;
 import clueGame.CardType;
 import clueGame.Player;
 import clueGame.Room;
+import clueGame.Solution;
 
 /** 
  * @author Caleb Farnie
@@ -72,7 +74,7 @@ class gameSetupTests {
 	void testWeaponsCards() {
 		// test amount of weapons
 		int count = 0;
-		Set<Card> cardList = board.getDeck();
+		ArrayList<Card> cardList = board.getDeck();
 		
 		for(Card c : cardList) {
 			if(c.getType() == CardType.WEAPON) {
@@ -111,7 +113,7 @@ class gameSetupTests {
 	public void testDeck() {
 		// test amount of PERSON cards
 		int count = 0;
-		Set<Card> cardList = board.getDeck();
+		ArrayList<Card> cardList = board.getDeck();
 		
 		for(Card c : cardList) {
 			if(c.getType() == CardType.PERSON) {
@@ -155,7 +157,28 @@ class gameSetupTests {
 		}
 
 		assertEquals(count, 1);
-
+	}
+	
+	@Test
+	public void testCardDealing() {
+		// test that answer has 3 cards
+		Solution answer = board.getAnswer();
+		ArrayList<Card> deck = board.getDeck();
+		Map<String, Player> players = board.getPlayers();
+		assertTrue(answer.person != null);
+		assertFalse(answer.weapon == null);
+		assertFalse(answer.room == null);
 		
+		// test hand count is sufficient for each player
+		int requirement = (deck.size() - 3) / players.size() - 1;
+		int count = 0;
+		
+		for(Player player : players.values()) {
+			if(player.getHand().size() >= requirement) {
+				count++;
+			}
+		}
+		
+		assertEquals(count, players.size());
 	}
 }

@@ -8,6 +8,7 @@ package clueGame;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class Board {
 	private Map<String, Player> playerMap;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
-	private Set<Card> deck;
+	private ArrayList<Card> deck;
 	private Solution theAnswer;
 	private BoardCell[][] grid;
 
@@ -158,7 +159,8 @@ public class Board {
 		// allocate memory for room map
 		roomMap = new HashMap<Character, Room>();
 		playerMap = new HashMap<String, Player>();
-		deck = new HashSet<Card>();
+		deck = new ArrayList<Card>();
+		theAnswer = new Solution();
 		
 		// set up file reader and scanner
 		FileReader reader = new FileReader(setupConfigFile);
@@ -218,6 +220,9 @@ public class Board {
 		}
 
 		in.close();
+		
+		// shuffle and deal cards
+		shuffleDeck();
 	}
 
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
@@ -396,6 +401,47 @@ public class Board {
 			}
 		}
 	}
+	
+	public void shuffleDeck() {
+		Collections.shuffle(deck);
+	}
+	
+	public void dealCards() {
+		// give Answer 3 cards
+		for(Card c : deck) {
+			if(c.getType() == CardType.PERSON) {
+				theAnswer.person = c;
+				deck.remove(c);
+				break;
+			}
+		}
+		
+		for(Card c : deck) {
+			if(c.getType() == CardType.WEAPON) {
+				theAnswer.person = c;
+				deck.remove(c);
+				break;
+			}
+		}
+		
+		for(Card c : deck) {
+			if(c.getType() == CardType.ROOM) {
+				theAnswer.person = c;
+				deck.remove(c);
+				break;
+			}
+		}
+		
+		// deal remaining cards to players
+		while(deck.size() > 0) {
+			for(Player player : playerMap.values()) {
+				if(deck.size() > 0) {
+					player.updateHand(deck.get(0));
+					deck.remove(0);
+				}
+			}
+		}
+	}
 
 	public Set<BoardCell> getTargets() {
 		return targets;
@@ -409,8 +455,12 @@ public class Board {
 		return playerMap.get(name);
 	}
 	
-	public Set<Card> getDeck(){
+	public ArrayList<Card> getDeck(){
 		return deck;
+	}
+	
+	public Solution getAnswer() {
+		return theAnswer;
 	}
 	
 }
