@@ -15,7 +15,7 @@ public class Card {
 	}
 	
 	public String getName() {
-		return null;
+		return this.cardName;
 	}
 	
 	public CardType getType() {
@@ -23,7 +23,7 @@ public class Card {
 	}
 	
 	public boolean equals(Card target) {
-		return false;
+		return this.cardName.equals(target.cardName) && this.cardType == target.cardType;
 	}
 
 }

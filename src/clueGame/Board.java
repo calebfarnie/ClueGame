@@ -174,7 +174,7 @@ public class Board {
 			String[] tempRoom = rowData.split(", ");
 
 			// throw exception if not a room or space
-			if (!tempRoom[0].equals("Room") && !tempRoom[0].equals("Space") && !tempRoom[0].equals("Player"))
+			if (!tempRoom[0].equals("Room") && !tempRoom[0].equals("Space") && !tempRoom[0].equals("Player") && !tempRoom[0].equals("Weapon"))
 				throw new BadConfigFormatException("Setup file contains room type that is not Room or Space.");
 
 			if (tempRoom[0].equals("Player")) {
@@ -194,12 +194,24 @@ public class Board {
 				
 				playerMap.put(playerName, player);
 				
+				Card card = new Card(playerName, CardType.PERSON);
+				deck.add(card);
+				
+				// do weapon stuff
+			}else if(tempRoom[0].equals("Weapon")){
+				String name = tempRoom[1];
+				Card card = new Card(name, CardType.WEAPON);
+				deck.add(card);
+				
 				// do Room/Space stuff
 			}else {
 				String roomName = tempRoom[1];
 				char roomInitial = tempRoom[2].charAt(0);
 				Room room = new Room(roomName);
 				roomMap.put(roomInitial, room);
+				
+				Card card = new Card(roomName, CardType.ROOM);
+				deck.add(card);
 			}
 		}
 

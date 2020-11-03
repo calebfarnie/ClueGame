@@ -84,18 +84,28 @@ class gameSetupTests {
 		
 		// test that blaster pistol is in the set
 		Card testCard = new Card("Blaster Pistol", CardType.WEAPON);
-		assertTrue(cardList.contains(testCard));
-		
-		// test that the type of the lightsaber card is CardType.WEAPON
-		testCard = new Card("Light Saber", CardType.WEAPON);
 		
 		count = 0;
 		for(Card c : cardList) {
-			if(c.getType() == CardType.WEAPON && c.getName() == "Lightsaber") {
+			if(testCard.equals(c)) {
+				count++;
+			}
+		}
+		
+		assertEquals(count, 1);
+		
+		// test that the type of the lightsaber card is CardType.WEAPON
+		testCard = new Card("Lightsaber", CardType.WEAPON);
+		
+		count = 0;
+		for(Card c : cardList) {
+			if(testCard.equals(c)) {
 				count++;
 			}
 		}
 		assertEquals(count, 1);
 	}
+	
+	
 
 }
