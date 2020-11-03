@@ -13,18 +13,48 @@ public abstract class Player {
 	private Color color;
 	protected int row;
 	protected int column;
-	private BoardCell startingLocation;
-	private boolean isHuman;
 	private Set<Card> hand;
 		
 	public abstract void updateHand(Card card);
 	
-	public int getStartRow() {
-		return 0;
+	public Player(String name, String color, int startRow, int startCol) {
+		this.name = name;
+		
+		switch(color.toLowerCase()) {
+		case "white":
+			this.color = Color.white;
+			break;
+		case "blue":
+			this.color = Color.blue;
+			break;
+		case "green":
+			this.color = Color.green;
+			break;
+		case "red":
+			this.color = Color.red;
+			break;
+		case "brown":
+			this.color = Color.orange;
+			break;
+		case "black":
+			this.color = Color.black;
+			break;
+		}
+		
+		this.row = startRow;
+		this.column = startCol;
 	}
 	
-	public int getStartCol() {
-		return 0;
+	public int getRow() {
+		return this.row;
+	}
+	
+	public int getCol() {
+		return this.column;
+	}
+	
+	public Color getColor() {
+		return this.color;
 	}
 
 }

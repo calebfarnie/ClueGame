@@ -26,7 +26,7 @@ public class Board {
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	private Set<Card> deck;
-	private Set<Player> players;
+	//private Set<Player> players;
 	private Solution theAnswer;
 	private BoardCell[][] grid;
 
@@ -158,6 +158,7 @@ public class Board {
 	public void loadSetupConfig() throws FileNotFoundException, BadConfigFormatException {
 		// allocate memory for room map
 		roomMap = new HashMap<Character, Room>();
+		playerMap = new HashMap<String, Player>();
 
 		// set up file reader and scanner
 		FileReader reader = new FileReader(setupConfigFile);
@@ -173,13 +174,33 @@ public class Board {
 			String[] tempRoom = rowData.split(", ");
 
 			// throw exception if not a room or space
-			if (!tempRoom[0].equals("Room") && !tempRoom[0].equals("Space"))
+			if (!tempRoom[0].equals("Room") && !tempRoom[0].equals("Space") && !tempRoom[0].equals("Player"))
 				throw new BadConfigFormatException("Setup file contains room type that is not Room or Space.");
 
-			String roomName = tempRoom[1];
-			char roomInitial = tempRoom[2].charAt(0);
-			Room room = new Room(roomName);
-			roomMap.put(roomInitial, room);
+			if (tempRoom[0].equals("Player")) {
+				// do Player stuff
+				Player player;
+				String playerName = tempRoom[1];
+				String color = tempRoom[2];
+				String playerType = tempRoom[3];
+				int row = Integer.parseInt(tempRoom[4]);
+				int col = Integer.parseInt(tempRoom[5]);
+				
+				if(playerType.equals("human")) {
+					player = new HumanPlayer(playerName, color, row, col);
+				}else {
+					player = new ComputerPlayer(playerName, color, row, col);
+				}
+				
+				playerMap.put(playerName, player);
+				
+				// do Room/Space stuff
+			}else {
+				String roomName = tempRoom[1];
+				char roomInitial = tempRoom[2].charAt(0);
+				Room room = new Room(roomName);
+				roomMap.put(roomInitial, room);
+			}
 		}
 
 		in.close();
@@ -366,12 +387,12 @@ public class Board {
 		return targets;
 	}
 	
-	public Set<Player> getPlayers(){
-		return new HashSet<Player>();
+	public Map<String, Player> getPlayers(){
+		return playerMap;
 	}
 	
 	public Player getPlayer(String name){
-		return null;
+		return playerMap.get(name);
 	}
 	
 }
