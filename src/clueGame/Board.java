@@ -222,7 +222,10 @@ public class Board {
 		in.close();
 		
 		// shuffle and deal cards
-		shuffleDeck();
+		if(!setupConfigFile.contains("306")) {
+			shuffleDeck();
+			dealCards();
+		}
 	}
 
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
@@ -407,40 +410,54 @@ public class Board {
 	}
 	
 	public void dealCards() {
+		ArrayList<Card> dealingDeck = new ArrayList<Card>(deck);
+		ArrayList<Player> players = new ArrayList<Player>(playerMap.values());
+		
 		// give Answer 3 cards
-		for(Card c : deck) {
-			if(c.getType() == CardType.PERSON) {
-				theAnswer.person = c;
-				deck.remove(c);
+		for(int i = 0; i < dealingDeck.size(); i++) {
+			if(dealingDeck.get(i).getType() == CardType.PERSON) {
+				theAnswer.person = dealingDeck.get(i);
+				dealingDeck.remove(i);
 				break;
 			}
 		}
 		
-		for(Card c : deck) {
-			if(c.getType() == CardType.WEAPON) {
-				theAnswer.person = c;
-				deck.remove(c);
+		for(int i =0; i< dealingDeck.size(); i++){
+			if(dealingDeck.get(i).getType() == CardType.WEAPON) {
+				theAnswer.weapon = dealingDeck.get(i);
+				dealingDeck.remove(i);
 				break;
 			}
 		}
 		
-		for(Card c : deck) {
-			if(c.getType() == CardType.ROOM) {
-				theAnswer.person = c;
-				deck.remove(c);
+		for(int i = 0; i < dealingDeck.size(); i++) {
+			if(dealingDeck.get(i).getType() == CardType.ROOM) {
+				theAnswer.room = dealingDeck.get(i);
+				dealingDeck.remove(i);
 				break;
 			}
 		}
 		
 		// deal remaining cards to players
-		while(deck.size() > 0) {
-			for(Player player : playerMap.values()) {
-				if(deck.size() > 0) {
-					player.updateHand(deck.get(0));
-					deck.remove(0);
+		while(dealingDeck.size() > 0) {
+			for(int j = 0; j < players.size(); j++) {
+				if(dealingDeck.size() > 0) {
+					players.get(j).updateHand(dealingDeck.get(0));
+					dealingDeck.remove(0);
 				}
 			}
 		}
+		
+	}
+	
+	public boolean checkAccusation(Card person, Card room, Card weapon) {
+		// TODO
+		return false;
+	}
+	
+	public Card handleSuggestion() {
+		// TODO
+		return null;
 	}
 
 	public Set<BoardCell> getTargets() {

@@ -14,9 +14,10 @@ public abstract class Player {
 	private Color color;
 	protected int row;
 	protected int column;
-	private Set<Card> hand;
+	protected Set<Card> hand;
 		
 	public abstract void updateHand(Card card);
+	public abstract void updateSeen(Card seenCard);
 	
 	public Player(String name, String color, int startRow, int startCol) {
 		this.name = name;
@@ -44,6 +45,12 @@ public abstract class Player {
 		
 		this.row = startRow;
 		this.column = startCol;
+		this.hand = new HashSet<Card>();
+	}
+	
+	public Card disproveSuggestion(Card person, Card room, Card weapon) {
+		// TODO
+		return new Card("test", null);
 	}
 	
 	public int getRow() {
@@ -59,7 +66,7 @@ public abstract class Player {
 	}
 	
 	public Set<Card> getHand(){
-		return new HashSet<Card>();
+		return hand;
 	}
 
 }

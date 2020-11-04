@@ -1,5 +1,129 @@
 Completed via pair programming.
 
+commit 1773c3be35f79f95e72ba89c69b55fb74e17ae57
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 22:13:55 2020 -0700
+
+    added test to testCardDealing() and passed it
+
+commit 29a1ea46b8d51a378ed63c64e86ba9684e7f2f7c
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 22:02:59 2020 -0700
+
+    implemented card shuffle/dealing and passed tests
+
+commit 9b823e9bd0dd6aeb8e1dcab18aad6fcb1581c0fc
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 19:50:51 2020 -0700
+
+    added failing test for dealing card / checking hands
+
+commit d6c087aab4e83b5e034471d6095d7f547c086b25
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 19:09:24 2020 -0700
+
+    implemented full deck setup and passed test
+
+commit 100f90435f521c95017175ad138c377448507c4d
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 19:08:50 2020 -0700
+
+    added failing test for testing full deck
+
+commit 357c2a38e7180a8b70f76997bee327b261b984e1
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 18:54:08 2020 -0700
+
+    implemented weapon setup and passed test
+
+commit d89f613e49f47e69250231b170b246391a088b6e
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 18:32:52 2020 -0700
+
+    added failing test for weapons
+
+commit fada7d6b034cfe0a0ebb33e64033da457ea08912
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 18:05:01 2020 -0700
+
+    implemented player setup and passed test
+
+commit 0ec49ec792150618ec8c01d5e43cbc88b69d7fb0
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 17:15:45 2020 -0700
+
+    added failing test for player setup
+
+commit 9fdb1e0087a0240a84cd712a26574650c606db81
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 2 16:34:26 2020 -0700
+
+    Created class stubs for C19A-1
+
+commit c8a81cd95aec80299ae8ffaec150eec9a4407afa
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Oct 29 20:37:15 2020 -0600
+
+    C18A-2, commit #8, refactored createCell().
+    
+     Extracted variables for repeated usages.
+     Used local variables for repeated usages of charAt().
+
+commit 1e56d12307198211abeae5732ba8cc0638249337
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Oct 29 20:15:12 2020 -0600
+
+    C18A-2, commit #7, removed unused imports and updated header.
+
+commit fc83853a124b718a3b3b1b3e2d219f2c9b9799b3
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Oct 29 20:09:24 2020 -0600
+
+    C18A-2, commit #6, refactored BoardCell.
+    
+    Simplified return statement for isWalkway(). Made getOccupied() more
+    readable. Reordered instance variables. Added 'this.' to all instance
+    vars for consistency.
+
+commit 3f1d4581e95f95e8ee2fcd8048ce505a8814dc1f
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Oct 29 20:01:47 2020 -0600
+
+    C18A-2, commit #5, refactored the fill board funct into methods from
+    loadLayoutConfig().
+
+commit f224f4382976718361197d97c56f6941983c43d1
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Oct 29 19:42:23 2020 -0600
+
+    C18A-2, commit #4, refactored addDoorAdjList() to be more readable.
+
+commit c90b5fcca6c6e60c3faf19f92f226b40a3572c71
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Oct 29 18:09:10 2020 -0600
+
+    C18A-2, commit #3, removed unnecessary boolean assignments in
+    loadLayoutConfig().
+
+commit 762d84497dda565ff471c0fa7dea1b67c27f3ddc
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Oct 29 18:04:45 2020 -0600
+
+    C18A-2, commit #2, changed boolean instantiation in loadLayoutConfig()
+    to be more readable.
+
+commit 808a1192b3b1d3cc667a7f4a92f066326f9eedcc
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Oct 29 17:50:44 2020 -0600
+
+    Refactored calcAdjList(), extracted methods.
+
+commit 966a088ace27e9e331403f7a09f907758bf7407c
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Oct 29 17:38:47 2020 -0600
+
+    Commit before refactoring for C18A-2
+
 commit 9419d39d5e04c6405e23821e7c33244cf47166c8
 Author: Josh Josey <jjosey@mines.edu>
 Date:   Fri Oct 16 21:52:19 2020 -0600

@@ -13,8 +13,12 @@ public class HumanPlayer extends Player {
 
 	@Override
 	public void updateHand(Card card) {
-		// TODO Auto-generated method stub
-		
+		super.hand.add(card);
+	}
+	
+	@Override
+	public void updateSeen(Card seenCard) {
+		// TODO
 	}
 
 }

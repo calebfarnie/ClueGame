@@ -13,8 +13,22 @@ public class ComputerPlayer extends Player {
 
 	@Override
 	public void updateHand(Card card) {
-		// TODO Auto-generated method stub
-		
+		super.hand.add(card);		
+	}
+	
+	@Override
+	public void updateSeen(Card seenCard) {
+		// TODO
+	}
+	
+	public Solution createSuggestion(Room room) {
+		// TODO
+		return new Solution();
+	}
+	
+	public BoardCell selectTarget() {
+		// TODO
+		return new BoardCell(0, 0);
 	}
 
 }
