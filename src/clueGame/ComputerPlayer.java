@@ -27,7 +27,8 @@ public class ComputerPlayer extends Player {
 		seenCards.add(seenCard);
 	}
 	
-	public Solution createSuggestion(Room room) {
+	@Override
+	public Solution createSuggestion() {
 		// TODO
 		return new Solution();
 	}
