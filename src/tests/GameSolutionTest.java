@@ -60,7 +60,6 @@ class GameSolutionTest {
 		assertTrue(board.checkAccusation(accusee, room, weapon) == false);
 
 		// test solution with wrong room
-
 		weapon = new Card("Blaster Pistol", CardType.WEAPON);
 		room = new Card("Tatooine", CardType.ROOM);
 		assertTrue(board.checkAccusation(accusee, room, weapon) == false);
