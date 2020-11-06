@@ -1,6 +1,6 @@
 Caleb Farnie and Joshua Josey
-C19A-1 Clue Players 1
+C20A-1 Clue Players 2
 CSCI306-C
-02 November 2020
+06 November 2020
 
-Note: We also completed this via pair programming. We also each committed to the repo.
+Note: We also completed this via pair programming.
