@@ -7,6 +7,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -109,18 +111,62 @@ class GameSolutionTest {
 
 	}
 
-	//@Test
+	@Test
 	void testHandleSuggestion() {
-		fail("Not yet implemented");
-
+		// Process all the players in turn, each to see if they can dispute the suggestion.
+		// If return null, no player can dispute the suggestion. Otherwise return the first
+		// card that disputed the suggestion.
+		Solution suggestion = new Solution();
+		suggestion.person = new Card("Darth Vader", CardType.PERSON);
+		suggestion.weapon = new Card("Lightsaber", CardType.WEAPON);
+		suggestion.room = new Card("Couruscant", CardType.ROOM);
+		
+		// add 3 test players to players AL
+		ArrayList<Player> players = new ArrayList<Player>();
+		Set<Card> hand = new HashSet<Card>();
+		players.add(new HumanPlayer("myPlayer", "red", 0, 1));
+		hand.add(new Card("Luke Skywalker", CardType.PERSON));
+		hand.add(new Card("Blaster Pistol", CardType.WEAPON));
+		hand.add(new Card("Han Solo", CardType.PERSON));
+		players.get(0).setHand(hand);
+		
+		players.add(new ComputerPlayer("player1", "green", 0, 2));
+		hand = new HashSet<Card>();
+		hand.add(new Card("Yoda", CardType.PERSON));
+		hand.add(new Card("Blaster Rifle", CardType.WEAPON));
+		hand.add(new Card("Geonosis", CardType.ROOM));
+		players.get(1).setHand(hand);
+		
+		players.add(new ComputerPlayer("player2", "blue", 0, 3));
+		hand = new HashSet<Card>();
+		hand.add(new Card("Obi-Wan Kenobi", CardType.PERSON));
+		hand.add(new Card("Vibro Knife", CardType.WEAPON));
+		hand.add(new Card("Kashyyyk", CardType.ROOM));
+		players.get(2).setHand(hand);
+		
 		// Suggestion no one can disprove returns null
+		assertEquals(board.handleSuggestion(players, players.get(1)), null);
+		assertEquals(board.handleSuggestion(players, players.get(2)), null);
 
 		// Suggestion only accusing player can disprove, returns null
-
+		Card newCard = new Card("Couruscant", CardType.ROOM);
+		players.get(2).updateHand(newCard);
+		
+		assertEquals(board.handleSuggestion(players, players.get(2)), null);
+		
 		// Suggestion only human can disprove, return answer (i.e. card that disproves suggestion)
+		players.get(2).getHand().remove(newCard);
+		newCard = new Card("Darth Vader", CardType.PERSON);
+		players.get(0).updateHand(newCard);
+		assertEquals(board.handleSuggestion(players, players.get(1)), newCard);
 
 		// Suggestion that two players can disprove, correct player (next player in list) returns answer
+		players.get(0).getHand().remove(newCard);
+		Card lightsaberCard = new Card("Lightsaber", CardType.WEAPON);
+		players.get(2).updateHand(lightsaberCard);
+		players.get(0).updateHand(new Card("Couruscant", CardType.ROOM));
 
+		assertEquals(board.handleSuggestion(players, players.get(1)), lightsaberCard);
 	}
 
 }
