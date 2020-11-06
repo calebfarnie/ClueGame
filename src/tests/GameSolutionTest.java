@@ -68,7 +68,7 @@ class GameSolutionTest {
 	}
 
 	@Test
-	void testDisproveSolution() {
+	void testDisproveSuggestion() {
 		Player testPlayer = new ComputerPlayer("test", "red", 0, 0);
 		Solution suggestion = new Solution();
 		suggestion.person = new Card("Darth Vader", CardType.PERSON);

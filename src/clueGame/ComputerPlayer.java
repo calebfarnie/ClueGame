@@ -41,20 +41,17 @@ public class ComputerPlayer extends Player {
 			if(!seenCards.contains(card) && card.getType() == CardType.WEAPON) {
 				potentialWeapon.add(card);
 			}
-		}
-		
-		// return random (still returns the only card if only one)
-		Collections.shuffle(potentialWeapon);
-		mySoln.weapon = potentialWeapon.get(0);
-		
-		// set person
-		for(Card card : deck) {
+			
 			if(!seenCards.contains(card) && card.getType() == CardType.PERSON) {
 				potentialPerson.add(card);
 			}
 		}
 		
-		// return random (still returns the only card if only one)
+		// return random weapon (still returns the only card if only one)
+		Collections.shuffle(potentialWeapon);
+		mySoln.weapon = potentialWeapon.get(0);
+		
+		// return random person (still returns the only card if only one)
 		Collections.shuffle(potentialPerson);
 		mySoln.person = potentialPerson.get(0);
 		

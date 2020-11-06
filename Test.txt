@@ -1,4 +1,0 @@
-1. Dagobah has a door opening left.
-2. Bespin has a door opening right.
-3. We have 19 total doors.
-4. Passageway from Tatooine to Geonosis.

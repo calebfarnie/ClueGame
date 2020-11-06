@@ -109,4 +109,8 @@ public class BoardCell {
 	public boolean isWalkway() {
 		return (this.initial == 'W' || this.isDoorway || this.roomCenter);
 	}
+	
+	public boolean equals(BoardCell cell) {
+		return this.row == cell.getRow() && this.col == cell.getCol();
+	}
 }

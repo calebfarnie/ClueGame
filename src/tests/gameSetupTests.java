@@ -47,25 +47,25 @@ class gameSetupTests {
 		// just test a standard planet location
 		Player player = board.getPlayer("Luke Skywalker");
 		assertTrue( player != null );
-		assertEquals( player.getRow(), 8);
-		assertEquals( player.getCol(), 1);
+		assertEquals( 8, player.getRow());
+		assertEquals( 1, player.getCol());
 		
 		// test that Darth Vader is in the correct location
 		player = board.getPlayer("Darth Vader");
 		assertTrue( player != null );
-		assertEquals(player.getRow(), 13);
-		assertEquals(player.getCol(), 26);
+		assertEquals(13, player.getRow());
+		assertEquals(26, player.getCol());
 		
 		// test that Han Solo is in the correct location
 		player = board.getPlayer("Han Solo");
 		assertTrue( player != null );
-		assertEquals(player.getRow(), 1);
-		assertEquals(player.getCol(), 5);
+		assertEquals(1, player.getRow());
+		assertEquals(5, player.getCol());
 		
 		// ensure color of Yoda is green
 		player = board.getPlayer("Yoda");
 		assertTrue(player != null);
-		assertEquals(player.getColor(), Color.green);
+		assertEquals(Color.green, player.getColor());
 	}
 	
 	@Test
@@ -80,7 +80,7 @@ class gameSetupTests {
 			}
 		}
 		
-		assertEquals(count, 6);
+		assertEquals(6, count);
 		
 		// test that blaster pistol is in the set
 		Card testCard = new Card("Blaster Pistol", CardType.WEAPON);
@@ -92,7 +92,7 @@ class gameSetupTests {
 			}
 		}
 		
-		assertEquals(count, 1);
+		assertEquals(1, count);
 		
 		// test that the type of the lightsaber card is CardType.WEAPON
 		testCard = new Card("Lightsaber", CardType.WEAPON);
@@ -103,7 +103,7 @@ class gameSetupTests {
 				count++;
 			}
 		}
-		assertEquals(count, 1);
+		assertEquals(1, count);
 	}
 
 	
@@ -119,9 +119,7 @@ class gameSetupTests {
 			}
 		}
 		
-		assertEquals(count, 6);
-		
-		// test Obi-Wan Kenobi in deck and is PERSON
+		assertEquals(6, count);		// test Obi-Wan Kenobi in deck and is PERSON
 		Card testCard = new Card("Obi-Wan Kenobi", CardType.PERSON);
 		count = 0;
 		
@@ -131,7 +129,7 @@ class gameSetupTests {
 			}
 		}
 		
-		assertEquals(count, 1);
+		assertEquals(1, count);
 		
 		// test amount of ROOM cards
 		count = 0;
@@ -142,7 +140,7 @@ class gameSetupTests {
 			}
 		}
 
-		assertEquals(count, 9);
+		assertEquals(9, count);
 		
 		// test Kashyyyk in deck and is ROOM
 		testCard = new Card("Kashyyyk", CardType.ROOM);
@@ -154,7 +152,7 @@ class gameSetupTests {
 			}
 		}
 
-		assertEquals(count, 1);
+		assertEquals(1, count);
 	}
 	
 	@Test
@@ -177,7 +175,7 @@ class gameSetupTests {
 			}
 		}
 		
-		assertEquals(count, players.size());
+		assertEquals(players.size(), count);
 		
 		// test for no duplicates of Luke card
 		count = 0;
@@ -196,6 +194,6 @@ class gameSetupTests {
 			count++;
 		}
 		
-		assertEquals(count, 1);
+		assertEquals(1, count);
 	}
 }

@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.List;  
 
 public class Board {
 
@@ -451,17 +452,41 @@ public class Board {
 	}
 	
 	public boolean checkAccusation(Card person, Card room, Card weapon) {
-		// TODO
-		return false;
+		return person.equals(theAnswer.person)	&&
+			   room.equals(theAnswer.room)		&&
+			   weapon.equals(theAnswer.weapon);
 	}
 	
-	public Card handleSuggestion() {
-		// TODO
+	public void setAnswer(Solution myAnswer) {
+		theAnswer.person = myAnswer.person;
+		theAnswer.room = myAnswer.room;
+		theAnswer.weapon = myAnswer.weapon;
+	}
+	
+	public Card handleSuggestion(ArrayList<Player> players, Player accuser) {
+		
+		// re-orient the players arraylist to start at the accuser
+		ArrayList<Player> newPlayers = new ArrayList<Player>(players.subList(players.indexOf(accuser), players.size()));
+		newPlayers.addAll(players.subList(0, players.indexOf(accuser)));
+
+		// iterate through players to disprove suggestion
+		for(Player player : newPlayers) {
+			if(player.disproveSuggestion(theAnswer) == null || player.equals(accuser)) {
+				continue;
+			} else {
+				return player.disproveSuggestion(theAnswer);
+			}
+		}
+		
 		return null;
 	}
 
 	public Set<BoardCell> getTargets() {
 		return targets;
+	}
+	
+	public Map<Character, Room> getRoomMap(){
+		return roomMap;
 	}
 	
 	public Map<String, Player> getPlayers(){
