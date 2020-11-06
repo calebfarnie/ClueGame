@@ -7,12 +7,17 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
+import clueGame.ComputerPlayer;
+import clueGame.Player;
 import clueGame.Solution;
 
 
@@ -61,15 +66,47 @@ class GameSolutionTest {
 		assertTrue(board.checkAccusation(accusee, room, weapon) == false);
 	}
 
-	//@Test
+	@Test
 	void testDisproveSolution() {
-		fail("Not yet implemented");
+		Player testPlayer = new ComputerPlayer("test", "red", 0, 0);
+		Solution suggestion = new Solution();
+		suggestion.person = new Card("Darth Vader", CardType.PERSON);
+		suggestion.weapon = new Card("Lightsaber", CardType.WEAPON);
+		suggestion.room = new Card("Couruscant", CardType.ROOM);
 
 		// if player has only one matching card, return that card
+		Set<Card> hand = new HashSet<Card>();
+		hand.add(new Card("Darth Vader", CardType.PERSON));
+		hand.add(new Card("Blaster Pistol", CardType.WEAPON));
+		hand.add(new Card("Han Solo", CardType.PERSON));
+		testPlayer.setHand(hand);
+		
+		assertTrue(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon).equals(new Card("Darth Vader", CardType.PERSON)));
 
 		// if player has >1 matching card, randomly return a matching card
+		hand.add(new Card("Lightsaber", CardType.WEAPON));
+		hand.add(new Card("Obi-Wan Kenobi", CardType.PERSON));
+		testPlayer.setHand(hand);
+		int count1 = 0;
+		int count2 = 0;
+		
+		for(int i = 0; i < 100; i++) {
+			if(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon).equals(new Card("Darth Vader", CardType.PERSON)))
+				count1++;
+			if(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon).equals(new Card("Lightsaber", CardType.WEAPON)))
+				count2++;
+		}
+		
+		assertTrue(count1 > 10 && count2 > 10);
 
 		// if player has no matching cards, return null
+		hand = new HashSet<Card>();
+		hand.add(new Card("Luke Skywalker", CardType.PERSON));
+		hand.add(new Card("Blaster Pistol", CardType.WEAPON));
+		hand.add(new Card("Han Solo", CardType.PERSON));
+		testPlayer.setHand(hand);
+		
+		assertTrue(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon).equals(null));
 
 	}
 
