@@ -1,5 +1,9 @@
 package clueGame;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
@@ -19,6 +23,18 @@ public class HumanPlayer extends Player {
 	@Override
 	public void updateSeen(Card seenCard) {
 		// TODO
+	}
+
+	@Override
+	public BoardCell selectTarget(Set<BoardCell> targets, Map<Character, Room> roomMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Solution createSuggestion(String room, ArrayList<Card> deck) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
