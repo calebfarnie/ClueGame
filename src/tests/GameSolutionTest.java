@@ -106,7 +106,7 @@ class GameSolutionTest {
 		hand.add(new Card("Han Solo", CardType.PERSON));
 		testPlayer.setHand(hand);
 		
-		assertTrue(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon).equals(null));
+		assertEquals(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon), null);
 
 	}
 
