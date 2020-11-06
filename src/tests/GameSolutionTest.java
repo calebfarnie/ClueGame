@@ -82,7 +82,7 @@ class GameSolutionTest {
 		hand.add(new Card("Han Solo", CardType.PERSON));
 		testPlayer.setHand(hand);
 		
-		assertTrue(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon).equals(new Card("Darth Vader", CardType.PERSON)));
+		assertTrue(testPlayer.disproveSuggestion(suggestion).equals(new Card("Darth Vader", CardType.PERSON)));
 
 		// if player has >1 matching card, randomly return a matching card
 		hand.add(new Card("Lightsaber", CardType.WEAPON));
@@ -92,9 +92,9 @@ class GameSolutionTest {
 		int count2 = 0;
 		
 		for(int i = 0; i < 100; i++) {
-			if(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon).equals(new Card("Darth Vader", CardType.PERSON)))
+			if(testPlayer.disproveSuggestion(suggestion).equals(new Card("Darth Vader", CardType.PERSON)))
 				count1++;
-			if(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon).equals(new Card("Lightsaber", CardType.WEAPON)))
+			if(testPlayer.disproveSuggestion(suggestion).equals(new Card("Lightsaber", CardType.WEAPON)))
 				count2++;
 		}
 		
@@ -107,7 +107,7 @@ class GameSolutionTest {
 		hand.add(new Card("Han Solo", CardType.PERSON));
 		testPlayer.setHand(hand);
 		
-		assertEquals(testPlayer.disproveSuggestion(suggestion.person, suggestion.room, suggestion.weapon), null);
+		assertEquals(null, testPlayer.disproveSuggestion(suggestion));
 
 	}
 
