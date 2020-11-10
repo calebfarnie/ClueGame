@@ -1,6 +1,6 @@
 Caleb Farnie and Joshua Josey
-C20A-1 Clue Players 2
+C21A-1 Clue Control GUI
 CSCI306-C
-06 November 2020
+09 November 2020
 
 Note: We also completed this via pair programming.

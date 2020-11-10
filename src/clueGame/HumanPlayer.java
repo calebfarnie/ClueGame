@@ -22,7 +22,7 @@ public class HumanPlayer extends Player {
 	
 	@Override
 	public void updateSeen(Card seenCard) {
-		// TODO
+		super.seenCards.add(seenCard);
 	}
 
 	@Override

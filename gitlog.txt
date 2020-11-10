@@ -1,4 +1,22 @@
-Note: we completed this assignment via pair programming on Saros.
+Note: we completed this via pair programming.
+
+commit 849345185497b624678165a1637467666fd64b91
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 9 19:42:51 2020 -0700
+
+    added comments, completed C21A-1
+
+commit 6fb1bd1fd39df86ac6117079e74e6880fc32890a
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 9 18:20:12 2020 -0700
+
+    added game control panel class to repo
+
+commit 11b0cb08b3494d6bef914ab4e52f384ee719b3b0
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 9 18:19:18 2020 -0700
+
+    completed control center GUI
 
 commit 6735fe6e6532d91b295f8269084b65d9ecf24066
 Author: Caleb Farnie <cfarnie@mymail.mines.edu>

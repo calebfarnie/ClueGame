@@ -93,5 +93,9 @@ public abstract class Player {
 	public String getName() {
 		return name;
 	}
+	
+	public Set<Card> getSeen() {
+		return new HashSet<Card>(seenCards);
+	}
 
 }
