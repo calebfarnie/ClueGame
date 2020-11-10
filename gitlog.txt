@@ -1,4 +1,100 @@
-Completed via pair programming.
+Note: we completed this assignment via pair programming on Saros.
+
+commit 6735fe6e6532d91b295f8269084b65d9ecf24066
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 6 12:34:55 2020 -0700
+
+    updated readme.txt
+
+commit b0b7f6d470aec683589f2e996393c2a454b3d2cd
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 6 12:33:29 2020 -0700
+
+    added missing files to repo
+
+commit 0632cd6326fff713e453fb38e9515633c6dd583f
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 6 12:32:03 2020 -0700
+
+    refactored previous functions for passing tests
+
+commit 295c5be3dbc8cb5c4ed73423cd17f948eb8a48cc
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 6 12:21:48 2020 -0700
+
+    passed tests for create suggestion
+
+commit 0bfea53f53445b6517e3fc9d2408e9c369468293
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 6 11:30:13 2020 -0700
+
+    made failing test for AI create suggestion
+
+commit 91b546c4397c72e64080e81cbea62d3f2b6b0d38
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 6 10:32:05 2020 -0700
+
+    passed tests for AI select target
+
+commit 28c83e67781c962b90f4306c4a0cc52776959016
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 5 22:49:13 2020 -0700
+
+    added failing test for select target
+
+commit 75bd44a6e668bbe5caa58020c8b19a721f85f4ab
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 5 21:31:56 2020 -0700
+
+    refactored tests and functions
+
+commit b028a165a09bb6b00275bcb7847eab37ff4729fa
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 5 21:20:59 2020 -0700
+
+    passed test for handle suggestion
+
+commit a099640602c1b1ec4d442b0cb8d49236a1625723
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 5 20:48:45 2020 -0700
+
+    made failing test for handling suggestions
+
+commit 67ee39f87384597428cc4e73133e304566bb731b
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 5 19:37:42 2020 -0700
+
+    refactored solutions to passed tests (past two)
+
+commit cb1302b374f54c52b2b37da1e4a7ccff027b2e0a
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 5 19:32:17 2020 -0700
+
+    passed test for disproving a solution
+
+commit fd4bc50736ed1bedc56087418ff98c992fac9da9
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 5 19:18:11 2020 -0700
+
+    wrote failing test for disproving solution
+
+commit 9cbda90edc57cc24716f3168f1f64281daa0342e
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 5 18:01:26 2020 -0700
+
+    passed check accusation test
+
+commit 4b1354eb1e2a38c19a289a88c6fa78938cbff664
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 5 17:54:15 2020 -0700
+
+    wrote failing test for checking accusation
+
+commit 09e43779edd4423f1f5e3b4ea5313d82a73fc968
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 3 18:04:11 2020 -0700
+
+    added method stubs for tests--added outline for test implementation
 
 commit 1773c3be35f79f95e72ba89c69b55fb74e17ae57
 Author: Caleb Farnie <cfarnie@mymail.mines.edu>

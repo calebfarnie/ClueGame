@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +16,10 @@ public class ComputerPlayer extends Player {
 
 	public ComputerPlayer(String name, String color, int startRow, int startCol) {
 		super(name, color, startRow, startCol);
+	}
+
+	public ComputerPlayer() {
+		super("test", "black", 0, 0);
 	}
 
 	@Override

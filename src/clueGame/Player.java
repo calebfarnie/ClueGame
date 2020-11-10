@@ -41,7 +41,7 @@ public abstract class Player {
 		case "red":
 			this.color = Color.red;
 			break;
-		case "brown":
+		case "orange":
 			this.color = Color.orange;
 			break;
 		case "black":
@@ -88,6 +88,10 @@ public abstract class Player {
 
 	public Set<Card> getHand(){
 		return hand;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 }
