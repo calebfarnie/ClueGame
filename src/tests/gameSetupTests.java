@@ -65,7 +65,7 @@ class gameSetupTests {
 		// ensure color of Yoda is green
 		player = board.getPlayer("Yoda");
 		assertTrue(player != null);
-		assertEquals(Color.green, player.getColor());
+		assertEquals(new Color(181, 225, 174), player.getColor());
 	}
 	
 	@Test
