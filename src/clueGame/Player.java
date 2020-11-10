@@ -33,19 +33,22 @@ public abstract class Player {
 			this.color = Color.white;
 			break;
 		case "blue":
-			this.color = Color.blue;
+			this.color = new Color(154, 206, 223);
 			break;
 		case "green":
-			this.color = Color.green;
+			this.color = new Color(181, 225, 174);
 			break;
 		case "red":
-			this.color = Color.red;
+			this.color = new Color(225, 138, 147);
 			break;
 		case "orange":
-			this.color = Color.orange;
+			this.color = new Color(253, 202, 162);
 			break;
-		case "black":
-			this.color = Color.black;
+		case "purple":
+			this.color = new Color(193, 179, 215);
+			break;
+		default:
+			this.color = Color.red;
 			break;
 		}
 
