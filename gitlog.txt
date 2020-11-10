@@ -1,4 +1,22 @@
-Note: we completed this via pair programming.
+Note: we completed this assignment via pair programming.
+
+commit b0b05daba5f55fa163a8fe80dfb27a785bd844f4
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 9 21:27:01 2020 -0700
+
+    refactored code
+
+commit 5848d961e627a1c781dcd8b81b3e94983e6b7e0a
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 9 21:17:16 2020 -0700
+
+    completed extra credit (added colors) for C21A-2
+
+commit 9d9bb5402e716259770b6488623c87a166f43447
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 9 21:05:33 2020 -0700
+
+    completed C21A-2
 
 commit 849345185497b624678165a1637467666fd64b91
 Author: Caleb Farnie <cfarnie@mymail.mines.edu>
