@@ -29,6 +29,7 @@ public class GameCardPanel extends JPanel {
 
 	public GameCardPanel(Player player, Board board) {
 		this.player = player;
+		this.board = board;
 		
 		setLayout(new GridLayout(0,1));
 		TitledBorder title = new TitledBorder(new EtchedBorder(), "Known Cards");
@@ -97,7 +98,7 @@ public class GameCardPanel extends JPanel {
 			if(card.getType() == type && !displayedCards.contains(card)) {
 				JTextField person = new JTextField(card.getName());
 				person.setEditable(false);
-				person.setBackground(Color.WHITE);
+				person.setBackground(getColor(card));
 				panel.add(person);
 				cardsPresent = true;
 			}
@@ -109,6 +110,15 @@ public class GameCardPanel extends JPanel {
 			person.setBackground(Color.WHITE);
 			panel.add(person);
 		}
+	}
+	
+	public Color getColor(Card card) {
+		for(Player player : board.getPlayers().values()) {
+			if(player.getHand().contains(card)) {
+				return player.getColor();
+			}
+		}
+		return Color.WHITE;
 	}
 
 	public static void main(String[] args) {
