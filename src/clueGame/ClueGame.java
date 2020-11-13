@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 
@@ -14,8 +15,8 @@ public class ClueGame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		add(new GameCardPanel(person, board), BorderLayout.EAST);
-		
 		add(new GameControlPanel(), BorderLayout.SOUTH);
+		add(Board.getInstance(), BorderLayout.CENTER);
 	}
 
 	public static void main(String[] args) {

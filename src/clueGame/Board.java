@@ -1,5 +1,13 @@
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.RenderingHints;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.Rectangle2D;
+
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
@@ -14,9 +22,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+
+import javax.swing.JPanel;
+
 import java.util.List;  
 
-public class Board {
+public class Board extends JPanel{
 
 	// instance variables
 	private int numRows;
@@ -479,6 +490,35 @@ public class Board {
 		}
 		
 		return null;
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		int cellWidth = getWidth()/numColumns;
+		int cellHeight = getHeight()/numRows;
+		
+		// draw board cells
+		for(int r = 0; r < numRows; r++) {
+			for(int c = 0; c < numColumns; c++) {
+				grid[r][c].draw(g, cellWidth, cellHeight, c*cellWidth, r*cellHeight);
+			}
+		}
+		
+		// draw room labels
+		Font font = new Font("TimesRoman", Font.BOLD, 18);
+		g.setFont(font);
+		g.setColor(Color.black);
+		for(Room room : roomMap.values()) {
+			if(room.getLabelCell() == null) {
+				continue;
+			}
+			int y = room.getLabelCell().getRow();
+			int x = room.getLabelCell().getCol();
+			String roomName = room.getName();
+			
+			g.drawString(roomName, x*cellWidth, y*cellHeight);
+		}
 	}
 
 	public Set<BoardCell> getTargets() {
