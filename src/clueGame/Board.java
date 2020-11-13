@@ -495,20 +495,26 @@ public class Board extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		// get cell sizes
 		int cellWidth = getWidth()/numColumns;
 		int cellHeight = getHeight()/numRows;
 		
 		// draw board cells
-		for(int r = 0; r < numRows; r++) {
-			for(int c = 0; c < numColumns; c++) {
-				grid[r][c].draw(g, cellWidth, cellHeight, c*cellWidth, r*cellHeight);
-			}
-		}
+		drawBoardCells(g, cellWidth, cellHeight);
 		
 		// draw room labels
-		Font font = new Font("TimesRoman", Font.BOLD, 18);
+		Font font = new Font("Gill Sans MT Bold Italic", Font.BOLD, 18);
 		g.setFont(font);
 		g.setColor(Color.black);
+		drawLabels(g, cellWidth, cellHeight);
+		
+		// draw players
+		for(Player player : playerMap.values()) {
+			player.draw(g, cellWidth, cellHeight);
+		}
+	}
+
+	private void drawLabels(Graphics g, int cellWidth, int cellHeight) {
 		for(Room room : roomMap.values()) {
 			if(room.getLabelCell() == null) {
 				continue;
@@ -519,10 +525,13 @@ public class Board extends JPanel{
 			
 			g.drawString(roomName, x*cellWidth, y*cellHeight);
 		}
-		
-		// draw players
-		for(Player player : playerMap.values()) {
-			player.draw(g, cellWidth, cellHeight);
+	}
+
+	private void drawBoardCells(Graphics g, int cellWidth, int cellHeight) {
+		for(int r = 0; r < numRows; r++) {
+			for(int c = 0; c < numColumns; c++) {
+				grid[r][c].draw(g, cellWidth, cellHeight, c*cellWidth, r*cellHeight);
+			}
 		}
 	}
 

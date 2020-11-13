@@ -173,10 +173,4 @@ public class BoardCell {
 				
 		}
 	}
-	
-	/*
-	 * Couruscant = grey/ purple
-	 * geonosis = oarnge
-	 * 
-	 */
 }
