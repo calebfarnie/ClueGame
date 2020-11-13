@@ -126,34 +126,31 @@ public class BoardCell {
 			g.setColor(Color.white);
 			g.drawRect(dx, dy, width, height);
 		}else if(initial == 'C') {				//Coruscant
-			g.setColor(Color.gray);
+			g.setColor(new Color(102, 102, 153));
 			g.fillRect(dx, dy, width, height);
 		}else if(initial == 'G') {				//Geonosis
-			g.setColor(Color.orange);
+			g.setColor(new Color(225, 136, 77));
 			g.fillRect(dx, dy, width, height);
 		}else if(initial == 'T') {				//Tattoine
-			g.setColor(Color.yellow);
+			g.setColor(new Color(225, 225, 128));
 			g.fillRect(dx, dy, width, height);
-		}else if(initial == 'K') {				//Geonosis
-			g.setColor(Color.green);
+		}else if(initial == 'K') {				//Kashyyyk
+			g.setColor(new Color(0, 153, 0));
 			g.fillRect(dx, dy, width, height);
 		}else if(initial == 'D') {				//Degobah
-			g.setColor(Color.magenta);
+			g.setColor(new Color(119, 119, 60));
 			g.fillRect(dx, dy, width, height);
 		}else if(initial == 'E') {				//Endor
-			g.setColor(Color.green);
+			g.setColor(new Color(0, 230, 115));
 			g.fillRect(dx, dy, width, height);
 		}else if(initial == 'B') {				//Bespin
-			g.setColor(Color.orange);
+			g.setColor(new Color(225, 184, 77));
 			g.fillRect(dx, dy, width, height);
 		}else if(initial == 'Y') {				//Yavin 4
-			g.setColor(Color.blue);
+			g.setColor(new Color(0, 179, 179));
 			g.fillRect(dx, dy, width, height);
 		}else if(initial == 'H') {				//Hoth
-			g.setColor(Color.white);
-			g.fillRect(dx, dy, width, height);
-		}else{									//Everything else
-			g.setColor(Color.darkGray);
+			g.setColor(new Color(230, 225, 225));
 			g.fillRect(dx, dy, width, height);
 		}
 		

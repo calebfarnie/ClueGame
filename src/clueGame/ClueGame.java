@@ -6,6 +6,7 @@ import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
 
@@ -13,10 +14,12 @@ public class ClueGame extends JFrame {
 		setTitle("Clue");
 		setSize(700, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel boardPanel = Board.getInstance();
+		boardPanel.setBackground(Color.darkGray);
 		
 		add(new GameCardPanel(person, board), BorderLayout.EAST);
 		add(new GameControlPanel(), BorderLayout.SOUTH);
-		add(Board.getInstance(), BorderLayout.CENTER);
+		add(boardPanel, BorderLayout.CENTER);
 	}
 
 	public static void main(String[] args) {
