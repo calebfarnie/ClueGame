@@ -1,4 +1,58 @@
-Note: we completed this assignment via pair programming.
+Note: this assignment was completed via pair programming
+
+commit f736a7de2bda3908c2a23a220a49cf33beefdfe0
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 13 16:42:30 2020 -0700
+
+    refactored code
+
+commit 7117411ed7075512f70025f092ebec1fb16caa88
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 13 16:26:22 2020 -0700
+
+    changed room label locations
+
+commit f7d09cc8b83cfb1e1d6f5479823480eec091d286
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 13 15:54:38 2020 -0700
+
+    drew players on board
+
+commit 6dba9f5efe534c64f8fb4d8cb701c6c6308b3e5d
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 12 21:52:04 2020 -0700
+
+    drew board cells and labels
+
+commit 69776fe4a44150905800626f4ef8fbea780de66c
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 10 17:45:45 2020 -0700
+
+    added ClueGame JFrame class and added the panels
+
+commit 9c6de9be0928ad5f503cac6e3d814151c14e05ed
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 10 12:19:43 2020 -0700
+
+    updated gameSetupTest's color test to use pastels
+
+commit 73ce87aedc098e36831233ab86271cb7eef2b2e0
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 10 12:16:40 2020 -0700
+
+    updated .gitignore
+
+commit fe7134175811e3c9482425ddfab674b579798e06
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 10 12:15:05 2020 -0700
+
+    changed colors to pastels for ease of viewing
+
+commit b2de001a13603baef38bf7b604d4592cd3f7ed5d
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 9 21:31:15 2020 -0700
+
+    updated readme
 
 commit b0b05daba5f55fa163a8fe80dfb27a785bd844f4
 Author: Caleb Farnie <cfarnie@mymail.mines.edu>

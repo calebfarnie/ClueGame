@@ -1,6 +1,6 @@
 Caleb Farnie and Joshua Josey
-C21A-2 Clue Cards GUI
+C22A - Clue Board GUI
 CSCI306-C
-09 November 2020
+13 November 2020
 
-Note: We completed this via pair programming AND completed the extra credit (colors).
+Note: We completed this assignment via pair programming.
