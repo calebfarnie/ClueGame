@@ -6,6 +6,7 @@ package clueGame;
  */
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -99,6 +100,13 @@ public abstract class Player {
 	
 	public Set<Card> getSeen() {
 		return new HashSet<Card>(seenCards);
+	}
+	
+	public void draw(Graphics g, int width, int height) {
+		g.setColor(color);
+		g.fillOval(column*width, row*height, width, height);
+		g.setColor(Color.black);
+		g.drawOval(column*width, row*height, width, height);
 	}
 
 }

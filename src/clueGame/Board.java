@@ -519,6 +519,11 @@ public class Board extends JPanel{
 			
 			g.drawString(roomName, x*cellWidth, y*cellHeight);
 		}
+		
+		// draw players
+		for(Player player : playerMap.values()) {
+			player.draw(g, cellWidth, cellHeight);
+		}
 	}
 
 	public Set<BoardCell> getTargets() {

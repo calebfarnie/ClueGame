@@ -1,6 +1,6 @@
 // Players - name, color, human/computer, startRow, startCol
 Player, Luke Skywalker, white, human, 8, 1
-Player, Obi-Wan Kenobi, blue, computer, 17, 3
+Player, Obi-Wan Kenobi, blue, computer, 17, 2
 Player, Yoda, green, computer, 26, 19
 Player, Darth Vader, red, computer, 13, 26
 Player, Emperor Palpatine, purple, computer, 1, 18
