@@ -6,10 +6,15 @@ package clueGame;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -18,17 +23,19 @@ import javax.swing.border.TitledBorder;
 
 public class GameControlPanel extends JPanel{
 	
-	private JTextField turnName;
-	private JTextField guessStr;
-	private JTextField guessResult;
-	private JTextField rollNum;
+	Board board;
+	private static JTextField turnName;
+	private static JTextField guessStr;
+	private static JTextField guessResult;
+	private static JTextField rollNum;
 
 	public GameControlPanel() {
 		setLayout(new GridLayout(2,0));
 		
-		// split the contro panel into two rows and add them to the panel 
+		// split the control panel into two rows and add them to the panel 
 		add(createControlPanelTopRow());
 		add(createControlPanelBottomRow());
+		this.board = Board.getInstance();
 	}
 	
 	private JPanel createControlPanelTopRow() {
@@ -43,6 +50,7 @@ public class GameControlPanel extends JPanel{
 		JButton accuse = new JButton("Make Accusation");
 		panel.add(accuse);
 		JButton next = new JButton("NEXT!");
+		next.addActionListener(new NextButtonListener());
 		panel.add(next);
 		
 		return panel;
@@ -92,11 +100,11 @@ public class GameControlPanel extends JPanel{
 
 		panel.setLayout(new GridLayout(0,1));
 		JLabel nameLabel = new JLabel("Whose turn?", SwingConstants.CENTER);	// second param makes label center
-		panel.add(nameLabel, BorderLayout.CENTER);
+		panel.add(nameLabel);
 		
 		turnName = new JTextField();
 		turnName.setEditable(false);
-		panel.add(turnName, BorderLayout.WEST);
+		panel.add(turnName);
 		
 		return panel;
 	}
@@ -109,6 +117,7 @@ public class GameControlPanel extends JPanel{
 		
 		rollNum = new JTextField();
 		rollNum.setEditable(false);
+		rollNum.setPreferredSize(new Dimension(50, 20));
 		
 		panel.add(rollNum);
 		
@@ -116,20 +125,34 @@ public class GameControlPanel extends JPanel{
 	}
 	
 	// setter methods
-	private void setTurn(Player player, int roll){
-		this.turnName.setText(player.getName());
-		this.turnName.setBackground(player.getColor());
-		this.rollNum.setText(String.valueOf(roll));
+	public static void setTurn(Player player, int roll){
+		turnName.setText(player.getName());
+		turnName.setBackground(player.getColor());
+		rollNum.setText(String.valueOf(roll));
 	}
 	
-	private void setGuess(String guess){
+	public void setGuess(String guess){
 		this.guessStr.setText(guess);
 	}
 	
-	private void setGuessResult(String guessResult) {
+	public void setGuessResult(String guessResult) {
 		this.guessResult.setText(guessResult);
 	}
 	
+	private class NextButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(board.processTurn()) {
+				board.humanPlayerTurn();
+			}else {
+				JOptionPane.showMessageDialog(null, "Please finish your turn!", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			repaint();
+		}
+		
+	}
+	/*
 	public static void main(String[] args) {
 		GameControlPanel panel = new GameControlPanel();  // create the panel
 		JFrame frame = new JFrame();  // create the frame
@@ -143,5 +166,6 @@ public class GameControlPanel extends JPanel{
         panel.setGuess( "I have no guess!");
         panel.setGuessResult( "So you have nothing?");
 	}
+	*/
 
 }

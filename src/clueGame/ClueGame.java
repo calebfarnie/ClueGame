@@ -50,5 +50,8 @@ public class ClueGame extends JFrame {
 		panel.add(line2);
 		panel.add(line3);
 		JOptionPane.showMessageDialog(null, panel, "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
+		
+		// start player's turn
+		board.processTurn();
 	}
 }

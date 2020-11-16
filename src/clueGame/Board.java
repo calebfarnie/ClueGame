@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.Rectangle2D;
@@ -27,7 +29,7 @@ import javax.swing.JPanel;
 
 import java.util.List;  
 
-public class Board extends JPanel{
+public class Board extends JPanel implements MouseListener{
 
 	// instance variables
 	private int numRows;
@@ -36,11 +38,15 @@ public class Board extends JPanel{
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
 	private Map<String, Player> playerMap;
+	private ArrayList<Player> playersList;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	private ArrayList<Card> deck;
 	private Solution theAnswer;
 	private BoardCell[][] grid;
+	public static int gameTurnCounter;
+	private boolean targetSelected;
+	private boolean accusationMade;
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -61,6 +67,7 @@ public class Board extends JPanel{
 		try {
 			loadConfigFiles();
 			generateAdjLists();
+			gameTurnCounter = 0;
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (BadConfigFormatException e) {
@@ -171,6 +178,7 @@ public class Board extends JPanel{
 		// allocate memory for room map
 		roomMap = new HashMap<Character, Room>();
 		playerMap = new HashMap<String, Player>();
+		playersList = new ArrayList<Player>();
 		deck = new ArrayList<Card>();
 		theAnswer = new Solution();
 		
@@ -207,6 +215,7 @@ public class Board extends JPanel{
 				}
 				
 				playerMap.put(playerName, player);
+				playersList.add(player);
 				
 				Card card = new Card(playerName, CardType.PERSON);
 				deck.add(card);
@@ -534,6 +543,69 @@ public class Board extends JPanel{
 			}
 		}
 	}
+	
+	public boolean processTurn() {
+		int numPlayers = playerMap.size();
+		int indexVariable = gameTurnCounter % numPlayers;
+		Player turn = playersList.get(indexVariable);
+		
+		GameControlPanel.setTurn(turn, 3);
+		
+		if(indexVariable == 0) {
+			 return checkHumanPlayerTurn();
+		}else {
+			 computerPlayerTurn();
+			 return true;
+		}
+		
+	}
+	
+	private boolean checkHumanPlayerTurn() {
+		// check is finished
+		boolean isFinished = false;
+		
+		// check if target selected or accusation made
+		// if so, set playerFinished flag to true and update gameTurnCounter
+		if(targetSelected || accusationMade) {			
+			isFinished = true;
+			gameTurnCounter++;
+		}
+		
+		return isFinished;
+	}
+	
+	public void humanPlayerTurn() {
+		
+		
+	}
+
+
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	
+	public void mouseClicked(MouseEvent e) {
+		// TODO
+		// if mouse clicks on a cell, do stuff
+			// e.getX() and e.getY() are in cell
+			// check if that cell is a target
+			// set foundTarget to true
+		
+		// else, show error message
+	}
+	
+	public Boolean isClickedCell(int xMouseLoc, int yMouseLoc) {
+		
+		
+		
+		return false;
+	}
+	
+	private void computerPlayerTurn() {
+		
+		gameTurnCounter++;
+	}
 
 	public Set<BoardCell> getTargets() {
 		return targets;
@@ -557,6 +629,10 @@ public class Board extends JPanel{
 	
 	public Solution getAnswer() {
 		return theAnswer;
+	}
+
+	public Boolean isTarget(BoardCell cell) {
+		return targets.contains(cell);
 	}
 	
 }
