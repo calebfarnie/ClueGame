@@ -23,6 +23,7 @@ public class BoardCell {
 	private boolean isRoom;
 	private boolean isOccupied;
 	private boolean isDoorway;
+	private boolean isHighlighted;
 	private DoorDirection doorDirection;
 	private Set<BoardCell> adjList = new HashSet<BoardCell>();
 
@@ -117,6 +118,10 @@ public class BoardCell {
 		return this.row == cell.getRow() && this.col == cell.getCol();
 	}
 	
+	public void setIsHighlighted(boolean highlighted) {
+		isHighlighted = highlighted;
+	}
+	
 	public void draw(Graphics g, int width, int height, int dx, int dy) {
 		
 		// draw cells
@@ -154,6 +159,11 @@ public class BoardCell {
 			g.fillRect(dx, dy, width, height);
 		}
 		
+		if(isHighlighted) {
+			g.setColor(new Color(255,255,0));
+			g.fillRect(dx, dy, width, height);
+		}
+		
 		if(isDoorway()) {
 			g.setColor(Color.red);
 			switch(doorDirection) {
@@ -172,5 +182,8 @@ public class BoardCell {
 			}
 				
 		}
+		
+		
 	}
+	
 }

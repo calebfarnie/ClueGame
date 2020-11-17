@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.util.List;  
@@ -47,6 +48,8 @@ public class Board extends JPanel implements MouseListener{
 	public static int gameTurnCounter;
 	private boolean targetSelected;
 	private boolean accusationMade;
+	private Map<Character, ArrayList<BoardCell>> roomCells;
+	private ArrayList<BoardCell> highlightedCells;
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -68,6 +71,8 @@ public class Board extends JPanel implements MouseListener{
 			loadConfigFiles();
 			generateAdjLists();
 			gameTurnCounter = 0;
+			addMouseListener(this);
+
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (BadConfigFormatException e) {
@@ -254,6 +259,8 @@ public class Board extends JPanel implements MouseListener{
 		ArrayList<String[]> rows = new ArrayList<String[]>();
 		FileReader reader = new FileReader(layoutConfigFile);
 		Scanner in = new Scanner(reader);
+		roomCells = new HashMap<Character, ArrayList<BoardCell>>();
+		highlightedCells = new ArrayList<BoardCell>();
 
 		// add each row to arraylist
 		while (in.hasNextLine()) {
@@ -291,6 +298,7 @@ public class Board extends JPanel implements MouseListener{
 		String[] currentRowData = rows.get(row);
 		String cellData = currentRowData[col];
 		char initial = cellData.charAt(0), symbol = '0';
+
 
 		// instantiate boolean values to false
 		// will be changed in switch-case below.
@@ -354,6 +362,7 @@ public class Board extends JPanel implements MouseListener{
 		// set room's center cell
 		if (center) {
 			roomMap.get(initial).setCenterCell(cell);
+			roomCells.put(initial, new ArrayList<BoardCell>());
 		}
 
 		// set room's label
@@ -549,7 +558,9 @@ public class Board extends JPanel implements MouseListener{
 		int indexVariable = gameTurnCounter % numPlayers;
 		Player turn = playersList.get(indexVariable);
 		
-		GameControlPanel.setTurn(turn, 3);
+		GameControlPanel.setTurn(turn, 6);
+		
+		highlightTargets(indexVariable, 6);
 		
 		if(indexVariable == 0) {
 			 return checkHumanPlayerTurn();
@@ -580,24 +591,39 @@ public class Board extends JPanel implements MouseListener{
 	}
 
 
-	public void mousePressed(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	
-	public void mouseClicked(MouseEvent e) {
-		// TODO
-		// if mouse clicks on a cell, do stuff
-			// e.getX() and e.getY() are in cell
-			// check if that cell is a target
-			// set foundTarget to true
+	public void mousePressed(MouseEvent e) {
+		int cellHeight = getHeight()/numRows;
+		int cellWidth = getWidth()/numColumns;
+		int row = (int) (Math.ceil(e.getY()*1.0 / cellHeight)) - 1;		// calculate row #
+		int column = (int) (Math.ceil(e.getX()*1.0 / cellWidth)) - 1;	// calculate column #
 		
-		// else, show error message
+		if(highlightedCells.contains(getCell(row, column))) {
+			BoardCell cell = getCell(row, column);
+			// find location
+			if(cell.getInitial() != 'W') {
+				BoardCell roomCenter = roomMap.get(cell.getInitial()).getCenterCell();
+				playersList.get(0).setLocation(roomCenter);
+			}else {
+				playersList.get(0).setLocation(row, column);
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "You can't go there!", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		for(BoardCell cell : highlightedCells) {
+			cell.setIsHighlighted(false);
+		}
+		highlightedCells.clear();
+		
+		repaint();
 	}
 	
 	public Boolean isClickedCell(int xMouseLoc, int yMouseLoc) {
-		
-		
 		
 		return false;
 	}
@@ -605,6 +631,43 @@ public class Board extends JPanel implements MouseListener{
 	private void computerPlayerTurn() {
 		
 		gameTurnCounter++;
+	}
+	
+	private void highlightTargets(int playerNum, int roll) {
+		fillRoomCells();
+		Player player = playersList.get(playerNum);
+		BoardCell startCell = getCell(player.getRow(), player.getCol());
+		calcTargets(startCell, roll);
+		for(BoardCell cell : targets) {
+			if(cell.getInitial()!='W') {
+				highlightRoom(cell.getInitial(), true);
+			} else {
+				cell.setIsHighlighted(true);
+				highlightedCells.add(cell);
+			}
+			
+		}
+		
+		repaint();
+	}
+	
+	private void fillRoomCells() {
+		for (int r = 0; r < numRows; r++) {
+			for (int c = 0; c < numColumns; c++) {
+				BoardCell cell = getCell(r,c);
+				if(cell.getInitial()!='W'&&cell.getInitial()!='X') {
+					roomCells.get(cell.getInitial()).add(getCell(r,c));
+				}
+			}
+		}
+	}
+	
+	private void highlightRoom(char initial, boolean setHighlight) {
+		for(BoardCell cell : roomCells.get(initial)) {
+			cell.setIsHighlighted(setHighlight);
+			if(setHighlight)
+				highlightedCells.add(cell);
+		}
 	}
 
 	public Set<BoardCell> getTargets() {

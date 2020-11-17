@@ -77,6 +77,16 @@ public abstract class Player {
 	public void setHand(Set<Card> hand) {
 		this.hand = new HashSet<Card>(hand);
 	}
+	
+	public void setLocation(int row, int col) {
+		this.row = row;
+		this.column = col;
+	}
+	
+	public void setLocation(BoardCell targetCell) {
+		this.row = targetCell.getRow();
+		this.column = targetCell.getCol();
+	}
 
 	public int getRow() {
 		return this.row;
