@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -48,6 +49,7 @@ public class Board extends JPanel implements MouseListener{
 	public static int gameTurnCounter;
 	private boolean targetSelected;
 	private boolean accusationMade;
+	private boolean isFinished;
 	private Map<Character, ArrayList<BoardCell>> roomCells;
 	private ArrayList<BoardCell> highlightedCells;
 
@@ -556,47 +558,47 @@ public class Board extends JPanel implements MouseListener{
 	public boolean processTurn() {
 		int numPlayers = playerMap.size();
 		int indexVariable = gameTurnCounter % numPlayers;
+		
 		Player turn = playersList.get(indexVariable);
+		int roll = rollDice();
 		
-		GameControlPanel.setTurn(turn, 6);
-		
-		highlightTargets(indexVariable, 6);
+		GameControlPanel.setTurn(turn, roll);
 		
 		if(indexVariable == 0) {
-			 return checkHumanPlayerTurn();
+			highlightTargets(indexVariable, roll);
+			return checkHumanPlayerTurn();
 		}else {
-			 computerPlayerTurn();
-			 return true;
+			computerPlayerTurn(indexVariable, roll);
+			return true;
 		}
-		
 	}
 	
 	private boolean checkHumanPlayerTurn() {
 		// check is finished
-		boolean isFinished = false;
 		
 		// check if target selected or accusation made
 		// if so, set playerFinished flag to true and update gameTurnCounter
 		if(targetSelected || accusationMade) {			
 			isFinished = true;
-			gameTurnCounter++;
+		}else {
+			isFinished = false;
 		}
 		
 		return isFinished;
 	}
-	
-	public void humanPlayerTurn() {
-		
-		
-	}
 
-
-	public void mouseClicked(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	
-	public void mousePressed(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) {
+		
+		if(isFinished) {
+			JOptionPane.showMessageDialog(null, "It's not your turn!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
 		int cellHeight = getHeight()/numRows;
 		int cellWidth = getWidth()/numColumns;
 		int row = (int) (Math.ceil(e.getY()*1.0 / cellHeight)) - 1;		// calculate row #
@@ -608,29 +610,49 @@ public class Board extends JPanel implements MouseListener{
 			if(cell.getInitial() != 'W') {
 				BoardCell roomCenter = roomMap.get(cell.getInitial()).getCenterCell();
 				playersList.get(0).setLocation(roomCenter);
+				playersList.get(0).setRoom(roomMap.get(cell.getInitial()));
 			}else {
 				playersList.get(0).setLocation(row, column);
+				playersList.get(0).setRoom(null);
 			}
+			targetSelected = true;
+			
+			// if turn is over
+			for(BoardCell cellToBeUnhighlighted : highlightedCells) {
+				cellToBeUnhighlighted.setIsHighlighted(false);
+			}
+			highlightedCells.clear();
+			
+			// turn is over
+			gameTurnCounter++;
 		}else {
 			JOptionPane.showMessageDialog(null, "You can't go there!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		
-		for(BoardCell cell : highlightedCells) {
-			cell.setIsHighlighted(false);
-		}
-		highlightedCells.clear();
-		
 		repaint();
 	}
 	
-	public Boolean isClickedCell(int xMouseLoc, int yMouseLoc) {
+	private void computerPlayerTurn(int indexVariable, int roll) {
+		isFinished = true;
+		targetSelected = false;
 		
-		return false;
-	}
-	
-	private void computerPlayerTurn() {
+		Player computerTurn = playersList.get(indexVariable);
+		BoardCell startCell = getCell(computerTurn.getRow(), computerTurn.getCol());
+		calcTargets(startCell, roll);
+		
+		BoardCell selectedCell = computerTurn.selectTarget(targets, roomMap);
+		
+		if(selectedCell.getInitial() != 'W') {
+			computerTurn.setRoom(roomMap.get(selectedCell.getInitial()));
+		}else {
+			computerTurn.setRoom(null);
+		}
+		
+		computerTurn.setLocation(selectedCell);
 		
 		gameTurnCounter++;
+		
+		repaint();
 	}
 	
 	private void highlightTargets(int playerNum, int roll) {
@@ -668,6 +690,11 @@ public class Board extends JPanel implements MouseListener{
 			if(setHighlight)
 				highlightedCells.add(cell);
 		}
+	}
+	
+	public int rollDice() {
+		Random random = new Random();
+		return random.nextInt(6) + 1;
 	}
 
 	public Set<BoardCell> getTargets() {

@@ -16,6 +16,7 @@ import java.util.Set;
 public abstract class Player {
 	private String name;
 	private Color color;
+	private Room inRoom = null;
 	protected int row;
 	protected int column;
 	protected Set<Card> hand;
@@ -88,6 +89,14 @@ public abstract class Player {
 		this.column = targetCell.getCol();
 	}
 
+	public void setRoom(Room room) {
+		this.inRoom = room;
+	}
+	
+	public Room getRoom() {
+		return inRoom;
+	}
+	
 	public int getRow() {
 		return this.row;
 	}
@@ -113,10 +122,30 @@ public abstract class Player {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
+		Board board = Board.getInstance();
+		int offset = 0;
+		
+		for(Player player : board.getPlayers().values()) {
+			if(this.equals(player)) {
+				continue;
+			}
+			
+			Room currentPlayerRoom = this.getRoom();
+			Room playerRoom = player.getRoom();
+			
+			if(currentPlayerRoom == null || playerRoom == null) {
+				continue;
+			}
+			
+			if(currentPlayerRoom.equals(playerRoom)) {
+				offset += 10;
+			}
+		}
+		
 		g.setColor(color);
-		g.fillOval(column*width, row*height, width, height);
+		g.fillOval(column*width + offset, row*height, width, height);
 		g.setColor(Color.black);
-		g.drawOval(column*width, row*height, width, height);
+		g.drawOval(column*width + offset, row*height, width, height);
 	}
 
 }
