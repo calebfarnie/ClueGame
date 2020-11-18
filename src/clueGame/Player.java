@@ -148,23 +148,6 @@ public abstract class Player {
 		g.setColor(Color.black);
 		g.drawOval(column*width + offset, row*height, width, height);
 		
-//		for(Player player : board.getPlayers().values()) {
-//			if(this.equals(player)) {
-//				continue;
-//			}
-//			
-//			Room currentPlayerRoom = this.getRoom();
-//			Room playerRoom = player.getRoom();
-//			
-//			if(currentPlayerRoom == null || playerRoom == null) {
-//				continue;
-//			}
-//			
-//			if(currentPlayerRoom.equals(playerRoom)) {
-//				offset += 10;
-//			}
-//		}
-		
 	}
 
 }

@@ -646,15 +646,16 @@ public class Board extends JPanel implements MouseListener{
 					// player was in a room
 				//	roomMap.get(cell.getInitial()).subtractOccupant();
 				//}
-				
+			
+			cell.setOccupied(false);
 			if(cell.getInitial() != 'W') {
 				BoardCell roomCenter = roomMap.get(cell.getInitial()).getCenterCell();
 				playersList.get(0).setLocation(roomCenter);
 				playersList.get(0).setRoom(roomMap.get(cell.getInitial()));
-				//roomMap.get(cell.getInitial()).addOccupant();
+				roomCenter.setOccupied(true);
 			}else {
-			
 				playersList.get(0).setLocation(row, column);
+				getCell(row, column).setOccupied(true);
 				playersList.get(0).setRoom(null);
 			}
 			//targetSelected = true;
@@ -688,7 +689,7 @@ public class Board extends JPanel implements MouseListener{
 		//if(startCell.isRoomCenter()&&targets.size()>0) {
 		//		roomMap.get(startCell.getInitial()).subtractOccupant();
 			//}
-		
+		startCell.setOccupied(false);
 		if(selectedCell.getInitial() != 'W') {
 			computerTurn.setRoom(roomMap.get(selectedCell.getInitial()));
 			//roomMap.get(selectedCell.getInitial()).addOccupant();
@@ -697,6 +698,7 @@ public class Board extends JPanel implements MouseListener{
 		}
 		
 		computerTurn.setLocation(selectedCell);
+		selectedCell.setOccupied(true);
 		
 		gameTurnCounter++;
 		
