@@ -1,6 +1,6 @@
 Caleb Farnie and Joshua Josey
-C22A - Clue Board GUI
+C23A Clue - Moving the Players
 CSCI306-C
-13 November 2020
+17 November 2020
 
 Note: We completed this assignment via pair programming.

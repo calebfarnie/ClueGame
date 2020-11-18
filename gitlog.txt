@@ -1,5 +1,53 @@
 Note: this assignment was completed via pair programming
 
+commit 3fd6ceb09980d8bbdc37098ecfd2759dc422c330
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 17 20:28:07 2020 -0700
+
+    refactored code
+
+commit d07b2a71adfa7a29bf3624f6f0155277f65c3465
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 17 20:15:36 2020 -0700
+
+    fixed bug where occupants can occupy same space
+
+commit 98b128dc4791a272200d9bc3b140c57ac15f3dbe
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 17 20:05:05 2020 -0700
+
+    finished player layering in rooms
+
+commit c7e12bb1cd291da2b387ee7131dcfeaa70390ec5
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 16 22:14:02 2020 -0700
+
+    attempted to implement offset players. Will continue later.
+
+commit 4d94ba642c6f008fe480d5a5656f5a5c6cae80e1
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 16 17:48:04 2020 -0700
+
+    implemented mouse listener and first move
+
+commit 7736844df465dca90ab8eb9458b696de869f7adf
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sun Nov 15 21:40:24 2020 -0700
+
+    added error message for Next button
+
+commit 9a720380ef90700a5489cbadd9c88c337cb7c13e
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sun Nov 15 19:46:02 2020 -0700
+
+    added splash screen
+
+commit c4853b04722358b39c9db66ba34095784684b8af
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Fri Nov 13 16:46:22 2020 -0700
+
+    updated git log and readme
+
 commit f736a7de2bda3908c2a23a220a49cf33beefdfe0
 Author: Caleb Farnie <cfarnie@mymail.mines.edu>
 Date:   Fri Nov 13 16:42:30 2020 -0700
