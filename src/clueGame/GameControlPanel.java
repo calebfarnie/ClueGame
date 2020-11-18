@@ -143,13 +143,19 @@ public class GameControlPanel extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			board.nextTurn();
+			
+			/*
 			if(board.processTurn()) {
 //				board.humanPlayerTurn();
 			}else {
 				JOptionPane.showMessageDialog(null, "Please finish your turn!", "Error", JOptionPane.ERROR_MESSAGE);
 			}
-			repaint();
+			//repaint();
+			 
+			 */
 		}
+		
 		
 	}
 	/*

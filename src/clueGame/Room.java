@@ -13,10 +13,27 @@ public class Room {
 	private BoardCell labelCell;
 	private char secretPassage = '0';
 	private boolean isWalkway;
+	private int occupancy;
 
 	public Room(String name) {
 		this.name = name;
 
+	}
+	
+	public void setOccupancy(int occupancy) {
+		this.occupancy = occupancy;
+	}
+	
+	public void addOccupant() {
+		occupancy ++;
+	}
+	
+	public void subtractOccupant() {
+		occupancy --;
+	}
+	
+	public int getOccupancy() {
+		return occupancy;
 	}
 	
 	public void setCenterCell(BoardCell center) {

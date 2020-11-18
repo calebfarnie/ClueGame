@@ -529,8 +529,10 @@ public class Board extends JPanel implements MouseListener{
 		drawLabels(g, cellWidth, cellHeight);
 		
 		// draw players
-		for(Player player : playerMap.values()) {
-			player.draw(g, cellWidth, cellHeight);
+		int indexVariable = 0;
+		for(Player player : playersList) {			
+			player.draw(g, cellWidth, cellHeight, indexVariable);
+			indexVariable++;
 		}
 	}
 
@@ -555,6 +557,38 @@ public class Board extends JPanel implements MouseListener{
 		}
 	}
 	
+	public void nextTurn() {
+		if(!isFinished) {
+			JOptionPane.showMessageDialog(null, "Please finish your turn!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else {
+			processTurn();
+		}
+	}
+	
+	public void processTurn() {
+		int numPlayers = playerMap.size();
+		int indexVariable = gameTurnCounter % numPlayers;
+		
+		Player turn = playersList.get(indexVariable);
+		int roll = rollDice();
+		GameControlPanel.setTurn(turn, roll);
+
+		
+		if(indexVariable == 0) {
+			humanPlayerTurn(indexVariable, roll);
+		} else {
+			computerPlayerTurn(indexVariable, roll);
+		}
+	}
+	
+	private void humanPlayerTurn(int indexVariable, int roll) {
+		isFinished = false;
+		Player playerTurn = playersList.get(indexVariable);
+		highlightTargets(indexVariable, roll);
+	}
+	
+	/*
 	public boolean processTurn() {
 		int numPlayers = playerMap.size();
 		int indexVariable = gameTurnCounter % numPlayers;
@@ -586,6 +620,7 @@ public class Board extends JPanel implements MouseListener{
 		
 		return isFinished;
 	}
+	*/
 
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
@@ -595,7 +630,7 @@ public class Board extends JPanel implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		
 		if(isFinished) {
-			JOptionPane.showMessageDialog(null, "It's not your turn!", "Error", JOptionPane.ERROR_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "It's not your turn!", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
@@ -607,15 +642,22 @@ public class Board extends JPanel implements MouseListener{
 		if(highlightedCells.contains(getCell(row, column))) {
 			BoardCell cell = getCell(row, column);
 			// find location
+				//if(getCell(playersList.get(0).getRow(), playersList.get(0).getCol()).isRoomCenter()&&targets.size()>0) {
+					// player was in a room
+				//	roomMap.get(cell.getInitial()).subtractOccupant();
+				//}
+				
 			if(cell.getInitial() != 'W') {
 				BoardCell roomCenter = roomMap.get(cell.getInitial()).getCenterCell();
 				playersList.get(0).setLocation(roomCenter);
 				playersList.get(0).setRoom(roomMap.get(cell.getInitial()));
+				//roomMap.get(cell.getInitial()).addOccupant();
 			}else {
+			
 				playersList.get(0).setLocation(row, column);
 				playersList.get(0).setRoom(null);
 			}
-			targetSelected = true;
+			//targetSelected = true;
 			
 			// if turn is over
 			for(BoardCell cellToBeUnhighlighted : highlightedCells) {
@@ -625,6 +667,7 @@ public class Board extends JPanel implements MouseListener{
 			
 			// turn is over
 			gameTurnCounter++;
+			isFinished = true;
 		}else {
 			JOptionPane.showMessageDialog(null, "You can't go there!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -633,8 +676,8 @@ public class Board extends JPanel implements MouseListener{
 	}
 	
 	private void computerPlayerTurn(int indexVariable, int roll) {
-		isFinished = true;
-		targetSelected = false;
+		//isFinished = true;
+		//targetSelected = false;
 		
 		Player computerTurn = playersList.get(indexVariable);
 		BoardCell startCell = getCell(computerTurn.getRow(), computerTurn.getCol());
@@ -642,8 +685,13 @@ public class Board extends JPanel implements MouseListener{
 		
 		BoardCell selectedCell = computerTurn.selectTarget(targets, roomMap);
 		
+		//if(startCell.isRoomCenter()&&targets.size()>0) {
+		//		roomMap.get(startCell.getInitial()).subtractOccupant();
+			//}
+		
 		if(selectedCell.getInitial() != 'W') {
 			computerTurn.setRoom(roomMap.get(selectedCell.getInitial()));
+			//roomMap.get(selectedCell.getInitial()).addOccupant();
 		}else {
 			computerTurn.setRoom(null);
 		}
@@ -723,6 +771,10 @@ public class Board extends JPanel implements MouseListener{
 
 	public Boolean isTarget(BoardCell cell) {
 		return targets.contains(cell);
+	}
+	
+	public ArrayList<Player> getPlayersList(){
+		return playersList;
 	}
 	
 }
