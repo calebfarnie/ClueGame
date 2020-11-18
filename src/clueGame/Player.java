@@ -122,27 +122,33 @@ public abstract class Player {
 	}
 	
 	public void draw(Graphics g, int width, int height, int indexVariable) {
+		// get board instance and list of players
 		Board board = Board.getInstance();
 		ArrayList<Player> players = board.getPlayersList();
-//		indexVariable = indexVariable - 1;
 		int offset = 0;
 
+		// loop through players in order up to current player,
+		// and add offset to player if room is occupied
 		for(int i = 0; i < indexVariable; i++) {
 			Player player = players.get(i);
 			
+			// skip if is current player
 			if(this.equals(player)) {
 				continue;
 			}
 
+			// skip if not in room
 			if(this.getRoom() == null || player.getRoom() == null) {
 				continue;
 			}
 
+			// if in occupied room, then add half the cell width to offset
 			if(player.getRoom().equals(this.getRoom())) {
 				offset += width/2;
 			}
 		}
 
+		// draw players
 		g.setColor(color);
 		g.fillOval(column*width + offset, row*height, width, height);
 		g.setColor(Color.black);

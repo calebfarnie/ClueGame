@@ -52,6 +52,8 @@ public class Board extends JPanel implements MouseListener{
 	private boolean isFinished;
 	private Map<Character, ArrayList<BoardCell>> roomCells;
 	private ArrayList<BoardCell> highlightedCells;
+	
+	public static final char WALKWAY_INITIAL = 'W';
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -373,7 +375,7 @@ public class Board extends JPanel implements MouseListener{
 		}
 
 		// set room walkway
-		if (initial == 'W') {
+		if (initial == WALKWAY_INITIAL) {
 			roomMap.get(initial).setWalkway();
 		}
 	}
@@ -587,40 +589,6 @@ public class Board extends JPanel implements MouseListener{
 		Player playerTurn = playersList.get(indexVariable);
 		highlightTargets(indexVariable, roll);
 	}
-	
-	/*
-	public boolean processTurn() {
-		int numPlayers = playerMap.size();
-		int indexVariable = gameTurnCounter % numPlayers;
-		
-		Player turn = playersList.get(indexVariable);
-		int roll = rollDice();
-		
-		GameControlPanel.setTurn(turn, roll);
-		
-		if(indexVariable == 0) {
-			highlightTargets(indexVariable, roll);
-			return checkHumanPlayerTurn();
-		}else {
-			computerPlayerTurn(indexVariable, roll);
-			return true;
-		}
-	}
-	
-	private boolean checkHumanPlayerTurn() {
-		// check is finished
-		
-		// check if target selected or accusation made
-		// if so, set playerFinished flag to true and update gameTurnCounter
-		if(targetSelected || accusationMade) {			
-			isFinished = true;
-		}else {
-			isFinished = false;
-		}
-		
-		return isFinished;
-	}
-	*/
 
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
@@ -630,7 +598,6 @@ public class Board extends JPanel implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		
 		if(isFinished) {
-			//JOptionPane.showMessageDialog(null, "It's not your turn!", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
@@ -641,14 +608,9 @@ public class Board extends JPanel implements MouseListener{
 		
 		if(highlightedCells.contains(getCell(row, column))) {
 			BoardCell cell = getCell(row, column);
-			// find location
-				//if(getCell(playersList.get(0).getRow(), playersList.get(0).getCol()).isRoomCenter()&&targets.size()>0) {
-					// player was in a room
-				//	roomMap.get(cell.getInitial()).subtractOccupant();
-				//}
 			
 			cell.setOccupied(false);
-			if(cell.getInitial() != 'W') {
+			if(cell.getInitial() != WALKWAY_INITIAL) {
 				BoardCell roomCenter = roomMap.get(cell.getInitial()).getCenterCell();
 				playersList.get(0).setLocation(roomCenter);
 				playersList.get(0).setRoom(roomMap.get(cell.getInitial()));
@@ -658,7 +620,6 @@ public class Board extends JPanel implements MouseListener{
 				getCell(row, column).setOccupied(true);
 				playersList.get(0).setRoom(null);
 			}
-			//targetSelected = true;
 			
 			// if turn is over
 			for(BoardCell cellToBeUnhighlighted : highlightedCells) {
@@ -676,23 +637,16 @@ public class Board extends JPanel implements MouseListener{
 		repaint();
 	}
 	
-	private void computerPlayerTurn(int indexVariable, int roll) {
-		//isFinished = true;
-		//targetSelected = false;
-		
+	private void computerPlayerTurn(int indexVariable, int roll) {		
 		Player computerTurn = playersList.get(indexVariable);
 		BoardCell startCell = getCell(computerTurn.getRow(), computerTurn.getCol());
 		calcTargets(startCell, roll);
 		
 		BoardCell selectedCell = computerTurn.selectTarget(targets, roomMap);
 		
-		//if(startCell.isRoomCenter()&&targets.size()>0) {
-		//		roomMap.get(startCell.getInitial()).subtractOccupant();
-			//}
 		startCell.setOccupied(false);
-		if(selectedCell.getInitial() != 'W') {
+		if(selectedCell.getInitial() != WALKWAY_INITIAL) {
 			computerTurn.setRoom(roomMap.get(selectedCell.getInitial()));
-			//roomMap.get(selectedCell.getInitial()).addOccupant();
 		}else {
 			computerTurn.setRoom(null);
 		}
@@ -711,7 +665,7 @@ public class Board extends JPanel implements MouseListener{
 		BoardCell startCell = getCell(player.getRow(), player.getCol());
 		calcTargets(startCell, roll);
 		for(BoardCell cell : targets) {
-			if(cell.getInitial()!='W') {
+			if(cell.getInitial()!= WALKWAY_INITIAL) {
 				highlightRoom(cell.getInitial(), true);
 			} else {
 				cell.setIsHighlighted(true);
@@ -727,13 +681,14 @@ public class Board extends JPanel implements MouseListener{
 		for (int r = 0; r < numRows; r++) {
 			for (int c = 0; c < numColumns; c++) {
 				BoardCell cell = getCell(r,c);
-				if(cell.getInitial()!='W'&&cell.getInitial()!='X') {
+				if(cell.getInitial()!=WALKWAY_INITIAL && cell.getInitial()!='X') {
 					roomCells.get(cell.getInitial()).add(getCell(r,c));
 				}
 			}
 		}
 	}
 	
+	// calculate targets for human player and highlight them
 	private void highlightRoom(char initial, boolean setHighlight) {
 		for(BoardCell cell : roomCells.get(initial)) {
 			cell.setIsHighlighted(setHighlight);
