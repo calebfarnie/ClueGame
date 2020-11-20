@@ -34,7 +34,8 @@ public class ClueGame extends JFrame {
 
 		// get the human player, Luke Skywalker
 		Player person = board.getPlayer("Luke Skywalker");
-		ClueGame gui = new ClueGame(person, board);	
+		ClueGame gui = new ClueGame(person, board);
+		gui.setLocationRelativeTo(null);
 		gui.setVisible(true);
 		
 		// display splash screen

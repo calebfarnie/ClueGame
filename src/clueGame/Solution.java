@@ -11,7 +11,6 @@ public class Solution {
 	public Card weapon;
 
 	public Solution() {
-		// TODO
 
 	}
 

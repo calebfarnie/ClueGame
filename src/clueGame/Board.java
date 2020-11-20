@@ -575,7 +575,6 @@ public class Board extends JPanel implements MouseListener{
 		Player turn = playersList.get(indexVariable);
 		int roll = rollDice();
 		GameControlPanel.setTurn(turn, roll);
-
 		
 		if(indexVariable == 0) {
 			humanPlayerTurn(indexVariable, roll);
@@ -606,20 +605,26 @@ public class Board extends JPanel implements MouseListener{
 		int row = (int) (Math.ceil(e.getY()*1.0 / cellHeight)) - 1;		// calculate row #
 		int column = (int) (Math.ceil(e.getX()*1.0 / cellWidth)) - 1;	// calculate column #
 		
-		if(highlightedCells.contains(getCell(row, column))) {
-			BoardCell cell = getCell(row, column);
+		BoardCell clickedCell = getCell(row, column);
+		Player humanPlayer = playersList.get(0);
+		
+		if(highlightedCells.contains(clickedCell)) {
+			BoardCell startCell = getCell(humanPlayer.getRow(), humanPlayer.getCol());
+			BoardCell targetCell;
 			
-			cell.setOccupied(false);
-			if(cell.getInitial() != WALKWAY_INITIAL) {
-				BoardCell roomCenter = roomMap.get(cell.getInitial()).getCenterCell();
-				playersList.get(0).setLocation(roomCenter);
-				playersList.get(0).setRoom(roomMap.get(cell.getInitial()));
-				roomCenter.setOccupied(true);
+			startCell.setOccupied(false);
+			if(clickedCell.getInitial() != WALKWAY_INITIAL) {
+				targetCell = roomMap.get(clickedCell.getInitial()).getCenterCell();
+				humanPlayer.setRoom(roomMap.get(clickedCell.getInitial()));
+				targetCell.setOccupied(true);
 			}else {
-				playersList.get(0).setLocation(row, column);
-				getCell(row, column).setOccupied(true);
-				playersList.get(0).setRoom(null);
+				targetCell = getCell(row, column);
+				targetCell.setOccupied(true);
+				humanPlayer.setRoom(null);
 			}
+			
+			// set player location
+			humanPlayer.setLocation(targetCell);
 			
 			// if turn is over
 			for(BoardCell cellToBeUnhighlighted : highlightedCells) {
@@ -647,6 +652,10 @@ public class Board extends JPanel implements MouseListener{
 		startCell.setOccupied(false);
 		if(selectedCell.getInitial() != WALKWAY_INITIAL) {
 			computerTurn.setRoom(roomMap.get(selectedCell.getInitial()));
+			Card roomCard = new Card(roomMap.get(selectedCell.getInitial()).getName(), CardType.ROOM);
+			if(!computerTurn.getSeen().contains(roomCard)) {
+				computerTurn.updateSeen(roomCard);
+			}
 		}else {
 			computerTurn.setRoom(null);
 		}
