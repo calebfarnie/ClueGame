@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
@@ -21,8 +22,13 @@ public class ClueGame extends JFrame {
 		JPanel boardPanel = Board.getInstance();
 		boardPanel.setBackground(Color.darkGray);
 		
-		add(new GameCardPanel(person, board), BorderLayout.EAST);
-		add(new GameControlPanel(), BorderLayout.SOUTH);
+		GameCardPanel cardPanel = new GameCardPanel(person, board);
+		GameControlPanel controlPanel = new GameControlPanel();
+		
+		cardPanel.setPreferredSize(new Dimension(150, 0));
+		
+		add(cardPanel, BorderLayout.EAST);
+		add(controlPanel, BorderLayout.SOUTH);
 		add(boardPanel, BorderLayout.CENTER);
 	}
 
