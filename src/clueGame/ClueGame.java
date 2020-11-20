@@ -12,12 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class ClueGame extends JFrame {
 
 	public ClueGame(Player person, Board board) {
 		setTitle("Clue");
-		setSize(700, 700);
+		setSize(820, 665);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel boardPanel = Board.getInstance();
 		boardPanel.setBackground(Color.darkGray);
