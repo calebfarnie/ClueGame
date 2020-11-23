@@ -52,6 +52,7 @@ public class Board extends JPanel implements MouseListener{
 	private boolean isFinished;
 	private Map<Character, ArrayList<BoardCell>> roomCells;
 	private ArrayList<BoardCell> highlightedCells;
+	private Solution currentSuggestion;
 	
 	public static final char WALKWAY_INITIAL = 'W';
 
@@ -190,6 +191,7 @@ public class Board extends JPanel implements MouseListener{
 		playersList = new ArrayList<Player>();
 		deck = new ArrayList<Card>();
 		theAnswer = new Solution();
+		currentSuggestion = new Solution();
 		
 		// set up file reader and scanner
 		FileReader reader = new FileReader(setupConfigFile);
@@ -496,18 +498,68 @@ public class Board extends JPanel implements MouseListener{
 		theAnswer.weapon = myAnswer.weapon;
 	}
 	
-	public Card handleSuggestion(ArrayList<Player> players, Player accuser) {
+	public void setCurrentSuggestion(Solution suggestion) {
+		currentSuggestion.person = suggestion.person;
+		currentSuggestion.room = suggestion.room;
+		currentSuggestion.weapon = suggestion.weapon;
+	}
+	
+	// method: make suggestion- calls handle suggestion and displays result on control panel 
+	// * If it is human's turn show card that disproved suggestion and color of player who has it 
+	// * If not human's turn only say if suggestion is disproved with color of whoever holds the card
+	// should handel suggestion use suggestion instead of answer?
+	
+	// turn method passes in accuser 
+	
+	private void makeSuggestion(Player accusor){
+		Card result = handleSuggestion(accusor); 
+		GameControlPanel.setGuess(currentSuggestion);
+		
+		if(accusor instanceof HumanPlayer) {
+			if(result != null) {
+				// display card in guess result box
+				GameControlPanel.setGuessResult(playersList, result);
+				
+				// add card to HP seen
+				accusor.updateSeen(result);
+			} else {
+				// no new clue found
+				GameControlPanel.setGuessResult("No new clue found!");
+			}
+		} else {
+			if(result != null) {
+				// display suggestion disproven
+				GameControlPanel.setGuessResult("Suggestion has been disproven!");
+				
+				// add card to CP seen
+				accusor.updateSeen(result);
+			} else {
+				// no new clue found
+				GameControlPanel.setGuessResult("No new clue found!");
+			}
+		}
+	}
+	
+	 
+	 
+	 
+	 
+	 
+	
+	
+	
+	public Card handleSuggestion(Player accuser) {
 		
 		// re-orient the players arraylist to start at the accuser
-		ArrayList<Player> newPlayers = new ArrayList<Player>(players.subList(players.indexOf(accuser), players.size()));
-		newPlayers.addAll(players.subList(0, players.indexOf(accuser)));
+		ArrayList<Player> newPlayers = new ArrayList<Player>(playersList.subList(playersList.indexOf(accuser), playersList.size()));
+		newPlayers.addAll(playersList.subList(0, playersList.indexOf(accuser)));
 
 		// iterate through players to disprove suggestion
 		for(Player player : newPlayers) {
-			if(player.disproveSuggestion(theAnswer) == null || player.equals(accuser)) {
+			if(player.disproveSuggestion(currentSuggestion) == null || player.equals(accuser)) {
 				continue;
 			} else {
-				return player.disproveSuggestion(theAnswer);
+				return player.disproveSuggestion(currentSuggestion);
 			}
 		}
 		
@@ -617,10 +669,14 @@ public class Board extends JPanel implements MouseListener{
 				targetCell = roomMap.get(clickedCell.getInitial()).getCenterCell();
 				humanPlayer.setRoom(roomMap.get(clickedCell.getInitial()));
 				targetCell.setOccupied(true);
+//				currentSuggestion = humanPlayer.createSuggestion(roomMap.get(clickedCell.getInitial()).getName(), deck);
+//				makeSuggestion(humanPlayer);
 			}else {
 				targetCell = getCell(row, column);
 				targetCell.setOccupied(true);
 				humanPlayer.setRoom(null);
+				GameControlPanel.setGuess("");
+				GameControlPanel.setGuessResult("");
 			}
 			
 			// set player location
@@ -642,7 +698,7 @@ public class Board extends JPanel implements MouseListener{
 		repaint();
 	}
 	
-	private void computerPlayerTurn(int indexVariable, int roll) {		
+	private void computerPlayerTurn(int indexVariable, int roll) {
 		Player computerTurn = playersList.get(indexVariable);
 		BoardCell startCell = getCell(computerTurn.getRow(), computerTurn.getCol());
 		calcTargets(startCell, roll);
@@ -656,8 +712,12 @@ public class Board extends JPanel implements MouseListener{
 			if(!computerTurn.getSeen().contains(roomCard)) {
 				computerTurn.updateSeen(roomCard);
 			}
+			currentSuggestion = computerTurn.createSuggestion(roomMap.get(selectedCell.getInitial()).getName(), deck);
+			makeSuggestion(computerTurn);
 		}else {
 			computerTurn.setRoom(null);
+			GameControlPanel.setGuess("");
+			GameControlPanel.setGuessResult("");
 		}
 		
 		computerTurn.setLocation(selectedCell);

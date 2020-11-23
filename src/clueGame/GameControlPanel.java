@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,7 +27,7 @@ public class GameControlPanel extends JPanel{
 	Board board;
 	private static JTextField turnName;
 	private static JTextField guessStr;
-	private static JTextField guessResult;
+	private static JTextField guessResultString;
 	private static JTextField rollNum;
 
 	public GameControlPanel() {
@@ -87,10 +88,10 @@ public class GameControlPanel extends JPanel{
 		panel.setLayout(new GridLayout(1,0));
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
 		
-		guessResult = new JTextField();
-		guessResult.setEditable(false);
+		guessResultString = new JTextField();
+		guessResultString.setEditable(false);
 		
-		panel.add(guessResult);
+		panel.add(guessResultString);
 		
 		return panel;
 	}
@@ -131,12 +132,27 @@ public class GameControlPanel extends JPanel{
 		rollNum.setText(String.valueOf(roll));
 	}
 	
-	public void setGuess(String guess){
-		this.guessStr.setText(guess);
+	public static void setGuess(String guess){
+		guessStr.setText(guess);
 	}
 	
-	public void setGuessResult(String guessResult) {
-		this.guessResult.setText(guessResult);
+	public static void setGuess(Solution suggestion) {
+		String out = suggestion.person.getName() + " with a " + suggestion.weapon.getName() + " in " + suggestion.room.getName();
+		guessStr.setText(out);
+	}
+	
+	public static void setGuessResult(String guessResult) {
+		guessResultString.setText(guessResult);
+	}
+	
+	public static void setGuessResult(ArrayList<Player> players, Card card) {
+		guessResultString.setText(card.getName());
+		
+		for(Player player : players) {
+			if(player.getHand().contains(card)) {
+				guessResultString.setBackground(player.getColor());
+			}
+		}
 	}
 	
 	private class NextButtonListener implements ActionListener{

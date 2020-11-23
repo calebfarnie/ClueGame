@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.JDialog;
+
 /** 
  * @author Caleb Farnie
  * @author Joshua Josey
@@ -33,8 +35,17 @@ public class HumanPlayer extends Player {
 
 	@Override
 	public Solution createSuggestion(String room, ArrayList<Card> deck) {
-		// TODO Auto-generated method stub
-		return null;
+		SuggestionDialog panel = new SuggestionDialog();
+		panel.setLocationRelativeTo(null);
+		panel.setVisible(true);
+		panel.setRoom(inRoom.getName());
+		
+		Solution suggestion = new Solution();
+		suggestion.room = new Card(inRoom.getName(), CardType.ROOM);
+		suggestion.person = new Card(panel.getSelectedPerson(), CardType.PERSON);
+		suggestion.weapon = new Card(panel.getSelectedWeapon(), CardType.WEAPON);
+		
+		return suggestion;
 	}
 
 }

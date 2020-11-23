@@ -16,7 +16,7 @@ import java.util.Set;
 public abstract class Player {
 	private String name;
 	private Color color;
-	private Room inRoom;
+	protected Room inRoom;
 	protected int row;
 	protected int column;
 	protected Set<Card> hand;
