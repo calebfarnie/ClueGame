@@ -511,7 +511,7 @@ public class Board extends JPanel implements MouseListener{
 	
 	// turn method passes in accuser 
 	
-	private void makeSuggestion(Player accusor){
+	public void makeSuggestion(Player accusor){
 		Card result = handleSuggestion(accusor); 
 		GameControlPanel.setGuess(currentSuggestion);
 		
@@ -522,32 +522,40 @@ public class Board extends JPanel implements MouseListener{
 				
 				// add card to HP seen
 				accusor.updateSeen(result);
+				
 			} else {
 				// no new clue found
-				GameControlPanel.setGuessResult("No new clue found!");
+				GameControlPanel.setGuessResult("No new clue found!", Color.white);
 			}
 		} else {
 			if(result != null) {
-				// display suggestion disproven
-				GameControlPanel.setGuessResult("Suggestion has been disproven!");
+				// display suggestion disproved with the player's color who disproved it
+				Color disprovedCardHolderColor = null;
+				for(Player player : playersList) {
+					if(player.getHand().contains(result)) {
+						disprovedCardHolderColor = player.getColor();
+					}
+				}
+				GameControlPanel.setGuessResult("Suggestion has been disproved!", disprovedCardHolderColor);
 				
 				// add card to CP seen
 				accusor.updateSeen(result);
 			} else {
 				// no new clue found
-				GameControlPanel.setGuessResult("No new clue found!");
+				GameControlPanel.setGuessResult("No new clue found!", Color.white);
 			}
 		}
+		
+		// move chosen player to current player's room
+		Player chosen = getPlayer(currentSuggestion.person.getName());
+		getCell(chosen.getRow(), chosen.getCol()).setOccupied(false);
+		chosen.setRoom(accusor.getRoom());
+		chosen.setLocation(accusor.inRoom.getCenterCell());
+		chosen.inRoom.getCenterCell().setOccupied(true);
+		repaint();
 	}
 	
-	 
-	 
-	 
-	 
-	 
-	
-	
-	
+
 	public Card handleSuggestion(Player accuser) {
 		
 		// re-orient the players arraylist to start at the accuser
@@ -669,14 +677,15 @@ public class Board extends JPanel implements MouseListener{
 				targetCell = roomMap.get(clickedCell.getInitial()).getCenterCell();
 				humanPlayer.setRoom(roomMap.get(clickedCell.getInitial()));
 				targetCell.setOccupied(true);
-//				currentSuggestion = humanPlayer.createSuggestion(roomMap.get(clickedCell.getInitial()).getName(), deck);
+				String temp = roomMap.get(clickedCell.getInitial()).getName();
+				humanPlayer.createSuggestion(temp, deck);
 //				makeSuggestion(humanPlayer);
 			}else {
 				targetCell = getCell(row, column);
 				targetCell.setOccupied(true);
 				humanPlayer.setRoom(null);
 				GameControlPanel.setGuess("");
-				GameControlPanel.setGuessResult("");
+				GameControlPanel.setGuessResult("", null);
 			}
 			
 			// set player location
@@ -717,7 +726,7 @@ public class Board extends JPanel implements MouseListener{
 		}else {
 			computerTurn.setRoom(null);
 			GameControlPanel.setGuess("");
-			GameControlPanel.setGuessResult("");
+			GameControlPanel.setGuessResult("", null);
 		}
 		
 		computerTurn.setLocation(selectedCell);

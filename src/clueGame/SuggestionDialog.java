@@ -21,14 +21,14 @@ public class SuggestionDialog extends JDialog{
 	
 	// instance variables
 	Board board;
+	Player human;
 	private static JTextField currentRoom;
 	private static JComboBox<String> person, weapon;
-	private String selectedPerson, selectedWeapon;
+	private String selectedRoom, selectedPerson, selectedWeapon;
 	
-	public SuggestionDialog() {
+	public SuggestionDialog(Player hPlayer) {
 		board = Board.getInstance();
-		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");	
-		board.initialize();
+		human = hPlayer;
 		
 		setLayout(new GridLayout(0,2));
 		setMinimumSize(new Dimension(300, 150));
@@ -46,7 +46,7 @@ public class SuggestionDialog extends JDialog{
 		for(Player player : board.getPlayersList()) {
 			person.addItem(player.getName());
 		}
-		
+		person.addActionListener(new ComboListener());
 		add(person);
 		
 		// make Weapon combo box
@@ -57,6 +57,7 @@ public class SuggestionDialog extends JDialog{
 				weapon.addItem(card.getName());
 			}
 		}
+		weapon.addActionListener(new ComboListener());
 		add(weapon);
 		
 		// add buttons
@@ -72,6 +73,7 @@ public class SuggestionDialog extends JDialog{
 	
 	public void setRoom(String room) {
 		currentRoom.setText(room);
+		selectedRoom = room;
 	}
 	
 	
@@ -100,6 +102,12 @@ public class SuggestionDialog extends JDialog{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// process submission
+			Solution suggestion = new Solution();
+			suggestion.person = new Card(selectedPerson, CardType.PERSON);
+			suggestion.weapon = new Card(selectedWeapon, CardType.WEAPON);
+			suggestion.room = new Card(selectedRoom, CardType.ROOM);
+			board.setCurrentSuggestion(suggestion);
+			board.makeSuggestion(human);			
 			dispose();
 		}
 	}
@@ -109,16 +117,16 @@ public class SuggestionDialog extends JDialog{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// close window -> turn is now over
-			selectedPerson = null;
-			selectedWeapon = null;
+//			selectedPerson = null;
+//			selectedWeapon = null;
 			dispose();
 		}
 		
 	}
 	public static void main(String[] args) {
-		SuggestionDialog panel = new SuggestionDialog();
-		panel.setVisible(true);
-		panel.setRoom("test");
+//		SuggestionDialog panel = new SuggestionDialog();
+//		panel.setVisible(true);
+//		panel.setRoom("test");
 	}
 
 }

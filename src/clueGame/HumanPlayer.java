@@ -1,10 +1,12 @@
 package clueGame;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /** 
  * @author Caleb Farnie
@@ -25,6 +27,11 @@ public class HumanPlayer extends Player {
 	@Override
 	public void updateSeen(Card seenCard) {
 		super.seenCards.add(seenCard);
+//		ClueGame.cardPanel = new GameCardPanel(this, Board.getInstance());
+//		ClueGame.refreshCardPanel();
+//		JFrame test = new JFrame();
+//		test.remove(ClueGame.cardPanel);
+//		test.setVisible(true);
 	}
 
 	@Override
@@ -35,17 +42,12 @@ public class HumanPlayer extends Player {
 
 	@Override
 	public Solution createSuggestion(String room, ArrayList<Card> deck) {
-		SuggestionDialog panel = new SuggestionDialog();
+		SuggestionDialog panel = new SuggestionDialog(this);
 		panel.setLocationRelativeTo(null);
 		panel.setVisible(true);
 		panel.setRoom(inRoom.getName());
-		
-		Solution suggestion = new Solution();
-		suggestion.room = new Card(inRoom.getName(), CardType.ROOM);
-		suggestion.person = new Card(panel.getSelectedPerson(), CardType.PERSON);
-		suggestion.weapon = new Card(panel.getSelectedWeapon(), CardType.WEAPON);
-		
-		return suggestion;
+
+		return null;
 	}
 
 }

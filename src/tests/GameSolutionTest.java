@@ -145,6 +145,7 @@ class GameSolutionTest {
 		hand.add(new Card("Kashyyyk", CardType.ROOM));
 		players.get(2).setHand(hand);
 		
+		// TODO: fix this test
 		// Suggestion no one can disprove returns null
 //		Card test = board.handleSuggestion(players, players.get(1));
 //		assertEquals(null, board.handleSuggestion(players, players.get(1)));

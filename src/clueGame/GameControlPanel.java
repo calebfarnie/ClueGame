@@ -6,6 +6,7 @@ package clueGame;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -141,8 +142,10 @@ public class GameControlPanel extends JPanel{
 		guessStr.setText(out);
 	}
 	
-	public static void setGuessResult(String guessResult) {
+	public static void setGuessResult(String guessResult, Color color) {
 		guessResultString.setText(guessResult);
+		guessResultString.setBackground(color);
+		
 	}
 	
 	public static void setGuessResult(ArrayList<Player> players, Card card) {
