@@ -25,6 +25,7 @@ public class SuggestionDialog extends JDialog{
 	private static JTextField currentRoom;
 	private static JComboBox<String> person, weapon;
 	private String selectedRoom, selectedPerson, selectedWeapon;
+	private Solution suggestion = new Solution();
 	
 	public SuggestionDialog(Player hPlayer) {
 		board = Board.getInstance();
@@ -49,17 +50,27 @@ public class SuggestionDialog extends JDialog{
 		person.addActionListener(new ComboListener());
 		add(person);
 		
+		// set default option for person to first item in list
+		suggestion.person = new Card(board.getPlayersList().get(0).getName(), CardType.PERSON);
+		
 		// make Weapon combo box
 		add(new JLabel("Weapon"));
 		weapon = new JComboBox<String>();
+		Card firstWeapon = null;
 		for(Card card : board.getDeck()) {
 			if(card.getType().equals(CardType.WEAPON)) {
 				weapon.addItem(card.getName());
+				if(firstWeapon == null) {
+					firstWeapon = card;
+				}
 			}
 		}
 		weapon.addActionListener(new ComboListener());
 		add(weapon);
 		
+		// set default option for weapon to first item in list
+		suggestion.weapon = new Card(firstWeapon.getName(), CardType.WEAPON);
+
 		// add buttons
 		JButton submit = new JButton("Submit");
 		submit.addActionListener(new SubmitButtonListener());
@@ -102,9 +113,14 @@ public class SuggestionDialog extends JDialog{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// process submission
-			Solution suggestion = new Solution();
-			suggestion.person = new Card(selectedPerson, CardType.PERSON);
-			suggestion.weapon = new Card(selectedWeapon, CardType.WEAPON);
+			if(selectedPerson != null) {
+				suggestion.person = new Card(selectedPerson, CardType.PERSON);
+			}
+			
+			if(selectedWeapon != null) {
+				suggestion.weapon = new Card(selectedWeapon, CardType.WEAPON);	
+			}
+					
 			suggestion.room = new Card(selectedRoom, CardType.ROOM);
 			board.setCurrentSuggestion(suggestion);
 			board.makeSuggestion(human);			
