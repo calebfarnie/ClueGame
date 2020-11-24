@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +25,10 @@ public class ClueGame extends JFrame {
 		setTitle("Clue");
 		setSize(820, 665);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Image icon = Toolkit.getDefaultToolkit().getImage("data/clueIcon.png");    
+		setIconImage(icon);  
+		
 		JPanel boardPanel = Board.getInstance();
 		boardPanel.setBackground(Color.darkGray);
 		
