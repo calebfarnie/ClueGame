@@ -1,4 +1,86 @@
-Note: this assignment was completed via pair programming
+commit 7dc2cadec481ddbc9f6a5066c5057b1883f25b6a
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 24 23:36:51 2020 -0600
+
+    refactored and finished Clue game :)
+
+commit 9e80175c7fd4d155117f58e9843d8931077c8d11
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 24 23:25:14 2020 -0600
+
+    finished requirements
+
+commit 359ec8db17142cd8e50ec504702f9b5e347345f3
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 24 22:10:12 2020 -0600
+
+    highlights current room if brought in by suggestion
+
+commit b49bec45573e9274d2a960147cef1413f1f9ef80
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 24 21:56:44 2020 -0600
+
+    finsihed suggestion and accusation functionality
+
+commit 5fd880014e9556b59445849a323efdc67fe1effc
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 23 20:44:29 2020 -0700
+
+    added icon
+
+commit 698183444b401310a5531533e6ff969c15ceb066
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 23 20:44:15 2020 -0700
+
+    added icon
+
+commit e16a35b8a4f8dd76b7ce4aac4db12388360cf36b
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 23 20:30:02 2020 -0700
+
+    fixed suggestion for default items in list returning nulls
+
+commit 6f63f11cdf50d12855f0a60731308b5e45737c8c
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Mon Nov 23 17:53:12 2020 -0700
+
+    implemented handle suggestion - need to update card panel
+
+commit 5b4a859ac1875aa4f86c98d922f4070fdda78cdc
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Sun Nov 22 21:51:02 2020 -0700
+
+    implemented suggestion handling for computer player
+
+commit 791cf410c67abdc486f2b163551b7f71f748a403
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 19 21:45:32 2020 -0700
+
+    resized main gui
+
+commit 2c119b12367dcd13f53e74f00bc4871b8a1e5020
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 19 20:47:14 2020 -0700
+
+    made card panel fixed in width
+
+commit 57cfe6db481f1b368c7a7412d6e7ce28de8f5b02
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 19 20:39:45 2020 -0700
+
+    centered GUI on screen and fixed player occupied cell bug
+
+commit 498adffa8656cc7078d85ec1d7287b443b9bc7de
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Thu Nov 19 20:39:31 2020 -0700
+
+    centered GUI on screen and fixed player occupied cell bug
+
+commit 7891f2d430f100517e55fbcab778f2a143d0a4d4
+Author: Caleb Farnie <cfarnie@mymail.mines.edu>
+Date:   Tue Nov 17 20:35:13 2020 -0700
+
+    updated gitlog and readme
 
 commit 3fd6ceb09980d8bbdc37098ecfd2759dc422c330
 Author: Caleb Farnie <cfarnie@mymail.mines.edu>

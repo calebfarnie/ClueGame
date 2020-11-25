@@ -157,7 +157,7 @@ class GameSolutionTest {
 		Card newCard = new Card("Couruscant", CardType.ROOM);
 		players.get(2).updateHand(newCard);
 		
-		assertEquals(null, board.handleSuggestion(players.get(2)));
+		assertEquals(new Card("Couruscant", CardType.ROOM), board.handleSuggestion(players.get(2)));
 		
 		// Suggestion only human can disprove, return answer (i.e. card that disproves suggestion)
 		players.get(2).getHand().remove(newCard);
