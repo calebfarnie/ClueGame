@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.InputStream;
+import java.net.URL;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,13 +21,25 @@ import javax.swing.SwingConstants;
  */
 
 public class ClueGame extends JFrame {
+	public static final boolean JAR = false;	// set to true if exporting JAR
 
 	public ClueGame(Player person, Board board) {
 		setTitle("Clue");
 		setSize(820, 665);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		Image icon = Toolkit.getDefaultToolkit().getImage("data/clueIcon.png");
+		
+		String iconDirectory = "clueIcon.png";
+		Image icon;
+		
+		if(ClueGame.JAR) {
+			iconDirectory = "/data/" + iconDirectory;
+			URL url = getClass().getResource(iconDirectory);
+			icon = Toolkit.getDefaultToolkit().getImage(url);
+		}else {
+			iconDirectory = "src/data/" + iconDirectory;
+			icon = Toolkit.getDefaultToolkit().getImage(iconDirectory);
+		}
+		
 		setIconImage(icon);
 
 		JPanel boardPanel = Board.getInstance();

@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -170,8 +171,13 @@ public class Board extends JPanel implements MouseListener {
 
 	// public methods
 	public void setConfigFiles(String csv, String txt) {
-		layoutConfigFile = "data/" + csv;
-		setupConfigFile = "data/" + txt;
+		if(ClueGame.JAR) {
+			layoutConfigFile = "/data/" + csv;
+			setupConfigFile = "/data/" + txt;
+		}else {
+			layoutConfigFile = "src/data/" + csv;
+			setupConfigFile = "src/data/" + txt;
+		}
 	}
 
 	public void loadConfigFiles() throws FileNotFoundException, BadConfigFormatException {
@@ -190,8 +196,18 @@ public class Board extends JPanel implements MouseListener {
 		currentAccusation = new Solution();
 
 		// set up file reader and scanner
-		FileReader reader = new FileReader(setupConfigFile);
-		Scanner in = new Scanner(reader);
+		Scanner in;
+		
+		if(ClueGame.JAR) {
+			InputStream reader = getClass().getResourceAsStream(setupConfigFile);
+			if( reader == null ) {
+			    throw new FileNotFoundException("Could not find file: " + setupConfigFile) ;
+			   }
+			in = new Scanner(reader);
+		}else {
+			FileReader reader = new FileReader(setupConfigFile);
+			in = new Scanner(reader);
+		}
 
 		// add rooms
 		while (in.hasNextLine()) {
@@ -260,8 +276,20 @@ public class Board extends JPanel implements MouseListener {
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
 		// create arraylist for rows
 		ArrayList<String[]> rows = new ArrayList<String[]>();
-		FileReader reader = new FileReader(layoutConfigFile);
-		Scanner in = new Scanner(reader);
+		
+		Scanner in;
+		
+		if(ClueGame.JAR) {
+			InputStream reader = getClass().getResourceAsStream(layoutConfigFile);
+			if( reader == null ) {
+			    throw new FileNotFoundException("Could not find file: " + layoutConfigFile) ;
+			   }
+			in = new Scanner(reader);
+		}else {
+			FileReader reader = new FileReader(layoutConfigFile);
+			in = new Scanner(reader);
+		}
+		
 		roomCells = new HashMap<Character, ArrayList<BoardCell>>();
 		highlightedCells = new ArrayList<BoardCell>();
 
