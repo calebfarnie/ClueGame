@@ -57,6 +57,7 @@ public class Board extends JPanel implements MouseListener{
 	private ArrayList<BoardCell> highlightedCells;
 	private Solution currentSuggestion;
 	private Solution currentAccusation;
+	private boolean computerAccusationFlag;
 	
 	public static final char WALKWAY_INITIAL = 'W';
 
@@ -478,7 +479,9 @@ public class Board extends JPanel implements MouseListener{
 				break;
 			}
 		}
-				
+		
+//		System.out.println(theAnswer.person.getName() + " " + theAnswer.room.getName() + " " + theAnswer.weapon.getName());
+//				
 		// deal remaining cards to players
 		while(dealingDeck.size() > 0) {
 			for(int j = 0; j < players.size(); j++) {
@@ -499,17 +502,23 @@ public class Board extends JPanel implements MouseListener{
 	public void checkAccusation() {
 		if(checkAccusation(currentAccusation.person, currentAccusation.room, currentAccusation.weapon)) {
 			JPanel panel = new JPanel();
-//			panel.setLayout(new GridLayout(0,1));
+			panel.setLayout(new GridLayout(0,1));
 			JLabel line1 = new JLabel("You win :)");
+			JLabel line2 = new JLabel("Thanks for playing Clue by Caleb Farnie and Joshua Josey");
 			line1.setHorizontalAlignment(SwingConstants.CENTER);
+			line2.setHorizontalAlignment(SwingConstants.CENTER);
 			panel.add(line1);
+			panel.add(line2);
 			JOptionPane.showMessageDialog(null, panel, "Congratulations!", JOptionPane.PLAIN_MESSAGE );
 		}else {
 			JPanel panel = new JPanel();
-//			panel.setLayout(new GridLayout(0,1));
+			panel.setLayout(new GridLayout(0,1));
 			JLabel line1 = new JLabel("You lost :(");
+			JLabel line2 = new JLabel("Thanks for playing Clue by Caleb Farnie and Joshua Josey");
 			line1.setHorizontalAlignment(SwingConstants.CENTER);
+			line2.setHorizontalAlignment(SwingConstants.CENTER);
 			panel.add(line1);
+			panel.add(line2);
 			JOptionPane.showMessageDialog(null, panel, "Oof...", JOptionPane.PLAIN_MESSAGE );
 		}
 		
@@ -590,6 +599,13 @@ public class Board extends JPanel implements MouseListener{
 			}
 		}
 		
+		// decide if next AI should make accusation
+		if(result == null) {
+			computerAccusationFlag = true;
+		}else {
+			computerAccusationFlag = false;
+		}
+		
 		// move chosen player to current player's room and set isRoom to false for the starting cell, and to true for the target cell
 		Player chosen = getPlayer(currentSuggestion.person.getName());
 		getCell(chosen.getRow(), chosen.getCol()).setOccupied(false);
@@ -609,7 +625,7 @@ public class Board extends JPanel implements MouseListener{
 
 		// iterate through players to disprove suggestion
 		for(Player player : newPlayers) {
-			if(player.disproveSuggestion(currentSuggestion) == null || player.equals(accuser)) {
+			if(player.disproveSuggestion(currentSuggestion) == null /*|| player.equals(accuser)*/) {
 				continue;
 			} else {
 				return player.disproveSuggestion(currentSuggestion);
@@ -751,8 +767,25 @@ public class Board extends JPanel implements MouseListener{
 		repaint();
 	}
 	
-	private void computerPlayerTurn(int indexVariable, int roll) {
+	private void computerPlayerTurn(int indexVariable, int roll) {		
 		Player computerTurn = playersList.get(indexVariable);
+		
+		if(computerAccusationFlag && !computerTurn.getHand().contains(currentSuggestion.room)) {
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(0,1));
+			JLabel line1 = new JLabel("The computer just won. The answer is:");
+			JLabel line2 = new JLabel(theAnswer.person.getName() + " with a " + theAnswer.weapon.getName() + " in " + theAnswer.room.getName());
+			JLabel line3 = new JLabel("Thanks for playing Clue by Caleb Farnie and Joshua Josey");
+			line1.setHorizontalAlignment(SwingConstants.CENTER);
+			line2.setHorizontalAlignment(SwingConstants.CENTER);
+			line3.setHorizontalAlignment(SwingConstants.CENTER);
+			panel.add(line1);
+			panel.add(line2);
+			panel.add(line3);
+			JOptionPane.showMessageDialog(null, panel, "Game Over", JOptionPane.PLAIN_MESSAGE );
+			System.exit(0);
+		}
+		
 		BoardCell startCell = getCell(computerTurn.getRow(), computerTurn.getCol());
 		calcTargets(startCell, roll);
 		
@@ -762,10 +795,6 @@ public class Board extends JPanel implements MouseListener{
 		if(selectedCell.getInitial() != WALKWAY_INITIAL) {
 			computerTurn.setRoom(roomMap.get(selectedCell.getInitial()));
 			Card roomCard = new Card(roomMap.get(selectedCell.getInitial()).getName(), CardType.ROOM);
-			
-//			if(!computerTurn.getSeen().contains(roomCard)) {
-//				computerTurn.updateSeen(roomCard);
-//			}
 			
 			currentSuggestion = computerTurn.createSuggestion(roomMap.get(selectedCell.getInitial()).getName(), deck);
 			makeSuggestion(computerTurn);
@@ -862,6 +891,10 @@ public class Board extends JPanel implements MouseListener{
 	
 	public ArrayList<Player> getPlayersList(){
 		return playersList;
+	}
+
+	public void setPlayersList(ArrayList<Player> players) {
+		playersList = players;		
 	}
 	
 }
