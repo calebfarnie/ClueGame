@@ -16,6 +16,7 @@ import java.util.Set;
 public abstract class Player {
 	private String name;
 	private Color color;
+	private boolean movedToRoom;
 	protected Room inRoom;
 	protected int row;
 	protected int column;
@@ -119,6 +120,14 @@ public abstract class Player {
 	
 	public Set<Card> getSeen() {
 		return new HashSet<Card>(seenCards);
+	}
+	
+	public void setMovedToRoom(boolean tfValue) {
+		movedToRoom = tfValue;
+	}
+	
+	public boolean getMovedToRoom() {
+		return movedToRoom;
 	}
 	
 	public void draw(Graphics g, int width, int height, int indexVariable) {

@@ -540,7 +540,7 @@ public class Board extends JPanel implements MouseListener{
 			accusePanel.setLocationRelativeTo(null);
 			accusePanel.setVisible(true);
 		}else {
-			JOptionPane.showMessageDialog(null, "Do that, you may not!", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Until your turn you must wait!", "Error", JOptionPane.ERROR_MESSAGE);
 			
 		}
 	}
@@ -595,6 +595,7 @@ public class Board extends JPanel implements MouseListener{
 		getCell(chosen.getRow(), chosen.getCol()).setOccupied(false);
 		chosen.setRoom(accusor.getRoom());
 		chosen.setLocation(accusor.inRoom.getCenterCell());
+		chosen.setMovedToRoom(true);
 		chosen.inRoom.getCenterCell().setOccupied(true);
 		repaint();
 	}
@@ -689,7 +690,7 @@ public class Board extends JPanel implements MouseListener{
 	
 	private void humanPlayerTurn(int indexVariable, int roll) {
 		isFinished = false;
-		Player playerTurn = playersList.get(indexVariable);
+		Player playerTurn = playersList.get(indexVariable);		
 		highlightTargets(indexVariable, roll);
 	}
 
@@ -709,8 +710,8 @@ public class Board extends JPanel implements MouseListener{
 		int row = (int) (Math.ceil(e.getY()*1.0 / cellHeight)) - 1;		// calculate row #
 		int column = (int) (Math.ceil(e.getX()*1.0 / cellWidth)) - 1;	// calculate column #
 		
-		BoardCell clickedCell = getCell(row, column);
 		Player humanPlayer = playersList.get(0);
+		BoardCell clickedCell = getCell(row, column);
 		
 		if(highlightedCells.contains(clickedCell)) {
 			BoardCell startCell = getCell(humanPlayer.getRow(), humanPlayer.getCol());
@@ -787,6 +788,12 @@ public class Board extends JPanel implements MouseListener{
 		Player player = playersList.get(playerNum);
 		BoardCell startCell = getCell(player.getRow(), player.getCol());
 		calcTargets(startCell, roll);
+		
+		if(player.getMovedToRoom()) {
+			targets.add(getCell(player.getRow(), player.getCol()));
+			player.setMovedToRoom(false);
+		}
+		
 		for(BoardCell cell : targets) {
 			if(cell.getInitial()!= WALKWAY_INITIAL) {
 				highlightRoom(cell.getInitial(), true);
