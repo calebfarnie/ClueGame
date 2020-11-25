@@ -35,6 +35,9 @@ public class SuggestionDialog extends JDialog{
 		setMinimumSize(new Dimension(300, 150));
 		setTitle("Make a Suggestion");
 		
+		// shuffle deck
+		board.shuffleDeck();
+		
 		// make Room text field
 		add(new JLabel("Current room"));
 		currentRoom = new JTextField();
@@ -113,6 +116,8 @@ public class SuggestionDialog extends JDialog{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// process submission
+			
+			// change the suggestions if they return null
 			if(selectedPerson != null) {
 				suggestion.person = new Card(selectedPerson, CardType.PERSON);
 			}

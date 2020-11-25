@@ -19,7 +19,6 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class ClueGame extends JFrame {
-	public static GameCardPanel cardPanel;
 
 	public ClueGame(Player person, Board board) {
 		setTitle("Clue");
@@ -32,7 +31,8 @@ public class ClueGame extends JFrame {
 		JPanel boardPanel = Board.getInstance();
 		boardPanel.setBackground(Color.darkGray);
 		
-		cardPanel = new GameCardPanel(person, board);
+		GameCardPanel cardPanel = GameCardPanel.getInstance();
+		cardPanel.initialize();
 		GameControlPanel controlPanel = new GameControlPanel();
 		
 		cardPanel.setPreferredSize(new Dimension(150, 0));

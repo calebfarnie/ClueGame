@@ -50,6 +50,7 @@ public class GameControlPanel extends JPanel{
 		
 		// add buttons
 		JButton accuse = new JButton("Make Accusation");
+		accuse.addActionListener(new AccusationButtonListener());
 		panel.add(accuse);
 		JButton next = new JButton("NEXT!");
 		next.addActionListener(new NextButtonListener());
@@ -165,6 +166,15 @@ public class GameControlPanel extends JPanel{
 			board.nextTurn();
 		}
 	}
+	
+	private class AccusationButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			board.processAccusation();
+		}
+		
+	}
 	/*
 	public static void main(String[] args) {
 		GameControlPanel panel = new GameControlPanel();  // create the panel
@@ -177,7 +187,9 @@ public class GameControlPanel extends JPanel{
         // test filling in the data
         panel.setTurn(new ComputerPlayer( "Col. Mustard", "orange", 0, 0), 5);
         panel.setGuess( "I have no guess!");
-        panel.setGuessResult( "So you have nothing?");
+        panel.setGuessResult("So you have nothing?", Color.blue);
+        
+        panel.setTurn(new ComputerPlayer("Luke Skywanler", "white", 0, 1), 4);
 	}
 	*/
 

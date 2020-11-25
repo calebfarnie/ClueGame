@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -21,28 +22,66 @@ public class GameCardPanel extends JPanel {
 	// instance variables
 	Board board;
 	Player player;
-	Set<Card> peopleCards = new HashSet<Card>();
-	Set<Card> roomCards = new HashSet<Card>();
-	Set<Card> weaponCards = new HashSet<Card>();
-	Set<Card> displayedCards = new HashSet<Card>();
+	//Set<Card> peopleCards = new HashSet<Card>();
+	//Set<Card> roomCards = new HashSet<Card>();
+	//Set<Card> weaponCards = new HashSet<Card>();
+	Set<Card> displayedCards;
+	
+	private static GameCardPanel theInstance = new GameCardPanel();
 
-	public GameCardPanel(Player player, Board board) {
-		this.player = player;
-		this.board = board;
-		
-		// make title and add options
-		setLayout(new GridLayout(0,1));
-		TitledBorder title = new TitledBorder(new EtchedBorder(), "Known Cards");
-		title.setTitleJustification(TitledBorder.CENTER);
-		setBorder(title);		
+	 private GameCardPanel() {
+		 super();
+//		this.board = Board.getInstance();
+//		this.player = board.getPlayersList().get(0);
+//		displayedCards = new HashSet<Card>();
+//		
+//		// make title and add options
+//		setLayout(new GridLayout(0,1));
+//		TitledBorder title = new TitledBorder(new EtchedBorder(), "Known Cards");
+//		title.setTitleJustification(TitledBorder.CENTER);
+//		setBorder(title);		
+//		
+//		updatePanels();
 
 		// make sections for people, rooms, and weapons
+//		add(createPeople());
+//		add(createRooms());
+//		add(createWeapons());
+	}
+	 
+	 public void initialize() {
+		 this.board = Board.getInstance();
+		 this.player = board.getPlayersList().get(0);
+		 displayedCards = new HashSet<Card>();
+
+		 // make title and add options
+		 setLayout(new GridLayout(0,1));
+		 TitledBorder title = new TitledBorder(new EtchedBorder(), "Known Cards");
+		 title.setTitleJustification(TitledBorder.CENTER);
+		 setBorder(title);		
+
+		 updatePanels();
+	 }
+	 
+	 public static GameCardPanel getInstance() {
+		 return theInstance;
+	 }
+	
+	public void updatePanels() {
+		removeAll();
+		addAll();
+		invalidate();
+		validate();
+	}
+	
+	public void addAll() {
+		displayedCards.clear();
 		add(createPeople());
 		add(createRooms());
 		add(createWeapons());
 	}
 	
-	public JPanel createPeople() {
+	private JPanel createPeople() {
 		// add people header
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
@@ -64,7 +103,7 @@ public class GameCardPanel extends JPanel {
 		return panel;
 	}
 	
-	public JPanel createRooms() {
+	private JPanel createRooms() {
 		// add rooms header
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
@@ -86,7 +125,7 @@ public class GameCardPanel extends JPanel {
 		return panel;
 	}
 	
-	public JPanel createWeapons() {
+	private JPanel createWeapons() {
 		// add weapons header
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
@@ -121,7 +160,7 @@ public class GameCardPanel extends JPanel {
 				displayedCards.add(card);
 				cardsPresent = true;
 			}
-		}
+		}		
 		
 		// if no cards are present in the previous iteration, add a None placeholder
 		if(!cardsPresent) {
@@ -143,7 +182,7 @@ public class GameCardPanel extends JPanel {
 		// else return white
 		return Color.WHITE;
 	}
-
+/*
 	public static void main(String[] args) {
 		// get the instance of the game board
 		Board board = Board.getInstance();
@@ -158,7 +197,6 @@ public class GameCardPanel extends JPanel {
 		person.updateSeen(new Card("Lightsaber", CardType.WEAPON));
 		person.updateSeen(new Card("Kashyyyk", CardType.ROOM));
 		person.updateSeen(new Card("Endor", CardType.ROOM));
-		person.updateSeen(new Card("Darth Vader", CardType.PERSON));
 		person.updateSeen(new Card("Vibro Knife", CardType.WEAPON));
 		
 		// create the JPanel
@@ -167,7 +205,14 @@ public class GameCardPanel extends JPanel {
 		frame.setContentPane(panel); // put the panel in the frame
         frame.setSize(200, 750);  // size the frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-        frame.setVisible(true); // make it visible
+        // make it visible
+        frame.setVisible(true); 
+        person.updateSeen(new Card("Darth Vader", CardType.PERSON));
+        
+        panel.updatePanels();
+        frame.invalidate();
+       frame.validate();
+        frame.repaint();
 	}
-
+	*/
 }

@@ -27,11 +27,6 @@ public class HumanPlayer extends Player {
 	@Override
 	public void updateSeen(Card seenCard) {
 		super.seenCards.add(seenCard);
-//		ClueGame.cardPanel = new GameCardPanel(this, Board.getInstance());
-//		ClueGame.refreshCardPanel();
-//		JFrame test = new JFrame();
-//		test.remove(ClueGame.cardPanel);
-//		test.setVisible(true);
 	}
 
 	@Override
@@ -42,6 +37,7 @@ public class HumanPlayer extends Player {
 
 	@Override
 	public Solution createSuggestion(String room, ArrayList<Card> deck) {
+		// display suggestion dialog
 		SuggestionDialog panel = new SuggestionDialog(this);
 		panel.setLocationRelativeTo(null);
 		panel.setVisible(true);
