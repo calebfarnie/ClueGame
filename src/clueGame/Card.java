@@ -1,6 +1,6 @@
 package clueGame;
 
-/** 
+/**
  * @author Caleb Farnie
  * @author Joshua Josey
  */
@@ -8,16 +8,16 @@ package clueGame;
 public class Card {
 	private String cardName;
 	private CardType cardType;
-	
+
 	public Card(String name, CardType type) {
 		this.cardName = name;
 		this.cardType = type;
 	}
-	
+
 	public String getName() {
 		return this.cardName;
 	}
-	
+
 	public CardType getType() {
 		return this.cardType;
 	}
@@ -39,7 +39,7 @@ public class Card {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		
+
 		Card other = (Card) obj;
 		if (cardName == null) {
 			if (other.cardName != null)

@@ -1,20 +1,20 @@
 package clueGame;
 
-/** 
- * @author Caleb Farnie
- * @author Joshua Josey
- */
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
-public class BadConfigFormatException extends Exception{
+/**
+ * @author Caleb Farnie
+ * @author Joshua Josey
+ */
+
+public class BadConfigFormatException extends Exception {
 
 	public BadConfigFormatException() {
 		super("Error: Invalid configuration file.");
-		
+
 		try {
 			PrintWriter out = new PrintWriter(new FileOutputStream(new File("logfile.txt"), true));
 			out.println("Error: Invalid configuration file.");
@@ -23,7 +23,7 @@ public class BadConfigFormatException extends Exception{
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public BadConfigFormatException(String message) {
 		super("Error: " + message);
 

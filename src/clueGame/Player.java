@@ -1,10 +1,5 @@
 package clueGame;
 
-/** 
- * @author Caleb Farnie
- * @author Joshua Josey
- */
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -12,6 +7,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+/**
+ * @author Caleb Farnie
+ * @author Joshua Josey
+ */
 
 public abstract class Player {
 	private String name;
@@ -24,14 +24,17 @@ public abstract class Player {
 	protected ArrayList<Card> seenCards = new ArrayList<Card>();
 
 	public abstract void updateHand(Card card);
+
 	public abstract void updateSeen(Card seenCard);
+
 	public abstract Solution createSuggestion(String room, ArrayList<Card> deck);
+
 	public abstract BoardCell selectTarget(Set<BoardCell> targets, Map<Character, Room> roomMap);
 
 	public Player(String name, String color, int startRow, int startCol) {
 		this.name = name;
 
-		switch(color.toLowerCase()) {
+		switch (color.toLowerCase()) {
 		case "white":
 			this.color = Color.white;
 			break;
@@ -63,41 +66,42 @@ public abstract class Player {
 	public Card disproveSuggestion(Solution suggestion) {
 		ArrayList<Card> proof = new ArrayList<Card>();
 
-		// loop through cards, add matching cards to AL and randomly choose one, else return null
-		for(Card card : hand) {
-			if(card.equals(suggestion.person) || card.equals(suggestion.room) || card.equals(suggestion.weapon))
+		// loop through cards, add matching cards to AL and randomly choose one, else
+		// return null
+		for (Card card : hand) {
+			if (card.equals(suggestion.person) || card.equals(suggestion.room) || card.equals(suggestion.weapon))
 				proof.add(card);
 		}
 
-		if(proof.size() > 0) {
+		if (proof.size() > 0) {
 			Collections.shuffle(proof);
 			return proof.get(0);
-		}else
+		} else
 			return null;
 	}
 
 	public void setHand(Set<Card> hand) {
 		this.hand = new HashSet<Card>(hand);
 	}
-	
+
 	public void setLocation(int row, int col) {
 		this.row = row;
 		this.column = col;
 	}
-	
+
 	public void setLocation(BoardCell targetCell) {
 		this.row = targetCell.getRow();
 		this.column = targetCell.getCol();
 	}
-	
+
 	public void setRoom(Room room) {
 		this.inRoom = room;
 	}
-	
+
 	public Room getRoom() {
 		return inRoom;
 	}
-	
+
 	public int getRow() {
 		return this.row;
 	}
@@ -110,26 +114,26 @@ public abstract class Player {
 		return this.color;
 	}
 
-	public Set<Card> getHand(){
+	public Set<Card> getHand() {
 		return hand;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public Set<Card> getSeen() {
 		return new HashSet<Card>(seenCards);
 	}
-	
+
 	public void setMovedToRoom(boolean tfValue) {
 		movedToRoom = tfValue;
 	}
-	
+
 	public boolean getMovedToRoom() {
 		return movedToRoom;
 	}
-	
+
 	public void draw(Graphics g, int width, int height, int indexVariable) {
 		// get board instance and list of players
 		Board board = Board.getInstance();
@@ -138,31 +142,31 @@ public abstract class Player {
 
 		// loop through players in order up to current player,
 		// and add offset to player if room is occupied
-		for(int i = 0; i < indexVariable; i++) {
+		for (int i = 0; i < indexVariable; i++) {
 			Player player = players.get(i);
-			
+
 			// skip if is current player
-			if(this.equals(player)) {
+			if (this.equals(player)) {
 				continue;
 			}
 
 			// skip if not in room
-			if(this.getRoom() == null || player.getRoom() == null) {
+			if (this.getRoom() == null || player.getRoom() == null) {
 				continue;
 			}
 
 			// if in occupied room, then add half the cell width to offset
-			if(player.getRoom().equals(this.getRoom())) {
-				offset += width/2;
+			if (player.getRoom().equals(this.getRoom())) {
+				offset += width / 2;
 			}
 		}
 
 		// draw players
 		g.setColor(color);
-		g.fillOval(column*width + offset, row*height, width, height);
+		g.fillOval(column * width + offset, row * height, width, height);
 		g.setColor(Color.black);
-		g.drawOval(column*width + offset, row*height, width, height);
-		
+		g.drawOval(column * width + offset, row * height, width, height);
+
 	}
 
 }

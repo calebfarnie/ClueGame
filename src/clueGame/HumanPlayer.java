@@ -1,20 +1,16 @@
 package clueGame;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-
-/** 
+/**
  * @author Caleb Farnie
  * @author Joshua Josey
  */
 
 public class HumanPlayer extends Player {
-	
+
 	public HumanPlayer(String name, String color, int startRow, int startCol) {
 		super(name, color, startRow, startCol);
 	}
@@ -23,7 +19,7 @@ public class HumanPlayer extends Player {
 	public void updateHand(Card card) {
 		super.hand.add(card);
 	}
-	
+
 	@Override
 	public void updateSeen(Card seenCard) {
 		super.seenCards.add(seenCard);

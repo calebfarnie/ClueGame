@@ -2,17 +2,16 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashSet;
+import java.util.Set;
 
-/** 
+/**
  * @author Caleb Farnie
  * @author Joshua Josey
  */
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class BoardCell {
-	
+
 	// instance variables
 	private int row;
 	private int col;
@@ -33,8 +32,9 @@ public class BoardCell {
 		this.col = col;
 		this.isOccupied = false;
 	}
-	
-	public BoardCell(int row, int col, char initial, boolean roomLabel, boolean roomCenter, DoorDirection doorDirection, boolean isDoorway) {
+
+	public BoardCell(int row, int col, char initial, boolean roomLabel, boolean roomCenter, DoorDirection doorDirection,
+			boolean isDoorway) {
 		this.row = row;
 		this.col = col;
 		this.initial = initial;
@@ -44,48 +44,48 @@ public class BoardCell {
 		this.isDoorway = isDoorway;
 		this.isOccupied = false;
 	}
-	
+
 	// public methods
 	public char getInitial() {
 		return this.initial;
 	}
-	
+
 	public void setSecretPassage(char secretPassage) {
 		this.secretPassage = secretPassage;
 	}
-	
+
 	public void addAdj(BoardCell adj) {
 		this.adjList.add(adj);
 	}
-	
-	public Set<BoardCell> getAdjList(){
+
+	public Set<BoardCell> getAdjList() {
 		return this.adjList;
 	}
-	
+
 	public void setIsRoom(boolean isRoom) {
 		this.isRoom = isRoom;
 	}
-	
+
 	public boolean isRoom() {
 		return this.isRoom;
 	}
-	
+
 	public void setOccupied(boolean isOccupied) {
 		this.isOccupied = isOccupied;
 	}
-	
+
 	public boolean getOccupied() {
-		if(this.roomCenter) {
+		if (this.roomCenter) {
 			return false;
-		}else {
+		} else {
 			return this.isOccupied;
 		}
 	}
-	
+
 	public int getRow() {
 		return this.row;
 	}
-	
+
 	public int getCol() {
 		return this.col;
 	}
@@ -109,81 +109,82 @@ public class BoardCell {
 	public char getSecretPassage() {
 		return this.secretPassage;
 	}
-	
+
 	public boolean isWalkway() {
 		return (this.initial == 'W' || this.isDoorway || this.roomCenter);
 	}
-	
+
 	public boolean equals(BoardCell cell) {
 		return this.row == cell.getRow() && this.col == cell.getCol();
 	}
-	
+
 	public void setIsHighlighted(boolean highlighted) {
 		isHighlighted = highlighted;
 	}
-	
+
 	public void draw(Graphics g, int width, int height, int dx, int dy) {
-		
+
 		// draw cells
-		if(initial == 'W') {
+		if (initial == 'W') {
 			g.setColor(Color.black);
 			g.fillRect(dx, dy, width, height);
 			g.setColor(Color.white);
 			g.drawRect(dx, dy, width, height);
-		}else if(initial == 'C') {				//Coruscant
+		} else if (initial == 'C') { // Coruscant
 			g.setColor(new Color(102, 102, 153));
 			g.fillRect(dx, dy, width, height);
-		}else if(initial == 'G') {				//Geonosis
+		} else if (initial == 'G') { // Geonosis
 			g.setColor(new Color(225, 136, 77));
 			g.fillRect(dx, dy, width, height);
-		}else if(initial == 'T') {				//Tattoine
+		} else if (initial == 'T') { // Tattoine
 			g.setColor(new Color(225, 225, 128));
 			g.fillRect(dx, dy, width, height);
-		}else if(initial == 'K') {				//Kashyyyk
+		} else if (initial == 'K') { // Kashyyyk
 			g.setColor(new Color(0, 153, 0));
 			g.fillRect(dx, dy, width, height);
-		}else if(initial == 'D') {				//Degobah
+		} else if (initial == 'D') { // Degobah
 			g.setColor(new Color(119, 119, 60));
 			g.fillRect(dx, dy, width, height);
-		}else if(initial == 'E') {				//Endor
+		} else if (initial == 'E') { // Endor
 			g.setColor(new Color(0, 230, 115));
 			g.fillRect(dx, dy, width, height);
-		}else if(initial == 'B') {				//Bespin
+		} else if (initial == 'B') { // Bespin
 			g.setColor(new Color(225, 184, 77));
 			g.fillRect(dx, dy, width, height);
-		}else if(initial == 'Y') {				//Yavin 4
+		} else if (initial == 'Y') { // Yavin 4
 			g.setColor(new Color(0, 179, 179));
 			g.fillRect(dx, dy, width, height);
-		}else if(initial == 'H') {				//Hoth
+		} else if (initial == 'H') { // Hoth
 			g.setColor(new Color(230, 225, 225));
 			g.fillRect(dx, dy, width, height);
 		}
-		
-		if(isHighlighted) {
-			g.setColor(new Color(255,255,0));
+
+		if (isHighlighted) {
+			g.setColor(new Color(255, 255, 0));
 			g.fillRect(dx, dy, width, height);
 		}
-		
-		if(isDoorway()) {
+
+		if (isDoorway()) {
 			g.setColor(Color.red);
-			switch(doorDirection) {
+			switch (doorDirection) {
 			case UP:
-				g.fillRect(dx, dy, width, height/5);
+				g.fillRect(dx, dy, width, height / 5);
 				break;
 			case DOWN:
-				g.fillRect(dx, dy+height*4/5, width, height/5);
+				g.fillRect(dx, dy + height * 4 / 5, width, height / 5);
 				break;
 			case LEFT:
-				g.fillRect(dx, dy, width/5, height);
+				g.fillRect(dx, dy, width / 5, height);
 				break;
 			case RIGHT:
-				g.fillRect(dx+width*4/5, dy, width/5, height);
+				g.fillRect(dx + width * 4 / 5, dy, width / 5, height);
+				break;
+			default:
 				break;
 			}
-				
+
 		}
-		
-		
+
 	}
-	
+
 }

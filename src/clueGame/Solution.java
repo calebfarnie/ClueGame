@@ -1,6 +1,6 @@
 package clueGame;
 
-/** 
+/**
  * @author Caleb Farnie
  * @author Joshua Josey
  */
