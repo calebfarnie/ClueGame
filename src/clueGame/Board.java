@@ -171,10 +171,10 @@ public class Board extends JPanel implements MouseListener {
 
 	// public methods
 	public void setConfigFiles(String csv, String txt) {
-		if(ClueGame.JAR) {
+		if (ClueGame.JAR) {
 			layoutConfigFile = "/data/" + csv;
 			setupConfigFile = "/data/" + txt;
-		}else {
+		} else {
 			layoutConfigFile = "src/data/" + csv;
 			setupConfigFile = "src/data/" + txt;
 		}
@@ -197,14 +197,14 @@ public class Board extends JPanel implements MouseListener {
 
 		// set up file reader and scanner
 		Scanner in;
-		
-		if(ClueGame.JAR) {
+
+		if (ClueGame.JAR) {
 			InputStream reader = getClass().getResourceAsStream(setupConfigFile);
-			if( reader == null ) {
-			    throw new FileNotFoundException("Could not find file: " + setupConfigFile) ;
-			   }
+			if (reader == null) {
+				throw new FileNotFoundException("Could not find file: " + setupConfigFile);
+			}
 			in = new Scanner(reader);
-		}else {
+		} else {
 			FileReader reader = new FileReader(setupConfigFile);
 			in = new Scanner(reader);
 		}
@@ -276,20 +276,20 @@ public class Board extends JPanel implements MouseListener {
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
 		// create arraylist for rows
 		ArrayList<String[]> rows = new ArrayList<String[]>();
-		
+
 		Scanner in;
-		
-		if(ClueGame.JAR) {
+
+		if (ClueGame.JAR) {
 			InputStream reader = getClass().getResourceAsStream(layoutConfigFile);
-			if( reader == null ) {
-			    throw new FileNotFoundException("Could not find file: " + layoutConfigFile) ;
-			   }
+			if (reader == null) {
+				throw new FileNotFoundException("Could not find file: " + layoutConfigFile);
+			}
 			in = new Scanner(reader);
-		}else {
+		} else {
 			FileReader reader = new FileReader(layoutConfigFile);
 			in = new Scanner(reader);
 		}
-		
+
 		roomCells = new HashMap<Character, ArrayList<BoardCell>>();
 		highlightedCells = new ArrayList<BoardCell>();
 
@@ -635,7 +635,7 @@ public class Board extends JPanel implements MouseListener {
 
 		// iterate through players to disprove suggestion
 		for (Player player : newPlayers) {
-			if (player.disproveSuggestion(currentSuggestion) == null /* || player.equals(accuser) */) {
+			if (player.disproveSuggestion(currentSuggestion) == null) {
 				continue;
 			} else {
 				return player.disproveSuggestion(currentSuggestion);
@@ -716,7 +716,6 @@ public class Board extends JPanel implements MouseListener {
 
 	private void humanPlayerTurn(int indexVariable, int roll) {
 		isFinished = false;
-		Player playerTurn = playersList.get(indexVariable);
 		highlightTargets(indexVariable, roll);
 	}
 

@@ -22,9 +22,8 @@ import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
-
 class GameSolutionTest {
-	
+
 	private static Board board;
 
 	@BeforeAll
@@ -32,8 +31,8 @@ class GameSolutionTest {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");		
-		// Initialize will load config files 
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		// Initialize will load config files
 		board.initialize();
 		// create true answer for tests
 		Solution trueAnswer = new Solution();
@@ -47,18 +46,18 @@ class GameSolutionTest {
 	void testCheckAccusation() {
 		// test solution is correct
 		Card accusee = new Card("Han Solo", CardType.PERSON);
-		Card weapon = new Card("Blaster Pistol", CardType.WEAPON); 
+		Card weapon = new Card("Blaster Pistol", CardType.WEAPON);
 		Card room = new Card("Dagobah", CardType.ROOM);
-		
+
 		assertTrue(board.checkAccusation(accusee, room, weapon));
 
 		// test solution with wrong person
 		accusee = new Card("Yoda", CardType.PERSON);
 		assertTrue(board.checkAccusation(accusee, room, weapon) == false);
-		
+
 		// test solution with wrong weapon
 		accusee = new Card("Han Solo", CardType.PERSON);
-		weapon = new Card("Lightsaber", CardType.WEAPON); 
+		weapon = new Card("Lightsaber", CardType.WEAPON);
 		assertTrue(board.checkAccusation(accusee, room, weapon) == false);
 
 		// test solution with wrong room
@@ -81,7 +80,7 @@ class GameSolutionTest {
 		hand.add(new Card("Blaster Pistol", CardType.WEAPON));
 		hand.add(new Card("Han Solo", CardType.PERSON));
 		testPlayer.setHand(hand);
-		
+
 		assertTrue(testPlayer.disproveSuggestion(suggestion).equals(new Card("Darth Vader", CardType.PERSON)));
 
 		// if player has >1 matching card, randomly return a matching card
@@ -90,14 +89,14 @@ class GameSolutionTest {
 		testPlayer.setHand(hand);
 		int count1 = 0;
 		int count2 = 0;
-		
-		for(int i = 0; i < 100; i++) {
-			if(testPlayer.disproveSuggestion(suggestion).equals(new Card("Darth Vader", CardType.PERSON)))
+
+		for (int i = 0; i < 100; i++) {
+			if (testPlayer.disproveSuggestion(suggestion).equals(new Card("Darth Vader", CardType.PERSON)))
 				count1++;
-			if(testPlayer.disproveSuggestion(suggestion).equals(new Card("Lightsaber", CardType.WEAPON)))
+			if (testPlayer.disproveSuggestion(suggestion).equals(new Card("Lightsaber", CardType.WEAPON)))
 				count2++;
 		}
-		
+
 		assertTrue(count1 > 10 && count2 > 10);
 
 		// if player has no matching cards, return null
@@ -106,22 +105,24 @@ class GameSolutionTest {
 		hand.add(new Card("Blaster Pistol", CardType.WEAPON));
 		hand.add(new Card("Han Solo", CardType.PERSON));
 		testPlayer.setHand(hand);
-		
+
 		assertEquals(null, testPlayer.disproveSuggestion(suggestion));
 
 	}
 
 	@Test
 	void testHandleSuggestion() {
-		// Process all the players in turn, each to see if they can dispute the suggestion.
-		// If return null, no player can dispute the suggestion. Otherwise return the first
+		// Process all the players in turn, each to see if they can dispute the
+		// suggestion.
+		// If return null, no player can dispute the suggestion. Otherwise return the
+		// first
 		// card that disputed the suggestion.
 		Solution suggestion = new Solution();
 		suggestion.person = new Card("Darth Vader", CardType.PERSON);
 		suggestion.weapon = new Card("Lightsaber", CardType.WEAPON);
 		suggestion.room = new Card("Couruscant", CardType.ROOM);
 		board.setCurrentSuggestion(suggestion);
-		
+
 		// add 3 test players to players AL
 		ArrayList<Player> players = new ArrayList<Player>();
 		Set<Card> hand = new HashSet<Card>();
@@ -130,24 +131,24 @@ class GameSolutionTest {
 		hand.add(new Card("Blaster Pistol", CardType.WEAPON));
 		hand.add(new Card("Han Solo", CardType.PERSON));
 		players.get(0).setHand(hand);
-		
+
 		players.add(new ComputerPlayer("player1", "green", 0, 2));
 		hand = new HashSet<Card>();
 		hand.add(new Card("Yoda", CardType.PERSON));
 		hand.add(new Card("Blaster Rifle", CardType.WEAPON));
 		hand.add(new Card("Geonosis", CardType.ROOM));
 		players.get(1).setHand(hand);
-		
+
 		players.add(new ComputerPlayer("player2", "blue", 0, 3));
 		hand = new HashSet<Card>();
 		hand.add(new Card("Obi-Wan Kenobi", CardType.PERSON));
 		hand.add(new Card("Vibro Knife", CardType.WEAPON));
 		hand.add(new Card("Kashyyyk", CardType.ROOM));
 		players.get(2).setHand(hand);
-		
+
 		// set players list
 		board.setPlayersList(players);
-		
+
 		// Suggestion no one can disprove returns null
 		Card test = board.handleSuggestion(players.get(1));
 		assertEquals(null, board.handleSuggestion(players.get(1)));
@@ -156,16 +157,18 @@ class GameSolutionTest {
 		// Suggestion only accusing player can disprove, returns null
 		Card newCard = new Card("Couruscant", CardType.ROOM);
 		players.get(2).updateHand(newCard);
-		
+
 		assertEquals(new Card("Couruscant", CardType.ROOM), board.handleSuggestion(players.get(2)));
-		
-		// Suggestion only human can disprove, return answer (i.e. card that disproves suggestion)
+
+		// Suggestion only human can disprove, return answer (i.e. card that disproves
+		// suggestion)
 		players.get(2).getHand().remove(newCard);
 		newCard = new Card("Darth Vader", CardType.PERSON);
 		players.get(0).updateHand(newCard);
 		assertEquals(newCard, board.handleSuggestion(players.get(1)));
 
-		// Suggestion that two players can disprove, correct player (next player in list) returns answer
+		// Suggestion that two players can disprove, correct player (next player in
+		// list) returns answer
 		players.get(0).getHand().remove(newCard);
 		Card lightsaberCard = new Card("Lightsaber", CardType.WEAPON);
 		players.get(2).updateHand(lightsaberCard);

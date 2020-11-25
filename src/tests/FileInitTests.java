@@ -26,7 +26,7 @@ import clueGame.Room;
 
 public class FileInitTests {
 	// Constants used to test whether the file was loaded correctly
-	public static final int LEGEND_SIZE = 11; 
+	public static final int LEGEND_SIZE = 11;
 	public static final int NUM_ROWS = 29;
 	public static final int NUM_COLUMNS = 29;
 
@@ -46,11 +46,11 @@ public class FileInitTests {
 	public void testRoomLabels() {
 		// To ensure data is correctly loaded, test retrieving a few planets
 		// from the hash, including the first and last in the file and a few others
-		assertEquals("Coruscant", board.getRoom('C').getName() );
-		assertEquals("Geonosis", board.getRoom('G').getName() );
-		assertEquals("Hoth", board.getRoom('H').getName() );
-		assertEquals("Dagobah", board.getRoom('D').getName() );
-		assertEquals("Endor", board.getRoom('E').getName() );
+		assertEquals("Coruscant", board.getRoom('C').getName());
+		assertEquals("Geonosis", board.getRoom('G').getName());
+		assertEquals("Hoth", board.getRoom('H').getName());
+		assertEquals("Dagobah", board.getRoom('D').getName());
+		assertEquals("Endor", board.getRoom('E').getName());
 	}
 
 	@Test
@@ -81,7 +81,6 @@ public class FileInitTests {
 		cell = board.getCell(15, 24);
 		assertFalse(cell.isDoorway());
 	}
-	
 
 	// Test that we have the correct number of doors
 	@Test
@@ -100,54 +99,54 @@ public class FileInitTests {
 	@Test
 	public void testRooms() {
 		// just test a standard planet location
-		BoardCell cell = board.getCell( 14, 6);
-		Room room = board.getRoom( cell ) ;
-		assertTrue( room != null );
-		assertEquals( room.getName(), "Kashyyyk" ) ;
-		assertFalse( cell.isLabel() );
-		assertFalse( cell.isRoomCenter() ) ;
-		assertFalse( cell.isDoorway()) ;
+		BoardCell cell = board.getCell(14, 6);
+		Room room = board.getRoom(cell);
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Kashyyyk");
+		assertFalse(cell.isLabel());
+		assertFalse(cell.isRoomCenter());
+		assertFalse(cell.isDoorway());
 
 		// this is a label cell to test
 		cell = board.getCell(17, 25);
-		room = board.getRoom( cell );
-		assertTrue( room != null );
-		assertEquals( room.getName(), "Yavin 4" ) ;
-		assertTrue( cell.isLabel() );
-		assertTrue( room.getLabelCell() == cell );
-		
+		room = board.getRoom(cell);
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Yavin 4");
+		assertTrue(cell.isLabel());
+		assertTrue(room.getLabelCell() == cell);
+
 		// this is a planet center cell to test
 		cell = board.getCell(2, 13);
-		room = board.getRoom( cell ) ;
-		assertTrue( room != null );
-		assertEquals( room.getName(), "Coruscant" ) ;
-		assertTrue( cell.isRoomCenter() );
-		assertTrue( room.getCenterCell() == cell );
-		
+		room = board.getRoom(cell);
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Coruscant");
+		assertTrue(cell.isRoomCenter());
+		assertTrue(room.getCenterCell() == cell);
+
 		// this is a secret passage (portal) test
 		cell = board.getCell(0, 24);
-		room = board.getRoom( cell ) ;
-		assertTrue( room != null );
-		assertEquals( room.getName(), "Tatooine" ) ;
-		assertTrue( cell.getSecretPassage() == 'G' );
-		
+		room = board.getRoom(cell);
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Tatooine");
+		assertTrue(cell.getSecretPassage() == 'G');
+
 		// test a free space
 		cell = board.getCell(7, 2);
-		room = board.getRoom( cell ) ;
+		room = board.getRoom(cell);
 		// Note for our purposes, walkways and closets are rooms
-		assertTrue( room != null );
-		assertEquals( room.getName(), "FreeSpace" ) ;
-		assertFalse( cell.isRoomCenter() );
-		assertFalse( cell.isLabel() );
-		
+		assertTrue(room != null);
+		assertEquals(room.getName(), "FreeSpace");
+		assertFalse(cell.isRoomCenter());
+		assertFalse(cell.isLabel());
+
 		// test an unused space
 		cell = board.getCell(14, 14);
-		room = board.getRoom( cell ) ;
-		assertTrue( room != null );
-		assertEquals( room.getName(), "Unused" ) ;
-		assertFalse( cell.isRoomCenter() );
-		assertFalse( cell.isLabel() );
-		
+		room = board.getRoom(cell);
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Unused");
+		assertFalse(cell.isRoomCenter());
+		assertFalse(cell.isLabel());
+
 	}
 
 }
