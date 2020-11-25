@@ -563,7 +563,8 @@ public class Board extends JPanel implements MouseListener {
 			accusePanel.setLocationRelativeTo(ClueGame.gui);
 			accusePanel.setVisible(true);
 		} else {
-			JOptionPane.showMessageDialog(ClueGame.gui, "Until your turn you must wait!", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(ClueGame.gui, "Until your turn you must wait!", "Error",
+					JOptionPane.ERROR_MESSAGE);
 
 		}
 	}

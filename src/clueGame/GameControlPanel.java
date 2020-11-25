@@ -32,9 +32,9 @@ public class GameControlPanel extends JPanel {
 		setLayout(new GridLayout(2, 0));
 
 		// split the control panel into two rows and add them to the panel
+		this.board = Board.getInstance();
 		add(createControlPanelTopRow());
 		add(createControlPanelBottomRow());
-		this.board = Board.getInstance();
 	}
 
 	private JPanel createControlPanelTopRow() {

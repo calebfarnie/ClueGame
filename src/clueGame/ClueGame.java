@@ -11,7 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 /**
  * @author Caleb Farnie
@@ -19,17 +22,21 @@ import javax.swing.SwingConstants;
  */
 
 public class ClueGame extends JFrame {
-	public static final boolean JAR = true;		// set to true if exporting JAR
+	public static final boolean JAR = false; // set to true if exporting JAR
 	public static ClueGame gui;
+	public static Board board;
 
 	public ClueGame(Player person, Board board) {
 		setTitle("Clue");
-		setSize(820, 665);
+		setMinimumSize(new Dimension(820, 720));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		ClueGame.board = board;
 
 		String iconDirectory = "clueIcon.png";
 		Image icon;
 
+		// set Clue icon
 		if (ClueGame.JAR) {
 			iconDirectory = "/data/" + iconDirectory;
 			URL url = getClass().getResource(iconDirectory);
@@ -41,15 +48,36 @@ public class ClueGame extends JFrame {
 
 		setIconImage(icon);
 
+		// create board panel
 		JPanel boardPanel = Board.getInstance();
 		boardPanel.setBackground(Color.darkGray);
 
+		// create card and control panels
 		GameCardPanel cardPanel = GameCardPanel.getInstance();
 		cardPanel.initialize();
+		cardPanel.setPreferredSize(new Dimension(150, 0));
 		GameControlPanel controlPanel = new GameControlPanel();
 
-		cardPanel.setPreferredSize(new Dimension(150, 0));
+		// create player/color map
+		JPanel playerColorPanel = new JPanel();
+		playerColorPanel.setLayout(new GridLayout(1, 0));
 
+		// create title
+		TitledBorder title = new TitledBorder(new EtchedBorder(), "Players");
+		title.setTitleJustification(TitledBorder.CENTER);
+		playerColorPanel.setBorder(title);
+
+		// loop through playerslist and display their color as a key
+		for (Player player : board.getPlayersList()) {
+			JTextField playerField = new JTextField(player.getName());
+			playerField.setHorizontalAlignment(SwingConstants.CENTER);
+			playerField.setEditable(false);
+			playerField.setBackground(player.getColor());
+			playerColorPanel.add(playerField);
+		}
+
+		// add panels to frame
+		add(playerColorPanel, BorderLayout.NORTH);
 		add(cardPanel, BorderLayout.EAST);
 		add(controlPanel, BorderLayout.SOUTH);
 		add(boardPanel, BorderLayout.CENTER);
@@ -57,7 +85,7 @@ public class ClueGame extends JFrame {
 
 	public static void main(String[] args) {
 		// get the instance of the game board
-		Board board = Board.getInstance();
+		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 
