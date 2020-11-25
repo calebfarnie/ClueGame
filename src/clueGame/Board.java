@@ -523,7 +523,7 @@ public class Board extends JPanel implements MouseListener {
 			line2.setHorizontalAlignment(SwingConstants.CENTER);
 			panel.add(line1);
 			panel.add(line2);
-			JOptionPane.showMessageDialog(null, panel, "Congratulations!", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(ClueGame.gui, panel, "Congratulations!", JOptionPane.PLAIN_MESSAGE);
 		} else {
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(0, 1));
@@ -533,7 +533,7 @@ public class Board extends JPanel implements MouseListener {
 			line2.setHorizontalAlignment(SwingConstants.CENTER);
 			panel.add(line1);
 			panel.add(line2);
-			JOptionPane.showMessageDialog(null, panel, "Oof...", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(ClueGame.gui, panel, "Oof...", JOptionPane.PLAIN_MESSAGE);
 		}
 
 		System.exit(0);
@@ -560,10 +560,10 @@ public class Board extends JPanel implements MouseListener {
 	public void processAccusation() {
 		if (!isFinished) {
 			AccusationDialog accusePanel = new AccusationDialog();
-			accusePanel.setLocationRelativeTo(null);
+			accusePanel.setLocationRelativeTo(ClueGame.gui);
 			accusePanel.setVisible(true);
 		} else {
-			JOptionPane.showMessageDialog(null, "Until your turn you must wait!", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(ClueGame.gui, "Until your turn you must wait!", "Error", JOptionPane.ERROR_MESSAGE);
 
 		}
 	}
@@ -692,7 +692,7 @@ public class Board extends JPanel implements MouseListener {
 
 	public void nextTurn() {
 		if (!isFinished) {
-			JOptionPane.showMessageDialog(null, "Please finish your turn!", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(ClueGame.gui, "Please finish your turn!", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		} else {
 			processTurn();
@@ -777,7 +777,7 @@ public class Board extends JPanel implements MouseListener {
 			gameTurnCounter++;
 			isFinished = true;
 		} else {
-			JOptionPane.showMessageDialog(null, "You can't go there!", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(ClueGame.gui, "You can't go there!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 
 		repaint();
@@ -799,7 +799,7 @@ public class Board extends JPanel implements MouseListener {
 			panel.add(line1);
 			panel.add(line2);
 			panel.add(line3);
-			JOptionPane.showMessageDialog(null, panel, "Game Over", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(ClueGame.gui, panel, "Game Over", JOptionPane.PLAIN_MESSAGE);
 			System.exit(0);
 		}
 

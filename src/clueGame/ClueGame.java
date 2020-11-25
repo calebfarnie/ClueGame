@@ -19,7 +19,8 @@ import javax.swing.SwingConstants;
  */
 
 public class ClueGame extends JFrame {
-	public static final boolean JAR = false;		// set to true if exporting JAR
+	public static final boolean JAR = true;		// set to true if exporting JAR
+	public static ClueGame gui;
 
 	public ClueGame(Player person, Board board) {
 		setTitle("Clue");
@@ -62,7 +63,7 @@ public class ClueGame extends JFrame {
 
 		// get the human player, Luke Skywalker
 		Player person = board.getPlayer("Luke Skywalker");
-		ClueGame gui = new ClueGame(person, board);
+		gui = new ClueGame(person, board);
 		gui.setLocationRelativeTo(null); // centers on screen
 		gui.setVisible(true);
 

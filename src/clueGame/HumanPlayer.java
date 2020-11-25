@@ -35,7 +35,7 @@ public class HumanPlayer extends Player {
 	public Solution createSuggestion(String room, ArrayList<Card> deck) {
 		// display suggestion dialog
 		SuggestionDialog panel = new SuggestionDialog(this);
-		panel.setLocationRelativeTo(null);
+		panel.setLocationRelativeTo(ClueGame.gui);
 		panel.setVisible(true);
 		panel.setRoom(inRoom.getName());
 
