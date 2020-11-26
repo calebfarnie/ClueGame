@@ -648,10 +648,18 @@ public class Board extends JPanel implements MouseListener {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		int cellWidth;
+		int cellHeight;
 
 		// get cell sizes
-		int cellWidth = getWidth() / numColumns;
-		int cellHeight = getHeight() / numRows;
+		if(getWidth() > getHeight()) {
+			cellWidth = getHeight() / numColumns;
+			cellHeight = getHeight() / numRows;
+		}else {
+			cellWidth = getWidth() / numColumns;
+			cellHeight = getWidth() / numRows;
+		}		
 
 		// draw board cells
 		drawBoardCells(g, cellWidth, cellHeight);
@@ -738,8 +746,18 @@ public class Board extends JPanel implements MouseListener {
 			return;
 		}
 
-		int cellHeight = getHeight() / numRows;
-		int cellWidth = getWidth() / numColumns;
+		int cellWidth;
+		int cellHeight;
+
+		// get cell sizes
+		if(getWidth() > getHeight()) {
+			cellWidth = getHeight() / numColumns;
+			cellHeight = getHeight() / numRows;
+		}else {
+			cellWidth = getWidth() / numColumns;
+			cellHeight = getWidth() / numRows;
+		}	
+		
 		int row = (int) (Math.ceil(e.getY() * 1.0 / cellHeight)) - 1; // calculate row #
 		int column = (int) (Math.ceil(e.getX() * 1.0 / cellWidth)) - 1; // calculate column #
 
