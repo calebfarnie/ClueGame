@@ -22,7 +22,7 @@ import javax.swing.border.TitledBorder;
  */
 
 public class ClueGame extends JFrame {
-	public static final boolean JAR = false; // set to true if exporting JAR
+	public static final boolean JAR = true; // set to true if exporting JAR
 	public static ClueGame gui;
 	public static Board board;
 
